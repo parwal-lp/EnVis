@@ -31,16 +31,15 @@ d3.csv("BarChartData.csv", function(data) {
 
     //here I select the top ten cities
     data = data.sort(function(a, b) {
-        return d3.ascending(a['Air Pollution Level'], b ['Air Pollution Level']);
-    });
-    //.slice(0, 10);
+        return d3.ascending(parseFloat(a['Air Pollution Level']), parseFloat(b['Air Pollution Level']));
+    }).slice(0, 10);
     
     //the max value is setted to te 10th city    
-    XmaxValue = data[9]['Air Pollution Level'];
+    XmaxValue = data[data.length-1]['Air Pollution Level'];
 
     // Add X axis
     var x = d3.scaleLinear()
-    .domain([0, 80])
+    .domain([0, XmaxValue])
     .range([ 0, width]);
     svg.append("g")
     .attr("transform", "translate(0," + height + ")")
@@ -92,17 +91,15 @@ function draw(selectedPollutant, XmaxValue){
     if(order == "top10"){
         //here I select the top ten cities
         data = data.sort(function(a, b) {
-            return d3.ascending(a['Air Pollution Level'], b['Air Pollution Level']);
-        });
-        //.slice(0, 10);
+            return d3.ascending(parseFloat(a['Air Pollution Level']), parseFloat(b['Air Pollution Level']));
+        }).slice(0, 10);
         //the maximum value on x axis is that of the worst city
         XmaxValue = data[9]['Air Pollution Level'];
     }
     else if(order == "worst10"){
         data = data.sort(function(a, b) {
-            return d3.ascending(b['Air Pollution Level'], a['Air Pollution Level']);
-        });
-        //slice(0,10);
+            return d3.descending(parseFloat(a['Air Pollution Level']), parseFloat(b['Air Pollution Level']));
+        }).slice(0,10);
         //the maximum value on x axis is that of the worst city
         XmaxValue = data[0]['Air Pollution Level'];
     }
@@ -110,7 +107,7 @@ function draw(selectedPollutant, XmaxValue){
 
         // Add X axis
         x = d3.scaleLinear()
-            .domain([0, 80])
+            .domain([0, XmaxValue])
             .range([ 0, width]);
 
         svg.append("g")
