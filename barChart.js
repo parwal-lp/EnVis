@@ -13,11 +13,11 @@ var svg = d3.select("#my_dataviz")
     .append("g")
     .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
+    
+    //set the default pollutant selected in the dropdown
+    var selectedPollutant = 'PM2.5';
+    var XmaxValue = 30;
 
-
-    //check which pollutant is selected in the dropdown
-    var e = document.getElementById("pollutant");
-    var selectedPollutant = e.value;
 
 // Parse the Data
 d3.csv("BarChartData.csv", function(data) {
