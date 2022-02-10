@@ -1,4 +1,6 @@
 //global variable
+var colorArray = ['#d73027','#fc8d59','#fee08b','#d9ef8b','#91cf60','#1a9850']; //da rosso a verde
+var levelArray = ['extremely poor', 'very poor', 'poor', 'moderate', 'fair', 'good'];
 
 // set the dimensions and margins of the graph
 var margin = {top: 20, right: 30, bottom: 40, left: 90},
@@ -21,11 +23,31 @@ var order = 'top10';
 
 //draw the default plot
 draw(selectedPollutant, XmaxValue, order);
-
-
-
+console.log(colorBar("PM2.5", 30.0));
 
 //-------- definition of used functions --------------//
+
+//function to color the bars based on the pollution level
+function colorBar(pollutant, value){
+    d3.csv("AQI_color.csv", function(data) {
+        data = data.filter(function(row){
+            if (row['pollutant'] == pollutant){
+                if (value <= parseFloat(data['to'])){
+                    console.log(row['level']);
+                    return row['level'];
+                }
+            }
+        });
+        console.log(data);
+    });
+    
+    /*
+    for (i=0; i<6; i++){
+        if (levelArray[i] == level){
+            return colorArray[i];
+        }
+    }*/
+}
 
 //function that returns the order selected with the radio buttons
 function getOrderValue() {
@@ -108,7 +130,7 @@ function draw(selectedPollutant, XmaxValue, order){
             .attr("y", function(d) { return y(d.City); })
             .attr("width", function(d) { return x(d['Air Pollution Level']); })
             .attr("height", y.bandwidth() )
-            .attr("fill", "#69b3a2")        
+            .attr("fill", colorArray[0])       
     });
     
 

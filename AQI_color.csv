@@ -1,0 +1,31 @@
+level, pollutant, from, to 
+good, PM2.5, 0, 10
+good, PM10, 0, 20
+good, NO2, 0, 40
+good, O3, 0, 50
+good, SO2, 0, 100
+fair, PM2.5, 10, 20
+fair, PM10, 20, 40
+fair, NO2, 40, 90
+fair, O3, 50, 100
+fair, SO2, 100, 200
+moderate, PM2.5, 20, 25
+moderate, PM10, 40, 50
+moderate, NO2, 90, 120
+moderate, O3, 100, 130
+moderate, SO2, 200, 350
+poor, PM2.5, 25, 50
+poor, PM10, 50, 100 
+poor, NO2, 120, 230
+poor, O3, 130, 240
+poor, SO2, 350, 500
+very poor, PM2.5, 50, 75
+very poor, PM10, 100, 150  
+very poor, NO2, 230, 340
+very poor, O3, 240, 380
+very poor, SO2, 500, 750
+extremely poor, PM2.5, 75, 800
+extremely poor, PM10, 150, 1200  
+extremely poor, NO2, 340, 1000
+extremely poor, O3, 380, 800
+extremely poor, SO2, 750, 1250
