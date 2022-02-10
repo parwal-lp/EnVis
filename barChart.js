@@ -59,24 +59,24 @@ function draw(selectedPollutant, XmaxValue, order){
     d3.csv("BarChartData.csv", function(data) {
         data = data.filter(function(row){
           return row['Air Pollutant'] == selectedPollutant;
-      });
+        });
     
-    //checking which value is setted
-    if(order == "top10"){
-        //here I select the top ten cities
-        data = data.sort(function(a, b) {
-            return d3.ascending(parseFloat(a['Air Pollution Level']), parseFloat(b['Air Pollution Level']));
-        }).slice(0, 10);
-        //the maximum value on x axis is that of the worst city
-        XmaxValue = data[9]['Air Pollution Level'];
-    }
-    else if(order == "worst10"){
-        data = data.sort(function(a, b) {
-            return d3.descending(parseFloat(a['Air Pollution Level']), parseFloat(b['Air Pollution Level']));
-        }).slice(0,10);
-        //the maximum value on x axis is that of the worst city
-        XmaxValue = data[0]['Air Pollution Level'];
-    }
+        //checking which value is setted
+        if(order == "top10"){
+            //here I select the top ten cities
+            data = data.sort(function(a, b) {
+                return d3.ascending(parseFloat(a['Air Pollution Level']), parseFloat(b['Air Pollution Level']));
+            }).slice(0, 10);
+            //the maximum value on x axis is that of the worst city
+            XmaxValue = data[9]['Air Pollution Level'];
+        }
+        else if(order == "worst10"){
+            data = data.sort(function(a, b) {
+                return d3.descending(parseFloat(a['Air Pollution Level']), parseFloat(b['Air Pollution Level']));
+            }).slice(0,10);
+            //the maximum value on x axis is that of the worst city
+            XmaxValue = data[0]['Air Pollution Level'];
+        }
 
 
         // Add X axis
@@ -108,9 +108,7 @@ function draw(selectedPollutant, XmaxValue, order){
             .attr("y", function(d) { return y(d.City); })
             .attr("width", function(d) { return x(d['Air Pollution Level']); })
             .attr("height", y.bandwidth() )
-            .attr("fill", "#69b3a2")
-
-        
+            .attr("fill", "#69b3a2")        
     });
     
 
