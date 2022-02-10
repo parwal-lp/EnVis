@@ -16,16 +16,23 @@
 <!-- Create a div where the graph will take place -->
 <div id="my_dataviz"></div>
 
-<div>
+<div style="width: 100px; float:left; height:100px; margin:10px">
   <p>Please select a pollutant</p>
-  <select id="pollutant" onchange="changePollutant(this.value)">
-    <option value="PM2.5" selected="selected">PM2.5</option>
-    <option value="PM10">PM10</option>
-    <option value="CO">CO</option>
-    <option value="SO2">SO2</option>
-    <option value="O3">O3</option>
-    <option value="NO2">NO2</option>
-  </select>
+    <select id="pollutant" onchange="changePollutant(this.value)">
+      <option value="PM2.5" selected = "selected">PM2.5</option>
+      <option value="PM10">PM10</option>
+      <option value="CO">CO</option>
+      <option value="SO2">SO2</option>
+      <option value="O3">O3</option>
+      <option value="NO2">NO2</option>
+    </select>
+</div>
+<div style="width: 200px; float:left; height:100px; margin:10px">
+    <p>Please select the order:</p>
+    <input type="radio" id="top10" name="order" value="top10" checked>
+    <label for="top10">Top 10</label>
+    <input type="radio" id="worst10" name="order" value="worst10">
+    <label for="worst10">Worst 10</label>
 </div>
 
 <!-- reference to the javascript file that draws the barchart -->

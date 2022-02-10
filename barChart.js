@@ -1,4 +1,5 @@
-var XmaxValue = 80;
+//global variable
+var order = document.getElementsByName("order");
 
 // set the dimensions and margins of the graph
 var margin = {top: 20, right: 30, bottom: 40, left: 90},
@@ -16,7 +17,7 @@ var svg = d3.select("#my_dataviz")
     
     //set the default pollutant selected in the dropdown
     var selectedPollutant = 'PM2.5';
-    var XmaxValue = 30;
+    var XmaxValue;
 
 
 // Parse the Data
@@ -27,9 +28,19 @@ d3.csv("BarChartData.csv", function(data) {
         //}
         return row['Air Pollutant'] == selectedPollutant;
     });
+
+    //here I select the top ten cities
+    data = data.sort(function(a, b) {
+        return d3.ascending(a['Air Pollution Level'], b ['Air Pollution Level']);
+    });
+    //.slice(0, 10);
+    
+    //the max value is setted to te 10th city    
+    XmaxValue = data[9]['Air Pollution Level'];
+
     // Add X axis
     var x = d3.scaleLinear()
-    .domain([0, XmaxValue])
+    .domain([0, 80])
     .range([ 0, width]);
     svg.append("g")
     .attr("transform", "translate(0," + height + ")")
@@ -62,29 +73,10 @@ d3.csv("BarChartData.csv", function(data) {
 function changePollutant(pollutant){
     var element = document.getElementById("pollutant");
     selectedPollutant = element.value;
-    switch(selectedPollutant){
-        case 'CO':
-            XmaxValue = 1;
-            break;
-        case 'PM2.5':
-            XmaxValue = 30;
-            break;
-        case 'PM10':
-            XmaxValue = 35;
-            break;
-        case 'SO2':
-            XmaxValue = 10;
-            break;
-        case 'NO2':
-            XmaxValue = 40;
-            break;
-        case 'O3': 
-            XmaxValue = 80;
-            break;
-    }
     svg.selectAll("*").remove();
     draw(selectedPollutant, XmaxValue);
 }
+
 
 function draw(selectedPollutant, XmaxValue){
     //we do not redefine the margin values, so that we can update directly the diagram
@@ -94,10 +86,31 @@ function draw(selectedPollutant, XmaxValue){
         data = data.filter(function(row){
           return row['Air Pollutant'] == selectedPollutant;
       });
+    
+    //checking which value is setted    
+    setOrderValue();
+    if(order == "top10"){
+        //here I select the top ten cities
+        data = data.sort(function(a, b) {
+            return d3.ascending(a['Air Pollution Level'], b['Air Pollution Level']);
+        });
+        //.slice(0, 10);
+        //the maximum value on x axis is that of the worst city
+        XmaxValue = data[9]['Air Pollution Level'];
+    }
+    else if(order == "worst10"){
+        data = data.sort(function(a, b) {
+            return d3.ascending(b['Air Pollution Level'], a['Air Pollution Level']);
+        });
+        //slice(0,10);
+        //the maximum value on x axis is that of the worst city
+        XmaxValue = data[0]['Air Pollution Level'];
+    }
+
 
         // Add X axis
         x = d3.scaleLinear()
-            .domain([0, XmaxValue])
+            .domain([0, 80])
             .range([ 0, width]);
 
         svg.append("g")
@@ -125,5 +138,17 @@ function draw(selectedPollutant, XmaxValue){
             .attr("width", function(d) { return x(d['Air Pollution Level']); })
             .attr("height", y.bandwidth() )
             .attr("fill", "#69b3a2")
+
+        
     });
+
+    //setting the variable for order 
+    function setOrderValue() {
+        var ele = document.getElementsByName('order'); 
+        for(i = 0; i < ele.length; i++) {
+            if(ele[i].checked)
+            order = ele[i].value;
+        }
+    };
+
 }
