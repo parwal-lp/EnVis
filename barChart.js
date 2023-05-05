@@ -23,30 +23,19 @@ var order = 'top10';
 
 //draw the default plot
 draw(selectedPollutant, XmaxValue, order);
-console.log(colorBar("PM2.5", 30.0));
 
 //-------- definition of used functions --------------//
 
-//function to color the bars based on the pollution level
-function colorBar(pollutant, value){
-    d3.csv("AQI_color.csv", function(data) {
-        data = data.filter(function(row){
-            if (row['pollutant'] == pollutant){
-                if (value <= parseFloat(data['to'])){
-                    console.log(row['level']);
-                    return row['level'];
-                }
+//assigns color based on the pollution level, takes data through colorData
+function assignColor(colorData, currentPollutant, currentValue){
+    for (let i=0; i<colorData.length; i++){
+        if (colorData[i]['pollutant']==currentPollutant){
+            if (parseInt(colorData[i]['from'])<=currentValue && currentValue<=parseInt(colorData[i]['to'])){
+                color = colorArray[parseInt(levelArray.indexOf(colorData[i]['level']))];
+                return color;
             }
-        });
-        console.log(data);
-    });
-    
-    /*
-    for (i=0; i<6; i++){
-        if (levelArray[i] == level){
-            return colorArray[i];
         }
-    }*/
+    }
 }
 
 //function that returns the order selected with the radio buttons
@@ -75,29 +64,24 @@ function changeOrder(order){
 }
 
 function draw(selectedPollutant, XmaxValue, order){
-    //we do not redefine the margin values, so that we can update directly the diagram
-
     // Parse the Data
     d3.csv("BarChartData.csv", function(data) {
         data = data.filter(function(row){
           return row['Air Pollutant'] == selectedPollutant;
         });
+
+        data = data.sort(function(a, b) { // sort in ordine crescente
+            return d3.ascending(parseFloat(a['Air Pollution Level']), parseFloat(b['Air Pollution Level']));
+        });
+        //the maximum value on x axis is that of the worst city
+        XmaxValue = data[data.length-1]['Air Pollution Level'];
     
         //checking which value is setted
-        if(order == "top10"){
-            //here I select the top ten cities
-            data = data.sort(function(a, b) {
-                return d3.ascending(parseFloat(a['Air Pollution Level']), parseFloat(b['Air Pollution Level']));
-            }).slice(0, 10);
-            //the maximum value on x axis is that of the worst city
-            XmaxValue = data[9]['Air Pollution Level'];
+        if(order == "top10"){ //prendo le prime 10
+            data = data.slice(0, 10);
         }
-        else if(order == "worst10"){
-            data = data.sort(function(a, b) {
-                return d3.descending(parseFloat(a['Air Pollution Level']), parseFloat(b['Air Pollution Level']));
-            }).slice(0,10);
-            //the maximum value on x axis is that of the worst city
-            XmaxValue = data[0]['Air Pollution Level'];
+        else if(order == "worst10"){ //prendo le ultime 10
+            data = data.slice(data.length-11,data.length-1);
         }
 
 
@@ -122,17 +106,19 @@ function draw(selectedPollutant, XmaxValue, order){
             .call(d3.axisLeft(y))
 
         //Bars
-        svg.selectAll("myRect")
+        d3.csv("AQI_color.csv", function(colorData) {
+            svg.selectAll("myRect")
             .data(data)
             .enter()
             .append("rect")
             .attr("x", x(0) )
             .attr("y", function(d) { return y(d.City); })
-            .attr("width", function(d) { return x(d['Air Pollution Level']); })
+            .attr("width", function(d) {return x(d['Air Pollution Level']); })
             .attr("height", y.bandwidth() )
-            .attr("fill", colorArray[0])       
+            .attr("fill", function(d){
+                return assignColor(colorData, selectedPollutant, d['Air Pollution Level']);
+            })
+        });
     });
-    
-
 
 }
