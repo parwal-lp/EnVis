@@ -1,17 +1,33 @@
-// const data = [
-//   {color: 'orange', values: [500, 400, 900]},
-//   {color: 'blue', values: [800, 200, 400]},
-//   {color: 'green', values: [300, 1000, 600]},
-// ];
-
 const starArea = d3.select('#starPlot'); //select html area for star plot
 const svgStar = starArea.append('svg') //create svg for the starplot
   .attr("width", 500 + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom) //set dimensions of starplot
-    
-const maxValue = 1000;
+
+const labels = ['PM2.5', 'PM10', 'CO', 'SO2', 'O3', 'NO2'];
+const shiftStart = ['middle', 'start', 'start', 'middle', 'end', 'end']; //lo shift delle labels deve partire da inizio, centro o fine della parola
+let pollutantsMaxValues = [];
+const maxValue = 50;
 const radius = 150;
 const center = {x: 250, y: 200};
+
+  // Parse the Data
+  d3.csv("StarPlotData.csv", function(data) {
+    labels.forEach(pollutant => {
+      let i=0;
+      let currentPollutantData = data.filter(function(row){
+        return row['Air Pollutant'] == pollutant;
+      });
+      currentPollutantData = currentPollutantData.sort(function(a, b) { // sort in ordine crescente
+          return d3.descending(parseFloat(a['Air Pollution Level']), parseFloat(b['Air Pollution Level']));
+      });
+      //the maximum value on x axis is that of the worst city
+      pollutantsMaxValues.push(currentPollutantData[i]['Air Pollution Level']);
+      i++;
+    });
+    console.log(pollutantsMaxValues);
+  });
+
+//todo crea scale diverse per ogni asse, usando pollutantMaxValues per sapere il maxValue di ogni asse
 
 const radialScale = d3.scaleLinear()
   .domain([0, maxValue]) 
@@ -38,12 +54,10 @@ for (val = 0; val <= maxValue; val += maxValue / nTicks) { //disegno i cerchi co
     .style('fill', 'none');
 }
 
-const labels = ['PM2.5', 'PM10', 'CO', 'SO2', 'O3', 'NO2'];
-const shiftStart = ['middle', 'start', 'start', 'middle', 'end', 'end']; //lo shift delle labels deve partire da inizio, centro o fine della parola
 
 for (let index = 0; index < labels.length; index++) {
   const angle = index * Math.PI * 2 / labels.length; //angolo tra un asse e l'altro (2pi/n) con n num di assi
-  console.log(angle);
+  //console.log(angle);
   const x = center.x + radius * Math.sin(angle);
   const y = center.y + radius * - Math.cos(angle);
   if (angle >= 0) {
@@ -65,32 +79,31 @@ for (let index = 0; index < labels.length; index++) {
     .attr('y', y)
 }
 
-d3.csv("BarChartData.csv", function(data) {
+d3.csv("StarPlotData.csv", function(data) {
   data = data.filter(function(row){
-    return row['City'] == 'Ancona              ';
+    return row['City'] == 'Catanzaro';
   });
-  console.log(data);
+  let path = '';
 
-  data.forEach(({color, values}, index) => {
-    let path = '';
-  for (let i = 0; i < values.length; i++) {
-    const r = radius - radialScale(values[i]);
-    //console.log('V: ', values[i]);
-    //console.log('R: ', r);
-    const angle = i * Math.PI * 2 / values.length;
-    const x = center.x + r * Math.sin(angle);
-    const y = center.y + r * -Math.cos(angle);
-    path += `${i > 0 ? 'L' : 'M'} ${x},${y} `;
+  for (let i=0; i<6; i++){
+    pollutantData = data.filter(function(row){
+      return row['Air Pollutant'] == labels[i];
+    });
+    
+    const r = radius - radialScale(pollutantData[0]['Air Pollution Level']);
+    //console.log(r);
+      const angle = i * Math.PI * 2 / 6;
+      const x = center.x + r * Math.sin(angle);
+      const y = center.y + r * -Math.cos(angle);
+      path += `${i > 0 ? 'L' : 'M'} ${x},${y} `;
   }
   path += 'Z';
-  svgStar.append('path')
-    .attr('d', path)
-    .style('stroke', color)
-    .style('stroke-width', 3)
-    .style('stroke-opacity', 0.6)
-    .style('fill', color)
-    .style('fill-opacity', 0.3)
-  
-});
+    svgStar.append('path')
+      .attr('d', path)
+      .style('stroke', '#000')
+      .style('stroke-width', 3)
+      .style('stroke-opacity', 0.6)
+      .style('fill', '#000')
+      .style('fill-opacity', 0.3)
 });
 

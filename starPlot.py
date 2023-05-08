@@ -5,11 +5,11 @@ import numpy as np
 dataset = pd.read_csv('AirQualityData.csv')
 
 #reduce the column size of field City to 20 chars
-dataset['City'] = dataset['City'].str.slice(0,20)
+dataset['City'] = dataset['City'].str.replace(" ", "")
 
 #select the columns of interest
 cols = ['Air Pollutant', 'Air Pollution Level', 'City']
-dataset_cols = dataset[cols].str.replace(" ", "")
+dataset_cols = dataset[cols]
 
 #select the rows of interest (where we analyze specific pollutants)
 dataset_rows = dataset_cols.loc[dataset_cols['Air Pollutant'].isin(['CO', 'PM2.5', 'PM10', 'NO2', 'NOX as NO2', 'SO2', 'O3'])]
