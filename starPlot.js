@@ -15,7 +15,7 @@ const scales = {};
 
 function drawStarPlot(){
   d3.csv("StarPlotData.csv", function(data) { //retrieve the data
-    //leggo e salvo qual e il valore massimo di ogni pollutant (serve per le scale degli assi)
+    // ------------ PRENDO I DATI CHE MI SERVONO --------------- //
     labels.forEach(pollutant => {
       let i=0;
       let currentPollutantData = data.filter(function(row){
@@ -24,73 +24,50 @@ function drawStarPlot(){
       currentPollutantData = currentPollutantData.sort(function(a, b) { // sort in ordine crescente
           return d3.descending(parseFloat(a['Air Pollution Level']), parseFloat(b['Air Pollution Level']));
       });
-      //the maximum value on x axis is that of the worst city
+      //leggo e salvo qual e il valore massimo di ogni pollutant (serve per le scale degli assi)
       pollutantsMaxValues.push(currentPollutantData[i]['Air Pollution Level']);
       i++;
     });
-    console.log(pollutantsMaxValues);
 
     for (let i=0; i<pollutantsMaxValues.length; i++){ //arrotondo per eccesso tutti i maxvalues, cosi da essere divisibili per 5 tickss
       pollutantsMaxValues[i] = nTicks*(Math.ceil(Math.abs(pollutantsMaxValues[i]/nTicks)));
     }
 
+    console.log(pollutantsMaxValues);
 
-    //todo crea scale diverse per ogni asse, usando pollutantMaxValues per sapere il maxValue di ogni asse
-    //todo crea tutte le scale, magari in modo carino pulito con un for, invece di ripetere codice all'infinito tutto uguale
 
-    //IDEONA fai un dizionario con tutte le scale
-    //lo chiami scales, e quando ti serve una scala specifica la usi facendo scales['PM10'](value)
-
-    for (let i=0; i<labels.length; i++){ //qui devi generare tutte le scale di tutti gli assi todo laura
-      scales[labels[i]] = d3.scaleLinear()
-        .domain([0, pollutantsMaxValues[i]]) 
+    // ------------ CREO LE SCALE CON I VALORI PER GLI ASSI --------------- //
+    for (let i=0; i<labels.length; i++){ //qui genero tutte le scale di tutti gli assi
+      const angle = i * 360 / labels.length; //angolo che incrementa ad ogni iterazione del for, rappresenta l'angolaizone di ogni asse (in degrees)
+      scales[labels[i]] = d3.scaleLinear() //creo le scale e le salvo nel dizionario scales: scales['PM10'] sara la scala del pollutant PM10
+        .domain([0, pollutantsMaxValues[i]])
         .range([radius, 0]);
 
-
-      const axis = d3.axisRight()
+      const axis = d3.axisRight() //creo le scale ticchettate
         .scale(scales[labels[i]])
         //.ticks(nTicks);
-        .tickValues([0,pollutantsMaxValues[0]/nTicks,2*pollutantsMaxValues[0]/nTicks,3*pollutantsMaxValues[0]/nTicks,4*pollutantsMaxValues[0]/nTicks, pollutantsMaxValues[0]]);
+        .tickValues([0,pollutantsMaxValues[i]/nTicks,2*pollutantsMaxValues[i]/nTicks,3*pollutantsMaxValues[i]/nTicks,4*pollutantsMaxValues[i]/nTicks, pollutantsMaxValues[i]]);
 
-      svgStar.append('g') //asse verticale con i valori
-        .attr('transform', `translate(${center.x},${center.y})`) //le scale devono essere ruotate di angoli progressivi (come le linee raggi)
-        .call(axis);
+      svgStar.append('g') //traslo e ruoto le scale ticchettate al posto giusto
+        .attr('transform', `translate(${center.x},${center.y-radius})rotate(${angle}, 0, ${radius})`) //le scale devono essere ruotate di angoli progressivi (come le linee raggi)
+        .call(axis)
+        .selectAll("text")
+        .style("text-anchor", "start")
+        //di seguito ruoto i valori per leggerli tutti in orizzontale, e poi li traslo per simulare una rotazione intorno al loro centro
+        //le formule per la traslazione sono un po empiriche, non sono ufficiali
+        .attr("transform",function(d,i){ return `rotate(${-angle})`+"translate(" + -Math.sin(angle/2*Math.PI/180)*radius/6 + ", "+ Math.sin(angle*Math.PI/180)*radius/9 +") "})
+    
+      d3.selectAll(".tick").filter(function (d) { return d===0;  }).remove(); //rimuovo gli 0 dagli assi, perche si sovrappongono e diventano poco leggibili, tanto e intuitivo che al centro ci sia lo 0
+      }
 
-    }
-    const radialScale = d3.scaleLinear()
+    // ------------ CREO CIRCONFERENZE CONCENTRICHE --------------- //
+    const scalaCerchi = d3.scaleLinear()
       .domain([0, maxValue]) 
       .range([radius, 0]);
 
-    const radialScalePM25 = d3.scaleLinear()
-      .domain([0, 5*(Math.floor(Math.abs(pollutantsMaxValues[0]/5)))]) 
-      .range([0, radius]);
-
-    const axisPM25 = d3.axisRight()
-      .scale(radialScalePM25)
-      //.ticks(nTicks);
-      .tickValues([0,pollutantsMaxValues[0]/nTicks,2*pollutantsMaxValues[0]/nTicks,3*pollutantsMaxValues[0]/nTicks,4*pollutantsMaxValues[0]/nTicks, pollutantsMaxValues[0]]);
-
-    svgStar.append('g') //asse verticale con i valori
-      .attr('transform', `translate(${center.x},${center.y})`)
-      .call(axisPM25);
-
-
-    const radialScalePM10 = d3.scaleLinear()
-      .domain([0, 5*(Math.floor(Math.abs(pollutantsMaxValues[1]/5)))]) 
-      .range([radius, 0]);
-
-    const axisPM10 = d3.axisRight()
-      .scale(radialScalePM10)
-      //.ticks(nTicks);
-      .tickValues([0,pollutantsMaxValues[1]/nTicks,2*pollutantsMaxValues[1]/nTicks,3*pollutantsMaxValues[1]/nTicks,4*pollutantsMaxValues[1]/nTicks, pollutantsMaxValues[1]]);
-
-    svgStar.append('g') //asse verticale con i valori
-      .attr('transform', `translate(${center.x},${center.y-radius})`)
-      .call(axisPM10);
-
-    let val, angle;
+    let val;
     for (val = 0; val <= maxValue; val += maxValue / nTicks) { //disegno i cerchi concentrici
-      const r = radialScale(val);
+      const r = scalaCerchi(val);
       svgStar.append('circle')
         .attr('cx', center.x)
         .attr('cy', center.y)
@@ -99,7 +76,7 @@ function drawStarPlot(){
         .style('fill', 'none');
     }
 
-
+    // ------------ CREO ASSI E NOMI DEGLI ASSI ------------------ //
     for (let index = 0; index < labels.length; index++) {
       const angle = index * Math.PI * 2 / labels.length; //angolo tra un asse e l'altro (2pi/n) con n num di assi
       //console.log(angle);
@@ -124,33 +101,58 @@ function drawStarPlot(){
         .attr('y', y)
     }
 
-
-    data = data.filter(function(row){
-      return row['City'] == 'Catanzaro';
+    // ------------ DISEGNO I PERCORSI IN BASE AI DATI ------------------ //
+    // dati citta selezionata dall'utente
+    let dataSelectedCity = data.filter(function(row){
+      return row['City'] == 'Roma'; //qui sostituisci con la citta selezionata dall'utente nella tendina in alto
     });
-    let path = '';
+    let pathSelectedCity = '';
   
     for (let i=0; i<6; i++){
-      pollutantData = data.filter(function(row){
+      pollutantData = dataSelectedCity.filter(function(row){
         return row['Air Pollutant'] == labels[i];
       });
       
-      const r = radius - radialScale(pollutantData[0]['Air Pollution Level']);
-      //console.log(r);
+      const r = radius - scales[labels[i]](pollutantData[0]['Air Pollution Level']);
         const angle = i * Math.PI * 2 / 6;
         const x = center.x + r * Math.sin(angle);
         const y = center.y + r * -Math.cos(angle);
-        path += `${i > 0 ? 'L' : 'M'} ${x},${y} `;
+        pathSelectedCity += `${i > 0 ? 'L' : 'M'} ${x},${y} `;
     }
-    path += 'Z';
+    pathSelectedCity += 'Z';
       svgStar.append('path')
-        .attr('d', path)
-        .style('stroke', '#000')
+        .attr('d', pathSelectedCity)
+        .style('stroke', '#888')
         .style('stroke-width', 3)
         .style('stroke-opacity', 0.6)
-        .style('fill', '#000')
+        .style('fill', '#888')
         .style('fill-opacity', 0.3)
 
+    // dati citta migliore nella selezione attuale
+    let dataBestCity = data.filter(function(row){
+      return row['City'] == 'Savona'; //qui sostituisci con la citta migliore della selezione attuale (capire cosa significa)
+    });
+    let pathBestCity = '';
+  
+    for (let i=0; i<6; i++){
+      pollutantData = dataBestCity.filter(function(row){
+        return row['Air Pollutant'] == labels[i];
+      });
+      
+      const r = radius - scales[labels[i]](pollutantData[0]['Air Pollution Level']);
+        const angle = i * Math.PI * 2 / 6;
+        const x = center.x + r * Math.sin(angle);
+        const y = center.y + r * -Math.cos(angle);
+        pathBestCity += `${i > 0 ? 'L' : 'M'} ${x},${y} `;
+    }
+    pathBestCity += 'Z';
+      svgStar.append('path')
+        .attr('d', pathBestCity)
+        .style('stroke', '#91cf60')
+        .style('stroke-width', 3)
+        .style('stroke-opacity', 0.6)
+        .style('fill', '#91cf60')
+        .style('fill-opacity', 0.3)
 
   });
 }
