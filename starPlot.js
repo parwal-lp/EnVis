@@ -1,6 +1,6 @@
 const starArea = d3.select('#starPlot'); //select html area for star plot
 const svgStar = starArea.append('svg') //create svg for the starplot
-  .attr("width", 500 + margin.left + margin.right)
+  .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom) //set dimensions of starplot
 
 const labels = ['PM2.5', 'PM10', 'CO', 'SO2', 'O3', 'NO2'];
@@ -8,7 +8,7 @@ const shiftStart = ['middle', 'start', 'start', 'middle', 'end', 'end']; //lo sh
 let pollutantsMaxValues = [];
 const maxValue = 50;
 const radius = 150;
-const center = {x: 250, y: 200};
+const center = {x: svgStar.attr("width")/2, y: svgStar.attr("height")/2};
 const nTicks = 5;
 const scales = {};
 
@@ -154,6 +154,27 @@ function drawStarPlot(){
         .style('fill', '#91cf60')
         .style('fill-opacity', 0.3)
 
+  // ----------- CREO LA LEGENDA ---------------- //
+  // let legendaChosenCity = svgStar.append("circle").attr("cx",svgStar.attr("width")/2-50).attr("cy",svgStar.attr("height")-svgStar.attr("height")*0.04).attr("r", 6).style("fill", "#69b3a2")
+  // svgStar.append("text").attr("x", svgStar.attr("width")/2-40).attr("y", svgStar.attr("height")-svgStar.attr("height")*0.03).text("Chosen City").style("font-size", "15px").attr("alignment-baseline","middle")
+
+  // svgStar.append("circle").attr("cx",svgStar.attr("width")/2+50).attr("cy",svgStar.attr("height")-svgStar.attr("height")*0.04).attr("r", 6).style("fill", "#404080")
+  // svgStar.append("text").attr("x", svgStar.attr("width")/2+60).attr("y", svgStar.attr("height")-svgStar.attr("height")*0.03).text("Chosen City").style("font-size", "15px").attr("alignment-baseline","middle")
+
+  let chosenCityDot = svgStar.append("circle").attr("r", 6).style("fill", "#69b3a2").attr("cy",svgStar.attr("height")-svgStar.attr("height")*0.04)
+  let chosenCityText = svgStar.append("text").text("Chosen City").style("font-size", "15px").attr("y",svgStar.attr("height")-svgStar.attr("height")*0.04)
+
+  let topCityDot = svgStar.append("circle").attr("r", 6).style("fill", "#404080").attr("cy",svgStar.attr("height")-svgStar.attr("height")*0.04)
+  let topCityText = svgStar.append("text").text("Chosen City").style("font-size", "15px").attr("y",svgStar.attr("height")-svgStar.attr("height")*0.04)
+
+  chosenCityDot.attr("cx", '120');
+  let startChosenCityText = parseInt(chosenCityDot.attr("cx"))+10;
+  chosenCityText.attr("x", '130');
+  chosenCityText.attr("y", '390');
+
+  topCityDot.attr("cx", '250');
+  topCityText.attr("x", '260');
+  topCityText.attr("y", '390'); //aggiustare le posizioni in modo che siano dinamiche in base al testo
   });
 }
 
