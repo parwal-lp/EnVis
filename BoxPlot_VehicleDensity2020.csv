@@ -1,0 +1,124 @@
+﻿City,VehicleDensity
+Torino,5.816
+Vercelli,3.545
+Novara,3.055
+Biella,2.481
+Cuneo,2.592
+Verbania,2.759
+Asti,2.852
+Alessandria,2.873
+Aosta,3.764
+Imperia,2.469
+Savona,5.108
+Genova,5.797
+La Spezia,4.150
+Varese,2.462
+Como,2.406
+Lecco,3.857
+Sondrio,3.846
+Milano,6.506
+Monza,5.268
+Bergamo,4.153
+Brescia,3.014
+Pavia,3.487
+Lodi,4.078
+Cremona,3.574
+Mantova,3.606
+Bolzano/Bozen,7.037
+Trento,3.792
+Verona,3.752
+Vicenza,3.131
+Belluno,2.292
+Treviso,2.530
+Venezia,1.906
+Padova,2.302
+Rovigo,2.244
+Pordenone,2.289
+Udine,1.789
+Gorizia,2.222
+Trieste,4.225
+Piacenza,2.866
+Parma,3.486
+Reggio nell'Emilia,2.756
+Modena,3.351
+Bologna,3.814
+Ferrara,2.061
+Ravenna,3.311
+Forlì,2.565
+Cesena,2.619
+Rimini,4.133
+Massa,1.931
+Lucca,1.586
+Pistoia,2.600
+Firenze,4.864
+Prato,3.624
+Livorno,3.874
+Pisa,2.840
+Arezzo,2.414
+Siena,2.734
+Grosseto,3.587
+Perugia,2.396
+Terni,2.976
+Pesaro,4.311
+Ancona,3.629
+Macerata,3.699
+Fermo,3.481
+Ascoli Piceno,2.923
+Viterbo,4.734
+Rieti,2.522
+Roma,4.540
+Latina,2.471
+Frosinone,2.111
+L'Aquila,1.996
+Teramo,3.809
+Pescara,3.880
+Chieti,2.979
+Isernia,5.932
+Campobasso,4.748
+Caserta,3.200
+Benevento,4.140
+Napoli,7.354
+Avellino,4.054
+Salerno,5.241
+Foggia,6.532
+Andria,7.046
+Barletta,6.146
+Trani,5.262
+Bari,4.051
+Taranto,3.270
+Brindisi,4.084
+Lecce,2.431
+Potenza,2.525
+Matera,5.817
+Cosenza,4.723
+Crotone,2.493
+Catanzaro,2.826
+Vibo Valentia,2.381
+Reggio di Calabria,2.573
+Trapani,2.807
+Palermo,6.501
+Messina,4.616
+Agrigento,3.210
+Caltanissetta,3.856
+Enna,4.066
+Catania,5.424
+Ragusa,3.059
+Siracusa,3.854
+Sassari,2.728
+Nuoro,4.291
+Oristano,3.483
+Cagliari,4.945
+Carbonia,2.703
+,
+Nord (*) ,3.695
+Nord-ovest (*),4.532
+Nord-est (*),2.986
+Centro (*),3.686
+Mezzogiorno (*) ,4.347
+Sud (*),4.207
+Isole (*),4.571
+,
+Capoluoghi di città metropolitana,4.998
+Capoluoghi di provincia (*),3.197
+,
+Italia (*),3.905
