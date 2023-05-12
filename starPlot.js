@@ -13,7 +13,7 @@ const nTicks = 5;
 const scales = {};
 
 
-function drawStarPlot(){
+function drawStarPlot(currentBestCity){
   d3.csv("StarPlotData.csv", function(data) { //retrieve the data
     // ------------ PRENDO I DATI CHE MI SERVONO --------------- //
     labels.forEach(pollutant => {
@@ -32,9 +32,6 @@ function drawStarPlot(){
     for (let i=0; i<pollutantsMaxValues.length; i++){ //arrotondo per eccesso tutti i maxvalues, cosi da essere divisibili per 5 tickss
       pollutantsMaxValues[i] = nTicks*(Math.ceil(Math.abs(pollutantsMaxValues[i]/nTicks)));
     }
-
-    console.log(pollutantsMaxValues);
-
 
     // ------------ CREO LE SCALE CON I VALORI PER GLI ASSI --------------- //
     for (let i=0; i<labels.length; i++){ //qui genero tutte le scale di tutti gli assi
@@ -79,7 +76,6 @@ function drawStarPlot(){
     // ------------ CREO ASSI E NOMI DEGLI ASSI ------------------ //
     for (let index = 0; index < labels.length; index++) {
       const angle = index * Math.PI * 2 / labels.length; //angolo tra un asse e l'altro (2pi/n) con n num di assi
-      //console.log(angle);
       const x = center.x + radius * Math.sin(angle);
       const y = center.y + radius * - Math.cos(angle);
       if (angle >= 0) { //scrivo le labels degli assi
@@ -103,34 +99,46 @@ function drawStarPlot(){
 
     // ------------ DISEGNO I PERCORSI IN BASE AI DATI ------------------ //
     // dati citta selezionata dall'utente
-    let dataSelectedCity = data.filter(function(row){
-      return row['City'] == 'Roma'; //qui sostituisci con la citta selezionata dall'utente nella tendina in alto
-    });
-    let pathSelectedCity = '';
-  
-    for (let i=0; i<6; i++){
-      pollutantData = dataSelectedCity.filter(function(row){
-        return row['Air Pollutant'] == labels[i];
+    let currentSelectedCity = document.getElementById("tendina_scelta_city").value;
+    if (currentSelectedCity != "none") {
+      //il path della citta selezionata dall'utente viene mostrato
+      //solamente se l'utente ha selezionato unacitta nella tendina, altrimenti salto e vado al path successivo
+      let dataSelectedCity = data.filter(function(row){
+        return row['City'] == document.getElementById("tendina_scelta_city").value; //qui sostituisci con la citta selezionata dall'utente nella tendina in alto
       });
-      
-      const r = radius - scales[labels[i]](pollutantData[0]['Air Pollution Level']);
+      let pathSelectedCity = '';
+    
+      for (let i=0; i<6; i++){
+        pollutantData = dataSelectedCity.filter(function(row){
+          return row['Air Pollutant'] == labels[i];
+        });
+
+        let r = 0;
+
+        if (pollutantData.length == 1){
+          r = radius - scales[labels[i]](pollutantData[0]['Air Pollution Level']);
+        }
         const angle = i * Math.PI * 2 / 6;
         const x = center.x + r * Math.sin(angle);
         const y = center.y + r * -Math.cos(angle);
         pathSelectedCity += `${i > 0 ? 'L' : 'M'} ${x},${y} `;
+        
+      }
+      pathSelectedCity += 'Z';
+        svgStar.append('path')
+          .attr('d', pathSelectedCity)
+          .style('stroke', '#888')
+          .style('stroke-width', 3)
+          .style('stroke-opacity', 0.6)
+          .style('fill', '#888')
+          .style('fill-opacity', 0.3)
+
     }
-    pathSelectedCity += 'Z';
-      svgStar.append('path')
-        .attr('d', pathSelectedCity)
-        .style('stroke', '#888')
-        .style('stroke-width', 3)
-        .style('stroke-opacity', 0.6)
-        .style('fill', '#888')
-        .style('fill-opacity', 0.3)
+    
 
     // dati citta migliore nella selezione attuale
     let dataBestCity = data.filter(function(row){
-      return row['City'] == 'Savona'; //qui sostituisci con la citta migliore della selezione attuale (capire cosa significa)
+      return row['City'] == currentBestCity; //qui sostituisci con la citta migliore della selezione attuale (capire cosa significa)
     });
     let pathBestCity = '';
   
@@ -138,12 +146,17 @@ function drawStarPlot(){
       pollutantData = dataBestCity.filter(function(row){
         return row['Air Pollutant'] == labels[i];
       });
-      
-      const r = radius - scales[labels[i]](pollutantData[0]['Air Pollution Level']);
-        const angle = i * Math.PI * 2 / 6;
-        const x = center.x + r * Math.sin(angle);
-        const y = center.y + r * -Math.cos(angle);
-        pathBestCity += `${i > 0 ? 'L' : 'M'} ${x},${y} `;
+
+      let r = 0;
+
+      if (pollutantData.length == 1){
+        r = radius - scales[labels[i]](pollutantData[0]['Air Pollution Level']);
+      }
+      const angle = i * Math.PI * 2 / 6;
+      const x = center.x + r * Math.sin(angle);
+      const y = center.y + r * -Math.cos(angle);
+      pathBestCity += `${i > 0 ? 'L' : 'M'} ${x},${y} `;
+
     }
     pathBestCity += 'Z';
       svgStar.append('path')
@@ -161,16 +174,18 @@ function drawStarPlot(){
   // svgStar.append("circle").attr("cx",svgStar.attr("width")/2+50).attr("cy",svgStar.attr("height")-svgStar.attr("height")*0.04).attr("r", 6).style("fill", "#404080")
   // svgStar.append("text").attr("x", svgStar.attr("width")/2+60).attr("y", svgStar.attr("height")-svgStar.attr("height")*0.03).text("Chosen City").style("font-size", "15px").attr("alignment-baseline","middle")
 
-  let chosenCityDot = svgStar.append("circle").attr("r", 6).style("fill", "#69b3a2").attr("cy",svgStar.attr("height")-svgStar.attr("height")*0.04)
-  let chosenCityText = svgStar.append("text").text("Chosen City").style("font-size", "15px").attr("y",svgStar.attr("height")-svgStar.attr("height")*0.04)
+  if (currentSelectedCity != "none"){
+    let chosenCityDot = svgStar.append("circle").attr("r", 6).style("fill", "#888").attr("cy",svgStar.attr("height")-svgStar.attr("height")*0.04)
+    let chosenCityText = svgStar.append("text").text(currentSelectedCity).style("font-size", "15px").attr("y",svgStar.attr("height")-svgStar.attr("height")*0.04)
+    chosenCityDot.attr("cx", '120');
+    let startChosenCityText = parseInt(chosenCityDot.attr("cx"))+10;
+    chosenCityText.attr("x", '130');
+    chosenCityText.attr("y", '390');
 
-  let topCityDot = svgStar.append("circle").attr("r", 6).style("fill", "#404080").attr("cy",svgStar.attr("height")-svgStar.attr("height")*0.04)
-  let topCityText = svgStar.append("text").text("Chosen City").style("font-size", "15px").attr("y",svgStar.attr("height")-svgStar.attr("height")*0.04)
+  }
 
-  chosenCityDot.attr("cx", '120');
-  let startChosenCityText = parseInt(chosenCityDot.attr("cx"))+10;
-  chosenCityText.attr("x", '130');
-  chosenCityText.attr("y", '390');
+  let topCityDot = svgStar.append("circle").attr("r", 6).style("fill", "#91cf60").attr("cy",svgStar.attr("height")-svgStar.attr("height")*0.04)
+  let topCityText = svgStar.append("text").text(currentBestCity).style("font-size", "15px").attr("y",svgStar.attr("height")-svgStar.attr("height")*0.04)
 
   topCityDot.attr("cx", '250');
   topCityText.attr("x", '260');
@@ -178,4 +193,4 @@ function drawStarPlot(){
   });
 }
 
-drawStarPlot();
+drawStarPlot("Roma");
