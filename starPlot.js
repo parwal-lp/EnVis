@@ -12,6 +12,14 @@ const center = {x: svgStar.attr("width")/2, y: svgStar.attr("height")/2};
 const nTicks = 5;
 const scales = {};
 
+function displayTextWidth(text, font) {
+  let canvas = displayTextWidth.canvas || (displayTextWidth.canvas = document.createElement("canvas"));
+  let context = canvas.getContext("2d");
+  context.font = font;
+  let metrics = context.measureText(text);
+  return metrics.width;
+}
+
 
 function drawStarPlot(currentBestCity){
   d3.csv("StarPlotData.csv", function(data) { //retrieve the data
@@ -168,29 +176,34 @@ function drawStarPlot(currentBestCity){
         .style('fill-opacity', 0.3)
 
   // ----------- CREO LA LEGENDA ---------------- //
-  // let legendaChosenCity = svgStar.append("circle").attr("cx",svgStar.attr("width")/2-50).attr("cy",svgStar.attr("height")-svgStar.attr("height")*0.04).attr("r", 6).style("fill", "#69b3a2")
-  // svgStar.append("text").attr("x", svgStar.attr("width")/2-40).attr("y", svgStar.attr("height")-svgStar.attr("height")*0.03).text("Chosen City").style("font-size", "15px").attr("alignment-baseline","middle")
 
-  // svgStar.append("circle").attr("cx",svgStar.attr("width")/2+50).attr("cy",svgStar.attr("height")-svgStar.attr("height")*0.04).attr("r", 6).style("fill", "#404080")
-  // svgStar.append("text").attr("x", svgStar.attr("width")/2+60).attr("y", svgStar.attr("height")-svgStar.attr("height")*0.03).text("Chosen City").style("font-size", "15px").attr("alignment-baseline","middle")
+  let legend = svgStar.append("g")
+  .attr("class", 'node')
 
+  let topCityDot = legend.append("circle").attr("r", 6).style("fill", "#91cf60").attr("cy",svgStar.attr("height")-svgStar.attr("height")*0.04)
+  let topCityText = legend.append("text").text(currentBestCity).style("font-size", "15px").attr("y",svgStar.attr("height")-svgStar.attr("height")*0.027)
+  topCityText.attr("x", '10');
+
+  let topCityWidth = displayTextWidth(currentBestCity, "15px sans-serif") + 10;
+  
+
+  let chosenCityWidth = 0;
   if (currentSelectedCity != "none"){
-    let chosenCityDot = svgStar.append("circle").attr("r", 6).style("fill", "#888").attr("cy",svgStar.attr("height")-svgStar.attr("height")*0.04)
-    let chosenCityText = svgStar.append("text").text(currentSelectedCity).style("font-size", "15px").attr("y",svgStar.attr("height")-svgStar.attr("height")*0.04)
-    chosenCityDot.attr("cx", '120');
-    let startChosenCityText = parseInt(chosenCityDot.attr("cx"))+10;
-    chosenCityText.attr("x", '130');
-    chosenCityText.attr("y", '390');
+    let chosenCityDot = legend.append("circle").attr("r", 6).style("fill", "#888").attr("cy",svgStar.attr("height")-svgStar.attr("height")*0.04)
+    let chosenCityText = legend.append("text").text(currentSelectedCity).style("font-size", "15px").attr("y",svgStar.attr("height")-svgStar.attr("height")*0.027)
+    
+    chosenCityDot.attr("cx", topCityWidth + 10);
+    chosenCityText.attr("x", topCityWidth + 20);
+
+    chosenCityWidth = displayTextWidth(currentSelectedCity, "15px sans-serif") + 10;
 
   }
 
-  let topCityDot = svgStar.append("circle").attr("r", 6).style("fill", "#91cf60").attr("cy",svgStar.attr("height")-svgStar.attr("height")*0.04)
-  let topCityText = svgStar.append("text").text(currentBestCity).style("font-size", "15px").attr("y",svgStar.attr("height")-svgStar.attr("height")*0.04)
+  //posiziono la legenda al centro, questo significa spostarla dinamicamente in base alla larghezza che il testo occupa
+  legend.attr("transform", `translate(${230-(topCityWidth + chosenCityWidth)/2}, 0)`) 
 
-  topCityDot.attr("cx", '250');
-  topCityText.attr("x", '260');
-  topCityText.attr("y", '390'); //aggiustare le posizioni in modo che siano dinamiche in base al testo
   });
+
 }
 
 drawStarPlot("Roma");
