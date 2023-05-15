@@ -5,7 +5,7 @@ import numpy as np
 dataset = pd.read_csv('AirQualityData.csv')
 
 #reduce the column size of field City to 20 chars
-dataset['City'] = dataset['City'].str.replace(" ", "")
+dataset['City'] = dataset['City'].str.strip(' ')
 
 #select the columns of interest
 cols = ['Air Pollutant', 'Air Pollution Level', 'City']

@@ -54,6 +54,32 @@ function changePollutant(pollutant){
     order = getOrderValue();
     svg.selectAll("*").remove();
     draw(selectedPollutant, XmaxValue, order);
+
+    //quando si cambia il pollutant, cambia anche il set di citta selezionate
+    //quindi devo aggiornare tutti i grafici che riguardano la miglior citta della selezione attuale
+    svgStar.selectAll("*").remove();
+    d3.csv("BarChartData.csv", function(data) {
+        data = data.filter(function(row){
+          return row['Air Pollutant'] == selectedPollutant;
+        });
+
+        data = data.sort(function(a, b) { // sort in ordine crescente
+            return d3.ascending(parseFloat(a['Air Pollution Level']), parseFloat(b['Air Pollution Level']));
+        });
+        //the maximum value on x axis is that of the worst city
+        XmaxValue = data[data.length-1]['Air Pollution Level'];
+    
+        //checking which value is setted
+        if(order == "top10"){ //prendo le prime 10
+            data = data.slice(0, 10);
+        }
+        else if(order == "worst10"){ //prendo le ultime 10
+            data = data.slice(data.length-11,data.length-1);
+        }
+        currentBestCity = data[0].City;
+        drawStarPlot(currentBestCity);
+    });
+    
 }
 
 //function invoked when clicking on radio buttons, it invokes a new draw
@@ -61,6 +87,31 @@ function changeOrder(order){
     order = getOrderValue();
     svg.selectAll("*").remove();
     draw(selectedPollutant, XmaxValue, order);
+
+    //quando si cambia il pollutant, cambia anche il set di citta selezionate
+    //quindi devo aggiornare tutti i grafici che riguardano la miglior citta della selezione attuale
+    svgStar.selectAll("*").remove();
+    d3.csv("BarChartData.csv", function(data) {
+        data = data.filter(function(row){
+          return row['Air Pollutant'] == selectedPollutant;
+        });
+
+        data = data.sort(function(a, b) { // sort in ordine crescente
+            return d3.ascending(parseFloat(a['Air Pollution Level']), parseFloat(b['Air Pollution Level']));
+        });
+        //the maximum value on x axis is that of the worst city
+        XmaxValue = data[data.length-1]['Air Pollution Level'];
+    
+        //checking which value is setted
+        if(order == "top10"){ //prendo le prime 10
+            data = data.slice(0, 10);
+        }
+        else if(order == "worst10"){ //prendo le ultime 10
+            data = data.slice(data.length-11,data.length-1);
+        }
+        currentBestCity = data[0].City;
+        drawStarPlot(currentBestCity);
+    });
 }
 
 function draw(selectedPollutant, XmaxValue, order){

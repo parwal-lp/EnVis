@@ -1,355 +1,355 @@
 Air Pollutant,City,Air Pollution Level
-CO,Ancona              ,0.758
-CO,Avellino            ,0.48700000000000004
-CO,Bari                ,0.25049999999999994
-CO,Bergamo             ,0.4825
-CO,Bologna             ,0.644
-CO,Bolzano             ,0.33299999999999996
-CO,Brescia             ,0.7809999999999999
-CO,Busto Arsizio       ,0.44299999999999995
-CO,Cagliari            ,0.295
-CO,Caserta             ,0.42100000000000004
-CO,Catania             ,0.517
-CO,Catanzaro           ,0.6659999999999999
-CO,Como                ,0.45
-CO,Cosenza             ,0.579
-CO,Cremona             ,0.35600000000000004
-CO,Firenze             ,0.73
-CO,Foggia              ,0.33399999999999996
-CO,Genova              ,0.67125
-CO,La Spezia           ,0.4175
-CO,Latina              ,0.29600000000000004
-CO,Lecce               ,0.246
-CO,Lecco               ,0.495
-CO,Livorno             ,0.418
-CO,Messina             ,0.18899999999999997
-CO,Milano              ,0.6637500000000001
-CO,Napoli              ,0.5632499999999999
-CO,Novara              ,0.535
-CO,Palermo             ,0.48
-CO,Pavia               ,0.598
-CO,Perugia             ,0.327
-CO,Pesaro              ,0.805
-CO,Pescara             ,0.4235
-CO,Piacenza            ,0.602
-CO,Pisa                ,0.45899999999999996
-CO,Potenza             ,0.387
-CO,Prato               ,0.44299999999999995
-CO,Ravenna             ,0.48200000000000004
-CO,Reggio di Calabria  ,0.716
-CO,Reggio nell'Emilia  ,0.47100000000000003
-CO,Rimini              ,0.677
-CO,Roma                ,0.517
-CO,Salerno             ,0.361
-CO,Sanremo             ,0.428
-CO,Sassari             ,0.354
-CO,Savona              ,0.7170000000000001
-CO,Terni               ,0.49700000000000005
-CO,Torino              ,0.739
-CO,Trento              ,0.8079999999999999
-CO,Trieste             ,0.4395
-CO,Varese              ,0.413
-NO2,Ancona              ,10.296
-NO2,Asti                ,22.929499999999997
-NO2,Avellino            ,16.5545
-NO2,Bari                ,10.6118
-NO2,Barletta            ,9.06
-NO2,Benevento           ,13.638333333333334
-NO2,Bergamo             ,33.6775
-NO2,Biella              ,15.867
-NO2,Bologna             ,25.897000000000002
-NO2,Bolzano             ,28.81233333333333
-NO2,Brescia             ,31.254666666666665
-NO2,Busto Arsizio       ,22.36
-NO2,Cagliari            ,19.937
-NO2,Campobasso          ,27.213
-NO2,Carrara             ,12.526
-NO2,Caserta             ,18.630000000000003
-NO2,Catania             ,30.1545
-NO2,Catanzaro           ,17.381999999999998
-NO2,Como                ,35.736999999999995
-NO2,Cosenza             ,18.678
-NO2,Cremona             ,25.9105
-NO2,Ferrara             ,23.0
-NO2,Firenze             ,30.921333333333337
-NO2,Foggia              ,10.921
-NO2,Forlì               ,22.8985
-NO2,Genova              ,31.711000000000006
-NO2,La Spezia           ,21.225249999999996
-NO2,Latina              ,21.117333333333335
-NO2,Lecce               ,8.761
-NO2,Lecco               ,26.258499999999998
-NO2,Livorno             ,20.672333333333334
-NO2,Massa               ,16.273
-NO2,Messina             ,23.0585
-NO2,Milano              ,35.58813333333333
-NO2,Modena              ,30.942999999999998
-NO2,Napoli              ,29.48264285714286
-NO2,Novara              ,26.465
-NO2,Padova              ,28.9045
-NO2,Palermo             ,29.824333333333332
-NO2,Parma               ,24.3295
-NO2,Pavia               ,28.621000000000002
-NO2,Perugia             ,14.664333333333332
-NO2,Pesaro              ,24.42
-NO2,Pescara             ,21.187
-NO2,Piacenza            ,25.189999999999998
-NO2,Pisa                ,19.9165
-NO2,Pordenone           ,13.693
-NO2,Prato               ,22.238
-NO2,Ravenna             ,19.774
-NO2,Reggio di Calabria  ,16.4645
-NO2,Reggio nell'Emilia  ,26.673499999999997
-NO2,Rimini              ,26.838500000000003
-NO2,Roma                ,30.03775
-NO2,Salerno             ,23.49866666666667
-NO2,Sanremo             ,10.6035
-NO2,Sassari             ,17.2895
-NO2,Savona              ,16.808
-NO2,Siracusa            ,13.56625
-NO2,Taranto             ,7.400333333333333
-NO2,Terni               ,16.123
-NO2,Torino              ,36.10875
-NO2,Trento              ,33.004999999999995
-NO2,Treviso             ,23.659000000000002
-NO2,Trieste             ,16.845333333333333
-NO2,Udine               ,13.618000000000002
-NO2,Varese              ,22.361
-NO2,Venezia             ,28.579666666666668
-NO2,Verona              ,20.035999999999998
-NO2,Viareggio           ,19.989
-NO2,Vicenza             ,25.454333333333334
-NO2,Vigevano            ,19.192
-NOX as NO2,Ancona              ,14.905999999999999
-NOX as NO2,Bari                ,16.077
-NOX as NO2,Bolzano             ,53.62833333333333
-NOX as NO2,Carrara             ,16.945
-NOX as NO2,Firenze             ,61.560333333333325
-NOX as NO2,Foggia              ,14.329
-NOX as NO2,Livorno             ,32.294333333333334
-NOX as NO2,Massa               ,23.77
-NOX as NO2,Padova              ,50.343500000000006
-NOX as NO2,Perugia             ,28.918000000000003
-NOX as NO2,Pesaro              ,39.626
-NOX as NO2,Pisa                ,36.4585
-NOX as NO2,Prato               ,43.662000000000006
-NOX as NO2,Taranto             ,7.37
-NOX as NO2,Terni               ,29.389666666666667
-NOX as NO2,Treviso             ,42.73
-NOX as NO2,Venezia             ,48.827666666666666
-NOX as NO2,Verona              ,33.111999999999995
-NOX as NO2,Viareggio           ,32.509
-NOX as NO2,Vicenza             ,45.144
-O3,Ancona              ,64.55
-O3,Asti                ,47.328
-O3,Avellino            ,52.449
-O3,Bari                ,31.021500000000003
-O3,Barletta            ,31.761
-O3,Benevento           ,54.088499999999996
-O3,Bergamo             ,53.238
-O3,Biella              ,52.832
-O3,Bologna             ,48.1225
-O3,Bolzano             ,46.806000000000004
-O3,Brescia             ,54.855
-O3,Busto Arsizio       ,44.813
-O3,Cagliari            ,38.418
-O3,Campobasso          ,50.655
-O3,Caserta             ,50.485
-O3,Catania             ,71.352
-O3,Catanzaro           ,78.098
-O3,Cosenza             ,64.218
-O3,Cremona             ,44.147
-O3,Ferrara             ,49.928000000000004
-O3,Forlì               ,53.533
-O3,Genova              ,70.61200000000001
-O3,La Spezia           ,54.76049999999999
-O3,Latina              ,44.949
-O3,Lecco               ,60.093
-O3,Messina             ,70.792
-O3,Milano              ,49.87966666666667
-O3,Modena              ,48.105
-O3,Napoli              ,56.202666666666666
-O3,Novara              ,42.326
-O3,Padova              ,49.733999999999995
-O3,Palermo             ,73.134
-O3,Parma               ,48.784
-O3,Pavia               ,47.028999999999996
-O3,Perugia             ,53.068000000000005
-O3,Pesaro              ,42.763000000000005
-O3,Pescara             ,58.476
-O3,Piacenza            ,52.869
-O3,Pisa                ,50.405
-O3,Ravenna             ,54.586000000000006
-O3,Reggio di Calabria  ,55.912
-O3,Reggio nell'Emilia  ,45.327
-O3,Rimini              ,52.57
-O3,Roma                ,46.918625
-O3,Salerno             ,50.644499999999994
-O3,Sanremo             ,75.661
-O3,Savona              ,72.055
-O3,Siracusa            ,79.691
-O3,Taranto             ,32.9685
-O3,Terni               ,53.071000000000005
-O3,Torino              ,52.9875
-O3,Trento              ,47.306000000000004
-O3,Treviso             ,47.95
-O3,Trieste             ,22.289
-O3,Udine               ,22.145
-O3,Varese              ,56.38399999999999
-O3,Venezia             ,49.731
-O3,Vicenza             ,46.369
-PM10,Asti                ,24.8975
-PM10,Avellino            ,32.885
-PM10,Bari                ,22.04
-PM10,Barletta            ,24.8
-PM10,Benevento           ,23.98966666666667
-PM10,Bergamo             ,25.391000000000002
-PM10,Biella              ,14.565999999999999
-PM10,Bologna             ,22.691666666666666
-PM10,Bolzano             ,16.468
-PM10,Brescia             ,29.4535
-PM10,Busto Arsizio       ,22.214000000000002
-PM10,Carrara             ,21.607
-PM10,Caserta             ,28.9075
-PM10,Catania             ,27.278
-PM10,Catanzaro           ,18.636499999999998
-PM10,Como                ,27.063000000000002
-PM10,Cosenza             ,19.706
-PM10,Cremona             ,32.472
-PM10,Ferrara             ,26.136
-PM10,Firenze             ,21.416249999999998
-PM10,Foggia              ,21.191999999999997
-PM10,Forlì               ,21.7205
-PM10,Genova              ,16.5785
-PM10,La Spezia           ,18.06233333333333
-PM10,Latina              ,21.549333333333333
-PM10,Lecce               ,21.298000000000002
-PM10,Lecco               ,19.9905
-PM10,Livorno             ,18.267
-PM10,Massa               ,22.526999999999997
-PM10,Messina             ,24.625999999999998
-PM10,Milano              ,29.444777777777777
-PM10,Modena              ,30.033
-PM10,Napoli              ,30.6015
-PM10,Novara              ,21.585500000000003
-PM10,Padova              ,30.326500000000003
-PM10,Palermo             ,23.997333333333334
-PM10,Parma               ,28.2285
-PM10,Pavia               ,29.5255
-PM10,Perugia             ,17.855
-PM10,Pesaro              ,30.587
-PM10,Pescara             ,19.689
-PM10,Piacenza            ,28.2965
-PM10,Pisa                ,21.183500000000002
-PM10,Pordenone           ,16.88
-PM10,Potenza             ,20.0525
-PM10,Prato               ,23.2665
-PM10,Ravenna             ,23.478
-PM10,Reggio di Calabria  ,21.993
-PM10,Reggio nell'Emilia  ,28.784
-PM10,Rimini              ,25.3715
-PM10,Roma                ,24.0005
-PM10,Salerno             ,26.938000000000002
-PM10,Savona              ,16.567
-PM10,Siracusa            ,23.2396
-PM10,Taranto             ,20.509333333333334
-PM10,Terni               ,25.862666666666666
-PM10,Torino              ,23.843
-PM10,Trento              ,20.3735
-PM10,Treviso             ,28.991500000000002
-PM10,Trieste             ,12.045333333333334
-PM10,Udine               ,17.47
-PM10,Varese              ,21.471
-PM10,Venezia             ,30.46733333333334
-PM10,Verona              ,30.948
-PM10,Viareggio           ,26.25
-PM10,Vicenza             ,28.910999999999998
-PM10,Vigevano            ,29.575
-PM2.5,Ancona              ,12.262
-PM2.5,Asti                ,16.166
-PM2.5,Avellino            ,15.118
-PM2.5,Bari                ,12.426
-PM2.5,Barletta            ,12.377
-PM2.5,Benevento           ,14.18
-PM2.5,Bergamo             ,18.244
-PM2.5,Biella              ,9.995
-PM2.5,Brescia             ,19.6455
-PM2.5,Cagliari            ,16.912
-PM2.5,Caserta             ,26.216500000000003
-PM2.5,Catanzaro           ,8.424
-PM2.5,Como                ,20.317
-PM2.5,Cosenza             ,12.780999999999999
-PM2.5,Cremona             ,23.3345
-PM2.5,Firenze             ,14.425
-PM2.5,Foggia              ,11.731
-PM2.5,La Spezia           ,9.847999999999999
-PM2.5,Latina              ,10.932
-PM2.5,Lecce               ,11.465499999999999
-PM2.5,Lecco               ,14.218
-PM2.5,Livorno             ,9.3845
-PM2.5,Massa               ,14.073
-PM2.5,Messina             ,11.911
-PM2.5,Milano              ,19.3244
-PM2.5,Napoli              ,13.636444444444443
-PM2.5,Novara              ,14.375
-PM2.5,Palermo             ,12.275
-PM2.5,Pavia               ,19.874000000000002
-PM2.5,Perugia             ,9.782333333333334
-PM2.5,Pesaro              ,13.097000000000001
-PM2.5,Pescara             ,10.68
-PM2.5,Pisa                ,14.033999999999999
-PM2.5,Prato               ,15.555
-PM2.5,Reggio di Calabria  ,11.289000000000001
-PM2.5,Roma                ,11.702142857142858
-PM2.5,Salerno             ,11.370999999999999
-PM2.5,Savona              ,8.375
-PM2.5,Taranto             ,10.42
-PM2.5,Terni               ,16.501666666666665
-PM2.5,Torino              ,18.374
-PM2.5,Trento              ,13.344000000000001
-PM2.5,Treviso             ,20.22
-PM2.5,Varese              ,16.076
-PM2.5,Viareggio           ,16.474
-SO2,Ancona              ,4.856
-SO2,Asti                ,4.6530000000000005
-SO2,Bergamo             ,1.817
-SO2,Biella              ,0.983
-SO2,Bolzano             ,0.9570000000000001
-SO2,Brescia             ,3.4010000000000002
-SO2,Busto Arsizio       ,2.847
-SO2,Cagliari            ,0.895
-SO2,Catania             ,5.428999999999999
-SO2,Catanzaro           ,5.2589999999999995
-SO2,Como                ,0.802
-SO2,Cosenza             ,10.843
-SO2,Cremona             ,1.1909999999999998
-SO2,Firenze             ,2.173
-SO2,Genova              ,3.5525
-SO2,La Spezia           ,2.3689999999999998
-SO2,Lecco               ,1.107
-SO2,Livorno             ,2.3280000000000003
-SO2,Messina             ,3.6
-SO2,Milano              ,2.936
-SO2,Napoli              ,3.5382
-SO2,Novara              ,5.085
-SO2,Padova              ,1.839
-SO2,Palermo             ,3.818
-SO2,Pavia               ,1.788
-SO2,Perugia             ,2.615
-SO2,Pescara             ,0.28
-SO2,Ravenna             ,1.743
-SO2,Reggio di Calabria  ,6.9910000000000005
-SO2,Roma                ,1.3946666666666665
-SO2,Salerno             ,2.221
-SO2,Sanremo             ,1.06
-SO2,Sassari             ,0.9809999999999999
-SO2,Savona              ,1.173
-SO2,Siracusa            ,1.415
-SO2,Taranto             ,1.0605
-SO2,Torino              ,4.9335
-SO2,Trento              ,1.847
-SO2,Trieste             ,1.0170000000000001
-SO2,Varese              ,1.67
-SO2,Venezia             ,1.306
-SO2,Verona              ,1.222
-SO2,Vicenza             ,1.916
+CO,Ancona,0.758
+CO,Avellino,0.48700000000000004
+CO,Bari,0.25049999999999994
+CO,Bergamo,0.4825
+CO,Bologna,0.644
+CO,Bolzano,0.33299999999999996
+CO,Brescia,0.7809999999999999
+CO,Busto Arsizio,0.44299999999999995
+CO,Cagliari,0.295
+CO,Caserta,0.42100000000000004
+CO,Catania,0.517
+CO,Catanzaro,0.6659999999999999
+CO,Como,0.45
+CO,Cosenza,0.579
+CO,Cremona,0.35600000000000004
+CO,Firenze,0.73
+CO,Foggia,0.33399999999999996
+CO,Genova,0.67125
+CO,La Spezia,0.4175
+CO,Latina,0.29600000000000004
+CO,Lecce,0.246
+CO,Lecco,0.495
+CO,Livorno,0.418
+CO,Messina,0.18899999999999997
+CO,Milano,0.6637500000000001
+CO,Napoli,0.5632499999999999
+CO,Novara,0.535
+CO,Palermo,0.48
+CO,Pavia,0.598
+CO,Perugia,0.327
+CO,Pesaro,0.805
+CO,Pescara,0.4235
+CO,Piacenza,0.602
+CO,Pisa,0.45899999999999996
+CO,Potenza,0.387
+CO,Prato,0.44299999999999995
+CO,Ravenna,0.48200000000000004
+CO,Reggio di Calabria,0.716
+CO,Reggio nell'Emilia,0.47100000000000003
+CO,Rimini,0.677
+CO,Roma,0.517
+CO,Salerno,0.361
+CO,Sanremo,0.428
+CO,Sassari,0.354
+CO,Savona,0.7170000000000001
+CO,Terni,0.49700000000000005
+CO,Torino,0.739
+CO,Trento,0.8079999999999999
+CO,Trieste,0.4395
+CO,Varese,0.413
+NO2,Ancona,10.296
+NO2,Asti,22.929499999999997
+NO2,Avellino,16.5545
+NO2,Bari,10.6118
+NO2,Barletta,9.06
+NO2,Benevento,13.638333333333334
+NO2,Bergamo,33.6775
+NO2,Biella,15.867
+NO2,Bologna,25.897000000000002
+NO2,Bolzano,28.81233333333333
+NO2,Brescia,31.254666666666665
+NO2,Busto Arsizio,22.36
+NO2,Cagliari,19.937
+NO2,Campobasso,27.213
+NO2,Carrara,12.526
+NO2,Caserta,18.630000000000003
+NO2,Catania,30.1545
+NO2,Catanzaro,17.381999999999998
+NO2,Como,35.736999999999995
+NO2,Cosenza,18.678
+NO2,Cremona,25.9105
+NO2,Ferrara,23.0
+NO2,Firenze,30.921333333333337
+NO2,Foggia,10.921
+NO2,Forlì,22.8985
+NO2,Genova,31.711000000000006
+NO2,La Spezia,21.225249999999996
+NO2,Latina,21.117333333333335
+NO2,Lecce,8.761
+NO2,Lecco,26.258499999999998
+NO2,Livorno,20.672333333333334
+NO2,Massa,16.273
+NO2,Messina,23.0585
+NO2,Milano,35.58813333333333
+NO2,Modena,30.942999999999998
+NO2,Napoli,29.48264285714286
+NO2,Novara,26.465
+NO2,Padova,28.9045
+NO2,Palermo,29.824333333333332
+NO2,Parma,24.3295
+NO2,Pavia,28.621000000000002
+NO2,Perugia,14.664333333333332
+NO2,Pesaro,24.42
+NO2,Pescara,21.187
+NO2,Piacenza,25.189999999999998
+NO2,Pisa,19.9165
+NO2,Pordenone,13.693
+NO2,Prato,22.238
+NO2,Ravenna,19.774
+NO2,Reggio di Calabria,16.4645
+NO2,Reggio nell'Emilia,26.673499999999997
+NO2,Rimini,26.838500000000003
+NO2,Roma,30.03775
+NO2,Salerno,23.49866666666667
+NO2,Sanremo,10.6035
+NO2,Sassari,17.2895
+NO2,Savona,16.808
+NO2,Siracusa,13.56625
+NO2,Taranto,7.400333333333333
+NO2,Terni,16.123
+NO2,Torino,36.10875
+NO2,Trento,33.004999999999995
+NO2,Treviso,23.659000000000002
+NO2,Trieste,16.845333333333333
+NO2,Udine,13.618000000000002
+NO2,Varese,22.361
+NO2,Venezia,28.579666666666668
+NO2,Verona,20.035999999999998
+NO2,Viareggio,19.989
+NO2,Vicenza,25.454333333333334
+NO2,Vigevano,19.192
+NOX as NO2,Ancona,14.905999999999999
+NOX as NO2,Bari,16.077
+NOX as NO2,Bolzano,53.62833333333333
+NOX as NO2,Carrara,16.945
+NOX as NO2,Firenze,61.560333333333325
+NOX as NO2,Foggia,14.329
+NOX as NO2,Livorno,32.294333333333334
+NOX as NO2,Massa,23.77
+NOX as NO2,Padova,50.343500000000006
+NOX as NO2,Perugia,28.918000000000003
+NOX as NO2,Pesaro,39.626
+NOX as NO2,Pisa,36.4585
+NOX as NO2,Prato,43.662000000000006
+NOX as NO2,Taranto,7.37
+NOX as NO2,Terni,29.389666666666667
+NOX as NO2,Treviso,42.73
+NOX as NO2,Venezia,48.827666666666666
+NOX as NO2,Verona,33.111999999999995
+NOX as NO2,Viareggio,32.509
+NOX as NO2,Vicenza,45.144
+O3,Ancona,64.55
+O3,Asti,47.328
+O3,Avellino,52.449
+O3,Bari,31.021500000000003
+O3,Barletta,31.761
+O3,Benevento,54.088499999999996
+O3,Bergamo,53.238
+O3,Biella,52.832
+O3,Bologna,48.1225
+O3,Bolzano,46.806000000000004
+O3,Brescia,54.855
+O3,Busto Arsizio,44.813
+O3,Cagliari,38.418
+O3,Campobasso,50.655
+O3,Caserta,50.485
+O3,Catania,71.352
+O3,Catanzaro,78.098
+O3,Cosenza,64.218
+O3,Cremona,44.147
+O3,Ferrara,49.928000000000004
+O3,Forlì,53.533
+O3,Genova,70.61200000000001
+O3,La Spezia,54.76049999999999
+O3,Latina,44.949
+O3,Lecco,60.093
+O3,Messina,70.792
+O3,Milano,49.87966666666667
+O3,Modena,48.105
+O3,Napoli,56.202666666666666
+O3,Novara,42.326
+O3,Padova,49.733999999999995
+O3,Palermo,73.134
+O3,Parma,48.784
+O3,Pavia,47.028999999999996
+O3,Perugia,53.068000000000005
+O3,Pesaro,42.763000000000005
+O3,Pescara,58.476
+O3,Piacenza,52.869
+O3,Pisa,50.405
+O3,Ravenna,54.586000000000006
+O3,Reggio di Calabria,55.912
+O3,Reggio nell'Emilia,45.327
+O3,Rimini,52.57
+O3,Roma,46.918625
+O3,Salerno,50.644499999999994
+O3,Sanremo,75.661
+O3,Savona,72.055
+O3,Siracusa,79.691
+O3,Taranto,32.9685
+O3,Terni,53.071000000000005
+O3,Torino,52.9875
+O3,Trento,47.306000000000004
+O3,Treviso,47.95
+O3,Trieste,22.289
+O3,Udine,22.145
+O3,Varese,56.38399999999999
+O3,Venezia,49.731
+O3,Vicenza,46.369
+PM10,Asti,24.8975
+PM10,Avellino,32.885
+PM10,Bari,22.04
+PM10,Barletta,24.8
+PM10,Benevento,23.98966666666667
+PM10,Bergamo,25.391000000000002
+PM10,Biella,14.565999999999999
+PM10,Bologna,22.691666666666666
+PM10,Bolzano,16.468
+PM10,Brescia,29.4535
+PM10,Busto Arsizio,22.214000000000002
+PM10,Carrara,21.607
+PM10,Caserta,28.9075
+PM10,Catania,27.278
+PM10,Catanzaro,18.636499999999998
+PM10,Como,27.063000000000002
+PM10,Cosenza,19.706
+PM10,Cremona,32.472
+PM10,Ferrara,26.136
+PM10,Firenze,21.416249999999998
+PM10,Foggia,21.191999999999997
+PM10,Forlì,21.7205
+PM10,Genova,16.5785
+PM10,La Spezia,18.06233333333333
+PM10,Latina,21.549333333333333
+PM10,Lecce,21.298000000000002
+PM10,Lecco,19.9905
+PM10,Livorno,18.267
+PM10,Massa,22.526999999999997
+PM10,Messina,24.625999999999998
+PM10,Milano,29.444777777777777
+PM10,Modena,30.033
+PM10,Napoli,30.6015
+PM10,Novara,21.585500000000003
+PM10,Padova,30.326500000000003
+PM10,Palermo,23.997333333333334
+PM10,Parma,28.2285
+PM10,Pavia,29.5255
+PM10,Perugia,17.855
+PM10,Pesaro,30.587
+PM10,Pescara,19.689
+PM10,Piacenza,28.2965
+PM10,Pisa,21.183500000000002
+PM10,Pordenone,16.88
+PM10,Potenza,20.0525
+PM10,Prato,23.2665
+PM10,Ravenna,23.478
+PM10,Reggio di Calabria,21.993
+PM10,Reggio nell'Emilia,28.784
+PM10,Rimini,25.3715
+PM10,Roma,24.0005
+PM10,Salerno,26.938000000000002
+PM10,Savona,16.567
+PM10,Siracusa,23.2396
+PM10,Taranto,20.509333333333334
+PM10,Terni,25.862666666666666
+PM10,Torino,23.843
+PM10,Trento,20.3735
+PM10,Treviso,28.991500000000002
+PM10,Trieste,12.045333333333334
+PM10,Udine,17.47
+PM10,Varese,21.471
+PM10,Venezia,30.46733333333334
+PM10,Verona,30.948
+PM10,Viareggio,26.25
+PM10,Vicenza,28.910999999999998
+PM10,Vigevano,29.575
+PM2.5,Ancona,12.262
+PM2.5,Asti,16.166
+PM2.5,Avellino,15.118
+PM2.5,Bari,12.426
+PM2.5,Barletta,12.377
+PM2.5,Benevento,14.18
+PM2.5,Bergamo,18.244
+PM2.5,Biella,9.995
+PM2.5,Brescia,19.6455
+PM2.5,Cagliari,16.912
+PM2.5,Caserta,26.216500000000003
+PM2.5,Catanzaro,8.424
+PM2.5,Como,20.317
+PM2.5,Cosenza,12.780999999999999
+PM2.5,Cremona,23.3345
+PM2.5,Firenze,14.425
+PM2.5,Foggia,11.731
+PM2.5,La Spezia,9.847999999999999
+PM2.5,Latina,10.932
+PM2.5,Lecce,11.465499999999999
+PM2.5,Lecco,14.218
+PM2.5,Livorno,9.3845
+PM2.5,Massa,14.073
+PM2.5,Messina,11.911
+PM2.5,Milano,19.3244
+PM2.5,Napoli,13.636444444444443
+PM2.5,Novara,14.375
+PM2.5,Palermo,12.275
+PM2.5,Pavia,19.874000000000002
+PM2.5,Perugia,9.782333333333334
+PM2.5,Pesaro,13.097000000000001
+PM2.5,Pescara,10.68
+PM2.5,Pisa,14.033999999999999
+PM2.5,Prato,15.555
+PM2.5,Reggio di Calabria,11.289000000000001
+PM2.5,Roma,11.702142857142858
+PM2.5,Salerno,11.370999999999999
+PM2.5,Savona,8.375
+PM2.5,Taranto,10.42
+PM2.5,Terni,16.501666666666665
+PM2.5,Torino,18.374
+PM2.5,Trento,13.344000000000001
+PM2.5,Treviso,20.22
+PM2.5,Varese,16.076
+PM2.5,Viareggio,16.474
+SO2,Ancona,4.856
+SO2,Asti,4.6530000000000005
+SO2,Bergamo,1.817
+SO2,Biella,0.983
+SO2,Bolzano,0.9570000000000001
+SO2,Brescia,3.4010000000000002
+SO2,Busto Arsizio,2.847
+SO2,Cagliari,0.895
+SO2,Catania,5.428999999999999
+SO2,Catanzaro,5.2589999999999995
+SO2,Como,0.802
+SO2,Cosenza,10.843
+SO2,Cremona,1.1909999999999998
+SO2,Firenze,2.173
+SO2,Genova,3.5525
+SO2,La Spezia,2.3689999999999998
+SO2,Lecco,1.107
+SO2,Livorno,2.3280000000000003
+SO2,Messina,3.6
+SO2,Milano,2.936
+SO2,Napoli,3.5382
+SO2,Novara,5.085
+SO2,Padova,1.839
+SO2,Palermo,3.818
+SO2,Pavia,1.788
+SO2,Perugia,2.615
+SO2,Pescara,0.28
+SO2,Ravenna,1.743
+SO2,Reggio di Calabria,6.9910000000000005
+SO2,Roma,1.3946666666666665
+SO2,Salerno,2.221
+SO2,Sanremo,1.06
+SO2,Sassari,0.9809999999999999
+SO2,Savona,1.173
+SO2,Siracusa,1.415
+SO2,Taranto,1.0605
+SO2,Torino,4.9335
+SO2,Trento,1.847
+SO2,Trieste,1.0170000000000001
+SO2,Varese,1.67
+SO2,Venezia,1.306
+SO2,Verona,1.222
+SO2,Vicenza,1.916
