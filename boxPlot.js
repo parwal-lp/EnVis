@@ -14,26 +14,35 @@ var svgBoxPlot = d3.select("#boxPlot")
           "translate(" + margin.left + "," + margin.top + ")");
 
 // Read the data and compute summary statistics for each specie
-d3.csv("BoxPlotData.csv", function(data) {
+d3.csv("BoxPlotData.csv", function(error, data) {
+  if (error) throw error;
+
+  //filter the data to eliminate the null value
 
   // Compute quartiles, median, inter quantile range min and max --> these info are then used to draw the box.
   var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
-    //.key(function(d) { return d.GreenAreaDensity;}) //what is the key of our dataset?
+   // .key(function(d) { return d.City ;}) 
     .rollup(function(d) {
-      q1 = d3.quantile(d.map(function(g) { return g.GreenAreaDensity;}).sort(d3.ascending),.25)
-      median = d3.quantile(d.map(function(g) { return g.GreenAreaDensity;}).sort(d3.ascending),.5)
-      q3 = d3.quantile(d.map(function(g) { return g.greenAreaDensity;}).sort(d3.ascending),.75)
-      interQuantileRange = q3 - q1
-      min = q1 - 1.5 * interQuantileRange
-      max = q3 + 1.5 * interQuantileRange
+      q1 = d3.quantile(d.map(function(g) { return g.GreenAreaDensity;}).sort(d3.ascending),.25);
+      median = d3.quantile(d.map(function(g) { return g.GreenAreaDensity;}).sort(d3.ascending),.5);
+      q3 = d3.quantile(d.map(function(g) { return g.GreenAreaDensity;}).sort(d3.ascending),.75);
+      interQuantileRange = q3 - q1;
+      min = d3.min(data, function(d) { return +d.GreenAreaDensity; }); //q1 - 1.5 * interQuantileRange; //inserire qui il min value dell'array
+      max = d3.max(data, function(d) { return +d.GreenAreaDensity; });//q3 + 1.5 * interQuantileRange; //inserire qui il max value dell'array
+
+      console.log("min:" + min);
+      console.log("max: " + max);
+      console.log("median: "+ median);
+      console.log ("interQuantile range: "+ interQuantileRange);
+      console.log("q1: "+q1+ " q3: "+ q3);
       return({q1: q1, median: median, q3: q3, interQuantileRange: interQuantileRange, min: min, max: max})
     })
-    .entries(data)
+    .entries(data) 
 
   // Show the X scale
   var x = d3.scaleBand()
     .range([ 0, width ])
-    .domain(["Green Area Density", "Vehicle", "Noise Pollution", "Emissions"]) //before was ["setosa", "versicolor", "virginica"]
+    .domain(["GreenAreaDensity"]) //to add "GasBifuel", "VehicleDensity", "NoisePollution"
     .paddingInner(1)
     .paddingOuter(.5)
   svgBoxPlot.append("g")
@@ -42,7 +51,7 @@ d3.csv("BoxPlotData.csv", function(data) {
 
   // Show the Y scale
   var y = d3.scaleLinear()
-    .domain([3,9])
+    .domain([0,max]) //il dominio dovrebbe essere da 0 a maxvalue no?
     .range([height, 0])
   svgBoxPlot.append("g").call(d3.axisLeft(y))
 
@@ -66,7 +75,7 @@ d3.csv("BoxPlotData.csv", function(data) {
     .data(sumstat)
     .enter()
     .append("rect")
-        .attr("x", function(d){return(x(d.key)-boxWidth/2)})
+        .attr("x", function(d){ return(x(d.key)-boxWidth/2)})
         .attr("y", function(d){return(y(d.value.q3))})
         .attr("height", function(d){return(y(d.value.q1)-y(d.value.q3))})
         .attr("width", boxWidth )
@@ -93,11 +102,11 @@ svgBoxPlot
   .data(data)
   .enter()
   .append("circle")
-    .attr("cx", function(d){return(x(d.Species) - jitterWidth/2 + Math.random()*jitterWidth )})
-    .attr("cy", function(d){return(y(d.Sepal_Length))})
+    .attr("cx", function(d){return(x(d.GreenAreaDensity) - jitterWidth/2 + Math.random()*jitterWidth )})
+    .attr("cy", function(d){return(y(d.GreenAreaDensity))})
     .attr("r", 4)
     .style("fill", "white")
-    .attr("stroke", "black")*/
+    .attr("stroke", "black") */
 
 
 });
