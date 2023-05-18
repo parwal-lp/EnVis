@@ -41,4 +41,4 @@ merged_df = pd.merge(merged_df, dataset4[['City','Percentuale_aree_verdi']], on=
 print(merged_df.head())
 
 #export results in a new csv
-merged_df.to_csv('ScatterPlotData.csv', header=True)
+merged_df.to_csv('../../data/processed/ScatterPlotData.csv', header=True)

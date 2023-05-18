@@ -21,5 +21,5 @@ dataset_mean = dataset_rows.groupby(['Air Pollutant', 'City'])['Air Pollution Le
 print(dataset_mean)
 #export results in a new csv
 #dataset = pd.DataFrame(dataset_mean, columns=['AirPollutant', 'AirPollutionLevel', 'City'])
-dataset_mean.to_csv('StarPlotData.csv', header=True)
+dataset_mean.to_csv('../../data/processed/StarPlotData.csv', header=True)
 #dataset_mean.to_csv('BarChartData.csv')

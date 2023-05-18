@@ -19,4 +19,4 @@ df_components = pd.DataFrame(data=components, columns=['PC1', 'PC2'])
 
 #plt.show()
 
-df_components.to_csv('pcaResults.csv', index=False)
+df_components.to_csv('../../data/processed/pcaResults.csv', index=False)

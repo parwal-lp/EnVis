@@ -58,7 +58,7 @@ function changePollutant(pollutant){
     //quando si cambia il pollutant, cambia anche il set di citta selezionate
     //quindi devo aggiornare tutti i grafici che riguardano la miglior citta della selezione attuale
     svgStar.selectAll("*").remove();
-    d3.csv("BarChartData.csv", function(data) {
+    d3.csv("../../data/processed/BarChartData.csv", function(data) {
         data = data.filter(function(row){
           return row['Air Pollutant'] == selectedPollutant;
         });
@@ -91,7 +91,7 @@ function changeOrder(order){
     //quando si cambia il pollutant, cambia anche il set di citta selezionate
     //quindi devo aggiornare tutti i grafici che riguardano la miglior citta della selezione attuale
     svgStar.selectAll("*").remove();
-    d3.csv("BarChartData.csv", function(data) {
+    d3.csv("../../data/processed/BarChartData.csv", function(data) {
         data = data.filter(function(row){
           return row['Air Pollutant'] == selectedPollutant;
         });
@@ -116,7 +116,7 @@ function changeOrder(order){
 
 function draw(selectedPollutant, XmaxValue, order){
     // Parse the Data
-    d3.csv("BarChartData.csv", function(data) {
+    d3.csv("../../data/processed/BarChartData.csv", function(data) {
         data = data.filter(function(row){
           return row['Air Pollutant'] == selectedPollutant;
         });
@@ -157,7 +157,7 @@ function draw(selectedPollutant, XmaxValue, order){
             .call(d3.axisLeft(y))
 
         //Bars
-        d3.csv("AQI_color.csv", function(colorData) {
+        d3.csv("../../data/processed/AQI_color.csv", function(colorData) {
             svg.selectAll("myRect")
             .data(data)
             .enter()

@@ -22,7 +22,7 @@ function displayTextWidth(text, font) {
 
 
 function drawStarPlot(currentBestCity){
-  d3.csv("StarPlotData.csv", function(data) { //retrieve the data
+  d3.csv("../../data/processed/StarPlotData.csv", function(data) { //retrieve the data
     // ------------ PRENDO I DATI CHE MI SERVONO --------------- //
     labels.forEach(pollutant => {
       let i=0;

@@ -4,7 +4,7 @@ const svgScatter = scatterArea.append('svg') //create svg for the starplot
   .attr("height", height + margin.top + margin.bottom) //set dimensions of starplot
 
 function drawScatterPlot(){
-    d3.csv("pcaResults.csv", function(data) { //retrieve the data
+    d3.csv("../../data/processed/pcaResults.csv", function(data) { //retrieve the data
       // ------------ PRENDO I DATI CHE MI SERVONO --------------- //
       // Add X axis
   var x = d3.scaleLinear()
