@@ -1,0 +1,235 @@
+City,Value,Category
+Torino,7.5,GreenAreaDensity
+Vercelli,1.3,GreenAreaDensity
+Novara,1.2,GreenAreaDensity
+Biella,33.6,GreenAreaDensity
+Cuneo,6.8,GreenAreaDensity
+Verbania,9.5,GreenAreaDensity
+Asti,17.1,GreenAreaDensity
+Alessandria,-,GreenAreaDensity
+Aosta,0.4,GreenAreaDensity
+Imperia,1.1,GreenAreaDensity
+Savona,7.8,GreenAreaDensity
+Genova,26.3,GreenAreaDensity
+La Spezia,24.2,GreenAreaDensity
+Varese ,45.5,GreenAreaDensity
+Como,19.4,GreenAreaDensity
+Lecco,20.7,GreenAreaDensity
+Sondrio,2.2,GreenAreaDensity
+Milano,..,GreenAreaDensity
+Monza ,22.3,GreenAreaDensity
+Bergamo,31.5,GreenAreaDensity
+Brescia,38.2,GreenAreaDensity
+Pavia,18.7,GreenAreaDensity
+Lodi,35.5,GreenAreaDensity
+Cremona,27.5,GreenAreaDensity
+Mantova ,21.3,GreenAreaDensity
+Bolzano - Bozen ,0.2,GreenAreaDensity
+Trento ,6.6,GreenAreaDensity
+Verona,4.7,GreenAreaDensity
+Vicenza,1.7,GreenAreaDensity
+Belluno ,21.4,GreenAreaDensity
+Treviso,10.4,GreenAreaDensity
+Venezia,62.8,GreenAreaDensity
+Padova,0.1,GreenAreaDensity
+Rovigo,0.1,GreenAreaDensity
+Pordenone,-,GreenAreaDensity
+Udine ,15.5,GreenAreaDensity
+Gorizia,7.6,GreenAreaDensity
+Trieste,33.4,GreenAreaDensity
+Piacenza,17.7,GreenAreaDensity
+Parma,2.3,GreenAreaDensity
+Reggio nell'Emilia ,7.1,GreenAreaDensity
+Modena,0.8,GreenAreaDensity
+Bologna,26.5,GreenAreaDensity
+Ferrara ,3,GreenAreaDensity
+Ravenna,29,GreenAreaDensity
+Forlì,3.2,GreenAreaDensity
+Cesena,1.7,GreenAreaDensity
+Rimini,0.6,GreenAreaDensity
+Massa,34,GreenAreaDensity
+Lucca,10.5,GreenAreaDensity
+Pistoia,17.7,GreenAreaDensity
+Firenze ,10.9,GreenAreaDensity
+Prato ,31.3,GreenAreaDensity
+Livorno,17.9,GreenAreaDensity
+Pisa,42.9,GreenAreaDensity
+Arezzo,7.1,GreenAreaDensity
+Siena,7.8,GreenAreaDensity
+Grosseto,30.5,GreenAreaDensity
+Perugia ,16,GreenAreaDensity
+Terni,20.7,GreenAreaDensity
+Pesaro,20.5,GreenAreaDensity
+Ancona ,25.3,GreenAreaDensity
+Macerata,-,GreenAreaDensity
+Fermo,-,GreenAreaDensity
+Ascoli Piceno,9.5,GreenAreaDensity
+Viterbo,5,GreenAreaDensity
+Rieti,19.2,GreenAreaDensity
+Roma ,32.2,GreenAreaDensity
+Latina,4.4,GreenAreaDensity
+Frosinone,..,GreenAreaDensity
+L'Aquila ,50.1,GreenAreaDensity
+Teramo,3,GreenAreaDensity
+Pescara ,1.8,GreenAreaDensity
+Chieti,-,GreenAreaDensity
+Isernia,19.7,GreenAreaDensity
+Campobasso,3.7,GreenAreaDensity
+Caserta,8.7,GreenAreaDensity
+Benevento,-,GreenAreaDensity
+Napoli ,24.1,GreenAreaDensity
+Avellino,-,GreenAreaDensity
+Salerno,0,GreenAreaDensity
+Foggia,3.7,GreenAreaDensity
+Andria,36.1,GreenAreaDensity
+Barletta,29.3,GreenAreaDensity
+Trani,-,GreenAreaDensity
+Bari,1.9,GreenAreaDensity
+Taranto,8.5,GreenAreaDensity
+Brindisi,10.6,GreenAreaDensity
+Lecce,12.8,GreenAreaDensity
+Potenza,0.9,GreenAreaDensity
+Matera ,25,GreenAreaDensity
+Cosenza,-,GreenAreaDensity
+Crotone,14.1,GreenAreaDensity
+Catanzaro,-,GreenAreaDensity
+Vibo Valentia,0.1,GreenAreaDensity
+Reggio di Calabria,17.5,GreenAreaDensity
+Trapani,5.1,GreenAreaDensity
+Palermo,29.4,GreenAreaDensity
+Messina,70.6,GreenAreaDensity
+Agrigento,5.3,GreenAreaDensity
+Caltanissetta,4.4,GreenAreaDensity
+Enna,13.7,GreenAreaDensity
+Catania,15,GreenAreaDensity
+Ragusa,6.5,GreenAreaDensity
+Siracusa,5.7,GreenAreaDensity
+Sassari,2.6,GreenAreaDensity
+Nuoro,11.2,GreenAreaDensity
+Oristano,2.4,GreenAreaDensity
+Cagliari,51.9,GreenAreaDensity
+Carbonia,-,GreenAreaDensity
+Italia  ,16.6,GreenAreaDensity
+Torino,5.816,VehicleDensity
+Vercelli,3.545,VehicleDensity
+Novara,3.055,VehicleDensity
+Biella,2.481,VehicleDensity
+Cuneo,2.592,VehicleDensity
+Verbania,2.759,VehicleDensity
+Asti,2.852,VehicleDensity
+Alessandria,2.873,VehicleDensity
+Aosta,3.764,VehicleDensity
+Imperia,2.469,VehicleDensity
+Savona,5.108,VehicleDensity
+Genova,5.797,VehicleDensity
+La Spezia,4.15,VehicleDensity
+Varese,2.462,VehicleDensity
+Como,2.406,VehicleDensity
+Lecco,3.857,VehicleDensity
+Sondrio,3.846,VehicleDensity
+Milano,6.506,VehicleDensity
+Monza,5.268,VehicleDensity
+Bergamo,4.153,VehicleDensity
+Brescia,3.014,VehicleDensity
+Pavia,3.487,VehicleDensity
+Lodi,4.078,VehicleDensity
+Cremona,3.574,VehicleDensity
+Mantova,3.606,VehicleDensity
+Bolzano/Bozen,7.037,VehicleDensity
+Trento,3.792,VehicleDensity
+Verona,3.752,VehicleDensity
+Vicenza,3.131,VehicleDensity
+Belluno,2.292,VehicleDensity
+Treviso,2.53,VehicleDensity
+Venezia,1.906,VehicleDensity
+Padova,2.302,VehicleDensity
+Rovigo,2.244,VehicleDensity
+Pordenone,2.289,VehicleDensity
+Udine,1.789,VehicleDensity
+Gorizia,2.222,VehicleDensity
+Trieste,4.225,VehicleDensity
+Piacenza,2.866,VehicleDensity
+Parma,3.486,VehicleDensity
+Reggio nell'Emilia,2.756,VehicleDensity
+Modena,3.351,VehicleDensity
+Bologna,3.814,VehicleDensity
+Ferrara,2.061,VehicleDensity
+Ravenna,3.311,VehicleDensity
+Forlì,2.565,VehicleDensity
+Cesena,2.619,VehicleDensity
+Rimini,4.133,VehicleDensity
+Massa,1.931,VehicleDensity
+Lucca,1.586,VehicleDensity
+Pistoia,2.6,VehicleDensity
+Firenze,4.864,VehicleDensity
+Prato,3.624,VehicleDensity
+Livorno,3.874,VehicleDensity
+Pisa,2.84,VehicleDensity
+Arezzo,2.414,VehicleDensity
+Siena,2.734,VehicleDensity
+Grosseto,3.587,VehicleDensity
+Perugia,2.396,VehicleDensity
+Terni,2.976,VehicleDensity
+Pesaro,4.311,VehicleDensity
+Ancona,3.629,VehicleDensity
+Macerata,3.699,VehicleDensity
+Fermo,3.481,VehicleDensity
+Ascoli Piceno,2.923,VehicleDensity
+Viterbo,4.734,VehicleDensity
+Rieti,2.522,VehicleDensity
+Roma,4.54,VehicleDensity
+Latina,2.471,VehicleDensity
+Frosinone,2.111,VehicleDensity
+L'Aquila,1.996,VehicleDensity
+Teramo,3.809,VehicleDensity
+Pescara,3.88,VehicleDensity
+Chieti,2.979,VehicleDensity
+Isernia,5.932,VehicleDensity
+Campobasso,4.748,VehicleDensity
+Caserta,3.2,VehicleDensity
+Benevento,4.14,VehicleDensity
+Napoli,7.354,VehicleDensity
+Avellino,4.054,VehicleDensity
+Salerno,5.241,VehicleDensity
+Foggia,6.532,VehicleDensity
+Andria,7.046,VehicleDensity
+Barletta,6.146,VehicleDensity
+Trani,5.262,VehicleDensity
+Bari,4.051,VehicleDensity
+Taranto,3.27,VehicleDensity
+Brindisi,4.084,VehicleDensity
+Lecce,2.431,VehicleDensity
+Potenza,2.525,VehicleDensity
+Matera,5.817,VehicleDensity
+Cosenza,4.723,VehicleDensity
+Crotone,2.493,VehicleDensity
+Catanzaro,2.826,VehicleDensity
+Vibo Valentia,2.381,VehicleDensity
+Reggio di Calabria,2.573,VehicleDensity
+Trapani,2.807,VehicleDensity
+Palermo,6.501,VehicleDensity
+Messina,4.616,VehicleDensity
+Agrigento,3.21,VehicleDensity
+Caltanissetta,3.856,VehicleDensity
+Enna,4.066,VehicleDensity
+Catania,5.424,VehicleDensity
+Ragusa,3.059,VehicleDensity
+Siracusa,3.854,VehicleDensity
+Sassari,2.728,VehicleDensity
+Nuoro,4.291,VehicleDensity
+Oristano,3.483,VehicleDensity
+Cagliari,4.945,VehicleDensity
+Carbonia,2.703,VehicleDensity
+,,VehicleDensity
+Nord (*) ,3.695,VehicleDensity
+Nord-ovest (*),4.532,VehicleDensity
+Nord-est (*),2.986,VehicleDensity
+Centro (*),3.686,VehicleDensity
+Mezzogiorno (*) ,4.347,VehicleDensity
+Sud (*),4.207,VehicleDensity
+Isole (*),4.571,VehicleDensity
+,,VehicleDensity
+Capoluoghi di città metropolitana,4.998,VehicleDensity
+Capoluoghi di provincia (*),3.197,VehicleDensity
+,,VehicleDensity
+Italia (*),3.905,VehicleDensity

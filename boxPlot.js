@@ -21,28 +21,43 @@ d3.csv("BoxPlotData.csv", function(error, data) {
 
   // Compute quartiles, median, inter quantile range min and max --> these info are then used to draw the box.
   var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
-   // .key(function(d) { return d.City ;}) 
+    .key(function(d) { return d.Category ;}) 
     .rollup(function(d) {
-      q1 = d3.quantile(d.map(function(g) { return g.GreenAreaDensity;}).sort(d3.ascending),.25);
-      median = d3.quantile(d.map(function(g) { return g.GreenAreaDensity;}).sort(d3.ascending),.5);
-      q3 = d3.quantile(d.map(function(g) { return g.GreenAreaDensity;}).sort(d3.ascending),.75);
+      q1 = d3.quantile(d.map(function(g) { return g.Value;}).sort(d3.ascending),.25);
+      median = d3.quantile(d.map(function(g) { return g.Value;}).sort(d3.ascending),.5);
+      q3 = d3.quantile(d.map(function(g) { return g.Value;}).sort(d3.ascending),.75);
       interQuantileRange = q3 - q1;
-      min = d3.min(data, function(d) { return +d.GreenAreaDensity; }); //q1 - 1.5 * interQuantileRange; //inserire qui il min value dell'array
-      max = d3.max(data, function(d) { return +d.GreenAreaDensity; });//q3 + 1.5 * interQuantileRange; //inserire qui il max value dell'array
+
+      sogliaOutlierMin = q1 - 1.5 * interQuantileRange;//d3.min(function(d) { return +d.Value; }); //q1 - 1.5 * interQuantileRange; //inserire qui il min value dell'array
+      sogliaOutlierMax = q3 + 1.5 * interQuantileRange;//d3.max(function(d) { return +d.Value; });//q3 + 1.5 * interQuantileRange; //inserire qui il max value dell'array
+
+      let datiPerCategoria = data.filter(function(row){
+        return row['Category'] == row.Category;
+      });
+      let minDatiOrdinati = datiPerCategoria.sort(function(a, b) { // sort in ordine crescente
+          return d3.ascending(parseFloat(a['Value']), parseFloat(b['Value']));
+      });
+      console.log(datiPerCategoria);
+      min = minDatiOrdinati[0]['Value'];
+
+      let maxDatiOrdinati = datiPerCategoria.sort(function(a, b) { // sort in ordine crescente
+        return d3.descending(parseFloat(a['Value']), parseFloat(b['Value']));
+      });
+      max = maxDatiOrdinati[0]['Value'];
 
       console.log("min:" + min);
       console.log("max: " + max);
       console.log("median: "+ median);
       console.log ("interQuantile range: "+ interQuantileRange);
       console.log("q1: "+q1+ " q3: "+ q3);
-      return({q1: q1, median: median, q3: q3, interQuantileRange: interQuantileRange, min: min, max: max})
+      return({q1: q1, median: median, q3: q3, interQuantileRange: interQuantileRange, min: d3.max([min, sogliaOutlierMin]), max: d3.min([max, sogliaOutlierMax])})
     })
     .entries(data) 
 
   // Show the X scale
   var x = d3.scaleBand()
     .range([ 0, width ])
-    .domain(["GreenAreaDensity"]) //to add "GasBifuel", "VehicleDensity", "NoisePollution"
+    .domain(["GreenAreaDensity", "VehicleDensity"]) //to add "GasBifuel", "VehicleDensity", "NoisePollution"
     .paddingInner(1)
     .paddingOuter(.5)
   svgBoxPlot.append("g")
@@ -51,7 +66,7 @@ d3.csv("BoxPlotData.csv", function(error, data) {
 
   // Show the Y scale
   var y = d3.scaleLinear()
-    .domain([0,max]) //il dominio dovrebbe essere da 0 a maxvalue no?
+    .domain([0,100]) //il dominio dovrebbe essere da 0 a maxvalue no?
     .range([height, 0])
   svgBoxPlot.append("g").call(d3.axisLeft(y))
 
@@ -96,17 +111,17 @@ d3.csv("BoxPlotData.csv", function(error, data) {
       .style("width", 80)
 
 // Add individual points with jitter
-/*var jitterWidth = 50
+var jitterWidth = 50
 svgBoxPlot
   .selectAll("indPoints")
   .data(data)
   .enter()
   .append("circle")
-    .attr("cx", function(d){return(x(d.GreenAreaDensity) - jitterWidth/2 + Math.random()*jitterWidth )})
-    .attr("cy", function(d){return(y(d.GreenAreaDensity))})
+    .attr("cx", function(d){return(x(d.Category) - jitterWidth/2 + Math.random()*jitterWidth )})
+    .attr("cy", function(d){return(y(d.Value))})
     .attr("r", 4)
     .style("fill", "white")
-    .attr("stroke", "black") */
+    .attr("stroke", "black") 
 
 
 });
