@@ -26,7 +26,13 @@ d3.csv("../../data/processed/BoxPlotData.csv", function(error, data) {
       q1 = d3.quantile(d.map(function(g) { return g.Value;}).sort(d3.ascending),.25);
       median = d3.quantile(d.map(function(g) { return g.Value;}).sort(d3.ascending),.5);
       q3 = d3.quantile(d.map(function(g) { return g.Value;}).sort(d3.ascending),.75);
-      interQuantileRange = q3 - q1;
+
+      //console.log(d.map(function(g) { return g.Value;}).sort(d3.ascending));
+      arrayReference = d.map(function(g) { return g.Value;}).sort(d3.ascending);
+      console.log("here starts the array");
+      console.log(arrayReference);
+      console.log(arrayReference[0]); //here's the new way to compute the min and max of the array of reference
+      interQuantileRange =  q3 - q1;
 
       sogliaOutlierMin = q1 - 1.5 * interQuantileRange;//d3.min(function(d) { return +d.Value; }); //q1 - 1.5 * interQuantileRange; //inserire qui il min value dell'array
       sogliaOutlierMax = q3 + 1.5 * interQuantileRange;//d3.max(function(d) { return +d.Value; });//q3 + 1.5 * interQuantileRange; //inserire qui il max value dell'array
@@ -37,7 +43,7 @@ d3.csv("../../data/processed/BoxPlotData.csv", function(error, data) {
       let minDatiOrdinati = datiPerCategoria.sort(function(a, b) { // sort in ordine crescente
           return d3.ascending(parseFloat(a['Value']), parseFloat(b['Value']));
       });
-      console.log(datiPerCategoria);
+      //console.log(datiPerCategoria);
       min = minDatiOrdinati[0]['Value'];
 
       let maxDatiOrdinati = datiPerCategoria.sort(function(a, b) { // sort in ordine crescente
@@ -57,7 +63,7 @@ d3.csv("../../data/processed/BoxPlotData.csv", function(error, data) {
   // Show the X scale
   var x = d3.scaleBand()
     .range([ 0, width ])
-    .domain(["GreenAreaDensity", "VehicleDensity"]) //to add "GasBifuel", "VehicleDensity", "NoisePollution"
+    .domain(["GreenAreaDensity", "Fuel", "Diesel", "LowEmission"]) //to add "GasBifuel", "VehicleDensity", "NoisePollution"
     .paddingInner(1)
     .paddingOuter(.5)
   svgBoxPlot.append("g")
@@ -84,7 +90,7 @@ d3.csv("../../data/processed/BoxPlotData.csv", function(error, data) {
       .style("width", 40)
 
   // rectangle for the main box
-  var boxWidth = 100
+  var boxWidth = 80 //prima era 100
   svgBoxPlot
     .selectAll("boxes")
     .data(sumstat)
@@ -92,10 +98,10 @@ d3.csv("../../data/processed/BoxPlotData.csv", function(error, data) {
     .append("rect")
         .attr("x", function(d){ return(x(d.key)-boxWidth/2)})
         .attr("y", function(d){return(y(d.value.q3))})
-        .attr("height", function(d){return(y(d.value.q1)-y(d.value.q3))})
+        .attr("height", function(d){return(y(d.value.q1)-y(d.value.q3))}) //questa riga è un problema per i Low emission che hanno i valori scambiati
         .attr("width", boxWidth )
         .attr("stroke", "black")
-        .style("fill", "#69b3a2")
+        .style("fill", "#990066")
 
   // Show the median
   svgBoxPlot
@@ -111,7 +117,7 @@ d3.csv("../../data/processed/BoxPlotData.csv", function(error, data) {
       .style("width", 80)
 
 // Add individual points with jitter
-var jitterWidth = 50
+var jitterWidth = 40
 svgBoxPlot
   .selectAll("indPoints")
   .data(data)

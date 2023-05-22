@@ -2,43 +2,40 @@ import pandas as pd
 import numpy as np
 
 #import the csv file to work on it
-dataset1 = pd.read_csv('BoxPlot_DensityGreenArea2020.csv')
-dataset1 = dataset1.drop(columns=['SquareMeters'], axis=1)
+#first file Green Area Density
+dataset1 = pd.read_csv("data/original/2021GreenAreaDensity.csv") #../../data/original/2021GreenAreaDensity.csv
+#dataset1 = dataset1.drop(columns=['SquareMeters'], axis=1) #non serve perchè non c'è più la colonna SquareMeters
 dataset1['Category'] = "GreenAreaDensity"
 #dataset1 = dataset1.set_index('City', 'Category')
 dataset1.rename(columns = {'GreenAreaDensity':'Value'}, inplace = True)
 
-dataset2 = pd.read_csv('BoxPlot_VehicleDensity2020.csv')
-dataset2['Category'] = "VehicleDensity"
+#second file Fuel
+dataset2 = pd.read_csv("data/original/2021Vehicles.csv")
+dataset2 = dataset2.drop(columns=['Diesel','LowEmission','Total'],axis=1) 
+dataset2['Category'] = "Fuel"
 #dataset2 = dataset2.set_index('City', 'Category')
-dataset2.rename(columns = {'VehicleDensity':'Value'}, inplace = True)
-#dataset3 = pd.read_csv('BoxPlot_VehicleEmission2020.csv')
-#dataset4 = pd.read_csv('BoxPlot_Noise2020.csv')
+dataset2.rename(columns = {'Fuel':'Value'}, inplace = True)
 
-#reduce the column size of field City to 20 chars
-#dataset1['City'] = dataset1['City'].str.replace(" ", "")
+#Third file Diesel
+dataset3 = pd.read_csv("data/original/2021Vehicles.csv")
+dataset3 = dataset3.drop(columns=['Fuel', 'LowEmission', 'Total'],axis=1) 
+dataset3['Category'] = "Diesel"
+dataset3.rename(columns = {'Diesel':'Value'}, inplace = True)
 
-#select the columns of interest
-#cols = ['City', 'Green Area Density', 'Vehicles', 'Noise', 'Emissions']
-#dataset_cols = dataset1[cols]
+#fourth file Low Emission
+dataset4 = pd.read_csv("data/original/2021Vehicles.csv")
+dataset4 = dataset4.drop(columns=['Fuel','Diesel','Total'],axis=1) 
+dataset4['Category'] = "LowEmission"
+dataset4.rename(columns = {'LowEmission':'Value'}, inplace = True)
 
-#dataset2['Category'] = "VehicleDensity"
-#dataset2.columns = ['City', 'Value', 'Category']
+#fifth file Noise Pollution
+#... to add the dataset
 
 
+#here start the union of the datasets
 merged_df = pd.concat([dataset1,dataset2], ignore_index=True)
-
-
-# esegue il merge dei dataset utilizzando la colonna 'comune' come chiave
-#merged_df = pd.merge(dataset1[['City', 'GreenAreaDensity']], dataset3[['City','GasBifuel', 'TotalEmission']], on='City', how= 'outer').set_index('City')
-#merged_df = pd.merge(merged_df, dataset2[['City','VehicleDensity']], on='City', how= 'outer').set_index('City')
-#merged_df = pd.merge(merged_df, dataset4[['City','NoisePollution']], on='City', how= 'outer').set_index('City')
-
-#merged_df = pd.merge(merged_df, dataset2, on='City')
-#merged_df = pd.merge(merged_df, dataset4, on='City')
-
-# stampa il dataframe risultante
-#print(merged_df.head())
+merged_df = pd.concat([merged_df,dataset3], ignore_index=True)
+merged_df = pd.concat([merged_df,dataset4], ignore_index=True)
 
 #export results in a new csv
-merged_df.to_csv('../../data/processed/BoxPlotData.csv', header=True, index=False)
+merged_df.to_csv('data/processed/BoxPlotData.csv', header=True, index=False)
