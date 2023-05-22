@@ -28,14 +28,38 @@ dataset4 = dataset4.drop(columns=['Fuel','Diesel','Total'],axis=1)
 dataset4['Category'] = "LowEmission"
 dataset4.rename(columns = {'LowEmission':'Value'}, inplace = True)
 
-#fifth file Noise Pollution
-#... to add the dataset
+#fifth and sixth file Noise Pollution
+dataset5 = pd.read_csv("data/original/2021Noise.csv")
+dataset5 = dataset5.drop(columns=['CommercialNoise','TemporaryNoise','Infrastructure','Others','Total'],axis=1) 
+dataset5['Category'] = "IndustrialNoise"
+dataset5.rename(columns = {'IndustrialNoise':'Value'}, inplace = True)
+
+dataset6 = pd.read_csv("data/original/2021Noise.csv")
+dataset6 = dataset6.drop(columns=['IndustrialNoise','TemporaryNoise','Infrastructure','Others','Total'],axis=1) 
+dataset6['Category'] = "CommercialNoise"
+dataset6.rename(columns = {'CommercialNoise':'Value'}, inplace = True)
+
+#seventh file Waste Collection Road
+dataset7 = pd.read_csv("data/original/2021WasteCollection.csv")
+dataset7 = dataset7.drop(columns=['Door_to_door_Waste'],axis=1) 
+dataset7['Category'] = "Road_Waste"
+dataset7.rename(columns = {'Road_Waste':'Value'}, inplace = True)
+
+#insert also door to door waste collection?
+#dataset8 = pd.read_csv("data/original/2021WasteCollection.csv")
+#dataset8 = dataset8.drop(columns=['Road_Waste'],axis=1) 
+#dataset8['Category'] = "Door_to_door_Waste"
+#dataset8.rename(columns = {'Door_to_door_Waste':'Value'}, inplace = True)
 
 
 #here start the union of the datasets
 merged_df = pd.concat([dataset1,dataset2], ignore_index=True)
 merged_df = pd.concat([merged_df,dataset3], ignore_index=True)
 merged_df = pd.concat([merged_df,dataset4], ignore_index=True)
+merged_df = pd.concat([merged_df,dataset5], ignore_index=True)
+merged_df = pd.concat([merged_df,dataset6], ignore_index=True)
+merged_df = pd.concat([merged_df,dataset7], ignore_index=True)
+#merged_df = pd.concat([merged_df,dataset8], ignore_index=True)
 
 #export results in a new csv
 merged_df.to_csv('data/processed/BoxPlotData.csv', header=True, index=False)
