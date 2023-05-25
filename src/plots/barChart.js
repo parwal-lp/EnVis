@@ -8,7 +8,7 @@ var margin = {top: 20, right: 30, bottom: 40, left: 100},
     height = 400 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-var svg = d3.select("#my_dataviz")
+var svg = d3.select("#barChart")
     .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -134,7 +134,6 @@ function draw(selectedPollutant, XmaxValue, order){
         else if(order == "worst10"){ //prendo le ultime 10
             data = data.slice(data.length-11,data.length-1);
         }
-
 
         // Add X axis
         x = d3.scaleLinear()
