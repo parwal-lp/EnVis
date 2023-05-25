@@ -26,9 +26,6 @@ dataset3['Percentuale_basse_emissioni'] = dataset3['Percentuale_basse_emissioni'
 dataset4['City'] = dataset4['City'].str.strip(' ')
 dataset4['Percentuale_aree_verdi'] = dataset4['Percentuale_aree_verdi'].replace(" ", "").replace(" - ", "0").replace(",,", ",0,")
 
-
-
-
 #select the columns of interest
 #cols = ['City', 'Green Area Density', 'Vehicles', 'Noise', 'Emissions']
 #dataset_cols = dataset1[cols]

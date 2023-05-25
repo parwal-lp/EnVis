@@ -37,7 +37,7 @@ d3.csv("../../data/processed/BoxPlotData.csv", function(error, data) {
       let minDatiOrdinati = datiPerCategoria.sort(function(a, b) { // sort in ordine crescente
           return d3.ascending(parseFloat(a['Value']), parseFloat(b['Value']));
       });
-      console.log(datiPerCategoria);
+      //console.log(datiPerCategoria);
       min = minDatiOrdinati[0]['Value'];
 
       let maxDatiOrdinati = datiPerCategoria.sort(function(a, b) { // sort in ordine crescente
@@ -45,11 +45,11 @@ d3.csv("../../data/processed/BoxPlotData.csv", function(error, data) {
       });
       max = maxDatiOrdinati[0]['Value'];
 
-      console.log("min:" + min);
-      console.log("max: " + max);
-      console.log("median: "+ median);
-      console.log ("interQuantile range: "+ interQuantileRange);
-      console.log("q1: "+q1+ " q3: "+ q3);
+      //console.log("min:" + min);
+      //console.log("max: " + max);
+      //console.log("median: "+ median);
+      //console.log ("interQuantile range: "+ interQuantileRange);
+      //console.log("q1: "+q1+ " q3: "+ q3);
       return({q1: q1, median: median, q3: q3, interQuantileRange: interQuantileRange, min: d3.max([min, sogliaOutlierMin]), max: d3.min([max, sogliaOutlierMax])})
     })
     .entries(data) 

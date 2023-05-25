@@ -536,8 +536,7 @@
 2020,Lombardia,Borgoforte,,POROCA1LO1,Po- Roncocorrente (Canale),RONCOCORRENTE,Superiore ai limiti,5,591,15,110,3,0.557,1193651.287960768,5630079.756207378
 2020,Lombardia,Seriate,,N0080010235LO2,SERIO - Serio (Fiume),dal Nese alla confluenza della roggia Borgogna,Superiore ai limiti,5,591,7,110,2,0.55,1082526.8974388,5729145.42335554
 2020,Lombardia,Capriolo, a valle dell'impianto idroelettrico del cotonificio N.K.,N0080605LO1,OGLIO SUBLACUALE- Oglio (Fiume),dall'Iseo alla confluenza Cherio,Entro i limiti,5,591,1,110,1,0.05,1103867.1739685463,5724095.529610546
-2020,Lombardia,"
-Pero", valle confluenza del Lura,N008044002014LO1,OLONA-LAMBRO MERIDIONALE- Olona (Fiume),dal Lura alla tombinatura di Milano,Superiore ai limiti,6,598,22,109,4,4.86,1009778.4500554842,5703083.467675212
+2020,Lombardia,"Pero", valle confluenza del Lura,N008044002014LO1,OLONA-LAMBRO MERIDIONALE- Olona (Fiume),dal Lura alla tombinatura di Milano,Superiore ai limiti,6,598,22,109,4,4.86,1009778.4500554842,5703083.467675212
 2020,Lombardia,Carnate,c.na Campana,N008001191012LO1,ADDA SUBLACUALE- La Molgora (Torrente),da Osnago alla confluenza del Molgoretta,Superiore ai limiti,7,822,20,109,3,0.798,1043970.1302560407,5725180.483807787
 2020,Lombardia,Sarezzo,Crocevia,N008060008101LO1,MELLA- Faidana (Torrente) - Gobbia (Torrente),dalla sorgente alla immissione nel Mella,Superiore ai limiti,4,473,4,110,1,11.3,1135693.4299875733,5723928.270062583
 2020,Lombardia,Castenedolo,a valle dell'impianto di depurazione,N008060008353LO1,OGLIO SUBLACUALE- Garza (Torrente),dal Naviglio Grande Bresciano allo spaglio,Entro i limiti,2,179,1,109,1,0.1,1144158.7373151425,5693383.080876391
@@ -626,16 +625,13 @@ Pero", valle confluenza del Lura,N008044002014LO1,OLONA-LAMBRO MERIDIONALE- Olon
 2020,Lombardia,Perledo,Foce- ponte pedon. Imbarcadero,N0080010571LO1,LAGO DI COMO (LARIO)- Esino (Torrente),dalla sorgente alla immissione nel lago di Como,Entro i limiti,5,10,5,2,1,0.127,1033383.5126274219,5782704.89766727
 2020,Lombardia,Sesto Calende,,N0080980191IR1,TICINO SUBLACUALE- Lenza (Torrente),dalla sorgente alla immissione nel Ticino,Entro i limiti,5,580,6,107,2,0.2,960350.2193554636,5736340.292648378
 2020,Lombardia,Goito,"Casale Sacca, a monte del diversivo del Mincio",N0080564IR1,MINCIO- Mincio (Fiume),dal Naviglio di Goito ai laghi di Mantova,Entro i limiti,4,472,12,109,1,0.275,1188511.7788160404,5657079.887502062
-2020,Lombardia,"
-Milano","
-sottopassaggio ciclo pedonale alla convergenza tra via Valenza e Alzaia Naviglio Grande",001098160011IR1,TICINO SUBLACUALE- Naviglio Grande (Canale),-,Superiore ai limiti,3,354,3,109,1,0.291,1020578.7727319862,5692710.306797566
+2020,Lombardia,"Milano","sottopassaggio ciclo pedonale alla convergenza tra via Valenza e Alzaia Naviglio Grande",001098160011IR1,TICINO SUBLACUALE- Naviglio Grande (Canale),-,Superiore ai limiti,3,354,3,109,1,0.291,1020578.7727319862,5692710.306797566
 2020,Lombardia,Collio,,N008060008121LO1,MELLA- Mella (Fiume),Dorgola (Torrente),Entro i limiti,3,354,1,109,1,0.08,1147730.9769604206,5751232.757978362
 2020,Lombardia,Sermide,,N00819IR1,Po- Po (Fiume),dal Mincio al confine regionale,Superiore ai limiti,2,236,6,109,1,0.431,1256798.5060808915,5623943.162542926
 2020,Lombardia,Ponti sul Mincio,,N0080560052LO1,MINCIO- Redone (Torrente),dal Fossa Redone alla immissione in Mincio,Superiore ai limiti,4,473,21,110,4,0.99,1191683.6222836464,5683919.220145416
 2020,Lombardia,Castellucchio,,POMI3OSCA1LO1,MINCIO- Osone Vecchio (Cavo),Canale Osone,Superiore ai limiti,5,588,16,109,2,3.059,1186910.6988063166,5644715.659322948
 2020,Lombardia,Serravalle a Po,,FTCA1IR1,FISSERO-TARTARO- Fissero (Canale) - Canalbianco (Canale),da derivazione dal fiume Mincio a conca di navigazione - Affluenza del canale Bussè,Superiore ai limiti,5,591,20,110,4,0.836,1236452.9526994694,5636938.541552905
-2020,Lombardia,Cesano Maderno,"via Como
-(via Eritrea)",N00800109101012LO1,SEVESO- Terrò (Torrente),dal depuratore di Mariano Comense a immissione nel Seveso,Superiore ai limiti,5,590,32,109,3,4.634,1017890.3738891832,5721684.545434664
+2020,Lombardia,Cesano Maderno,"via Como(via Eritrea)",N00800109101012LO1,SEVESO- Terrò (Torrente),dal depuratore di Mariano Comense a immissione nel Seveso,Superiore ai limiti,5,590,32,109,3,4.634,1017890.3738891832,5721684.545434664
 2020,Lombardia,Limone sul Garda,,N008056007451LO1,LAGO DI GARDA (BENACO)- San Giovanni (Torrente),da sorgente a immissione nel lago di Garda,Entro i limiti,4,464,1,107,1,0.08,1200839.4806954395,5750284.911766123
 2020,Lombardia,Ponte Nossa,Ponte del Costone,N0080010234LO1,SERIO- Serio (Fiume),dall'Acqualina fino alla confluenza del Nese,Entro i limiti,4,473,1,110,1,0.05,1100109.025512264,5756529.682702484
 2020,Lombardia,S. Stefano Lodigiano,ponte SP 145,N0082501LO1,Po- Mortizza (Rio) - Ancona (Colatore),dalla sorgente alla immissione nel Po,Superiore ai limiti,5,480,18,109,4,1.46,1083882.6712025981,5638190.814079283
@@ -699,11 +695,8 @@ sottopassaggio ciclo pedonale alla convergenza tra via Valenza e Alzaia Naviglio
 2020,Lombardia,Piadena,Fraz.  Del Vho,POOG3MACLCA1LO1,OGLIO SUBLACUALE- Laghetto (Colatore),Colatore Laghetto,Superiore ai limiti,4,472,21,109,6,4.44,1157086.628779306,5642443.141423712
 2020,Lombardia,Costamasnaga,Fraz. Brenno della Torre,N0080440512LO1,LAMBRO- Bevera (Torrente),dal colle Brianza a confluenza in Lambro,Superiore ai limiti,4,261,11,57,2,0.537,1031074.4851496725,5744074.808013733
 2020,Lombardia,Castiraga Vidardo,ponte SP 205,N0080440052LO1,LAMBRO- Lisone (Cavo),da Bascapè a immissione nel Lambro Meridionale,Superiore ai limiti,3,354,31,109,7,2.554,1045831.7058058886,5662084.385803258
-2020,Lombardia,"
-Paderno Dugnano","
-via Nino Bixio",N008001091014LO1,SEVESO- Seveso (Torrente),dal Terrò a Milano,Superiore ai limiti,5,590,21,109,2,6.612,1019204.2928809271,5714479.897077666
-2020,Lombardia,Baranzate,"
-via Falzarego",N0080410020107012LO1,OLONA-LAMBRO MERIDIONALE- Merlata (Torrente),dalla immisione del Guisa in immssione dell'Olona,Superiore ai limiti,4,472,11,109,2,1.096,1013374.5941383713,5705485.081747096
+2020,Lombardia,"Paderno Dugnano","via Nino Bixio",N008001091014LO1,SEVESO- Seveso (Torrente),dal Terrò a Milano,Superiore ai limiti,5,590,21,109,2,6.612,1019204.2928809271,5714479.897077666
+2020,Lombardia,Baranzate,"via Falzarego",N0080410020107012LO1,OLONA-LAMBRO MERIDIONALE- Merlata (Torrente),dalla immisione del Guisa in immssione dell'Olona,Superiore ai limiti,4,472,11,109,2,1.096,1013374.5941383713,5705485.081747096
 2020,Lombardia,Baranzate,Via A.Manzoni,N00804100201082LO1,OLONA-LAMBRO MERIDIONALE- Pudica (Torrente),dalla immsione del cisnara alla immissione in Olona,Superiore ai limiti,4,472,12,109,4,1.098,1015487.2390395248,5705229.419108455
 2020,Lombardia,Castrezzato,,POOG3BACA1LO1,OGLIO SUBLACUALE- Baioncello (Roggia),Baioncello (Roggia),Superiore ai limiti,2,236,3,109,2,0.69,1109652.6159279936,5701777.326904264
 2020,Lombardia,Canonica dAdda,,N0080010065LO1,BREMBO- Brembo (Fiume),dal Dordo alla immissione in Adda,Entro i limiti,5,275,7,55,1,0.11,1063359.9918916987,5714839.848580141

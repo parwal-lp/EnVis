@@ -18,6 +18,8 @@ components = pca.fit_transform(scaled)
 principal_components = pca.components_
 df_components = pd.DataFrame(data=components, columns=['PC1', 'PC2'])
 
+df_components['City']= dataset['City'] #aggiungo la colonna con l'indicazione di quale citta si tratta. Posso farlo perche la pca mantiene l'ordine delle righe
+
 #plt.scatter(df_components['PC1'], df_components['PC2'])
 
 #plt.xlabel('PC1')
