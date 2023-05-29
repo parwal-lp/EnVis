@@ -14,7 +14,7 @@ function assignColorWater(currentCity, dataWater){
     let num_oltre_limiti = 0;
     for (let i=0; i<dataWater.length; i++){
       if (dataWater[i]['Macrocomune']==currentCity){
-        //console.log(dataWater[i]['Macrocomune']);
+        ////console.log(dataWater[i]['Macrocomune']);
         if(dataWater[i]['Livello di contaminazione'] == 'Non quantificabile'){
           num_non_quantificabile = dataWater[i]['count'];
         }
@@ -34,8 +34,42 @@ function assignColorWater(currentCity, dataWater){
       else if(media > 0) media = 1;
       else media = 0;
     }
-    //console.log(currentCity + " " +waterColor[media.toString()]);
+    ////console.log(currentCity + " " +waterColor[media.toString()]);
     return waterColor[media.toString()];
+}
+
+var dots;
+
+const brush = d3.brush()
+  .on("start brush end", brushed);
+
+function brushed() {
+  extent = d3.event.selection;
+  d3.selectAll('circle').each(function () {
+    const mydot = d3.select(this);
+    var isBrushed = extent[0][0] <= mydot.attr('cx') && extent[1][0] >= mydot.attr('cx') && // Check X coordinate
+              extent[0][1] <= mydot.attr('cy') && extent[1][1] >= mydot.attr('cy')  // And Y coordinate
+
+    if(isBrushed){
+      console.log("hai selezionato qualche pallino");
+      //capire come aggiornare il colore dei pallini
+      mydot.attr('fill', '#ff0000');
+    }
+  })
+
+  
+  // let value = [];
+  // if (selection) {
+  //   const [[x0, y0], [x1, y1]] = selection;
+  //   value = dot
+  //     .style("stroke", "gray")
+  //     .filter(d => x0 <= x(d.x) && x(d.x) < x1 && y0 <= y(d.y) && y(d.y) < y1)
+  //     .style("stroke", "steelblue")
+  //     .data();
+  // } else {
+  //   dot.style("stroke", "steelblue");
+  // }
+  // svg.property("value", value).dispatch("input");
 }
 
 function drawScatterPlot(){
@@ -63,18 +97,19 @@ function drawScatterPlot(){
 
       d3.csv("../../data/processed/mergedWaterComuni.csv", function(dataWater){
         // Add dots
-        svgScatter.append('g')
+        dots = svgScatter.append('g')
         .selectAll("dot")
         .data(data)
         .enter()
         .append("circle")
+          .attr("class", "mydot")
           .attr("cx", function (d) { return x(d.PC1); } )
           .attr("cy", function (d) { return y(d.PC2); } )
           .attr("r", 4)
           .style("fill", function(d){
             return '#aaa'
             let color = assignColorWater(d.City, dataWater);
-            //console.log(d.City + " " + color);
+            ////console.log(d.City + " " + color);
             return color;
           })
         .on('mouseover', function (d, i) {
@@ -107,6 +142,9 @@ function drawScatterPlot(){
       })
       
     })
+
+    svgScatter.call(brush);
+  
 }
 
 
