@@ -1,9 +1,12 @@
 const scatterArea = d3.select('#scatterPlot'); //select html area for star plot
-margin.right = 100;
+margin.left = 200;
+height = 400
+width = 500
 const svgScatter = scatterArea.append('svg') //create svg for the starplot
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom) //set dimensions of starplot
-
+  .append('g')
+  .attr("transform", "translate(40,40)");
 //assigns color based on the pollution level, takes data through colorData
 function assignColorWater(currentCity, dataWater){
     let num_non_quantificabile = 0;
@@ -36,11 +39,11 @@ function assignColorWater(currentCity, dataWater){
 }
 
 function drawScatterPlot(){
-  d3.csv("../../data/processed/pcaResults.csv", function(data) { //retrieve the data
-        // ------------ PRENDO I DATI CHE MI SERVONO --------------- //
-        // Add X axis
+  d3.csv("../../data/processed/pcaWaterResults.csv", function(data) { //retrieve the data
+    // ------------ PRENDO I DATI CHE MI SERVONO --------------- //
+    // Add X axis
     var x = d3.scaleLinear()
-      .domain([-3, 5])
+      .domain([-2.5, 3])
       .range([ 0, width ]);
     svgScatter.append("g")
       .attr("transform", "translate(0," + height + ")")
@@ -48,10 +51,15 @@ function drawScatterPlot(){
 
     // Add Y axis
     var y = d3.scaleLinear()
-      .domain([-3, 5])
+      .domain([-2.5, 3])
       .range([ height, 0]);
-      svgScatter.append("g")
+    svgScatter.append("g")
       .call(d3.axisLeft(y));
+
+    var div = d3.select("body").append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 0);
+
 
       d3.csv("../../data/processed/mergedWaterComuni.csv", function(dataWater){
         // Add dots
@@ -62,12 +70,40 @@ function drawScatterPlot(){
         .append("circle")
           .attr("cx", function (d) { return x(d.PC1); } )
           .attr("cy", function (d) { return y(d.PC2); } )
-          .attr("r", 3)
+          .attr("r", 4)
           .style("fill", function(d){
+            return '#aaa'
             let color = assignColorWater(d.City, dataWater);
             //console.log(d.City + " " + color);
             return color;
           })
+        .on('mouseover', function (d, i) {
+            //ingrandisce pallino citta
+            d3.select(this).transition()
+                 .duration('100')
+                 .attr("r", 7);
+            //Makes tooltip appear
+            div.transition()
+                  .duration(100)
+            .     style("opacity", 1);
+            div.html(d.City)
+                  .style("left", (d3.event.pageX + 10) + "px")
+                  .style("top", (d3.event.pageY - 15) + "px");
+
+        })
+       .on('mouseout', function (d, i) {
+            //pallino citta torna piccolo
+            d3.select(this).transition()
+                 .duration('200')
+                 .attr("r", 4);
+            //makes tooltip disappear
+            div.transition()
+                  .duration('200')
+                  .style("opacity", 0);
+        });
+
+
+        
       })
       
     })
