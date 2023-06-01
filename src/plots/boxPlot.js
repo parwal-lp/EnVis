@@ -33,10 +33,10 @@ d3.csv("../../data/processed/BoxPlotData.csv", function(error, data) {
       median = d3.quantile(arrayReferenceAscending,.5);
       q3 = d3.quantile(arrayReferenceAscending,.75);
 
-      //console.log(d.map(function(g) { return g.Value;}).sort(d3.ascending));
-      //console.log("here starts the array");
-      //console.log(arrayReference);
-      //console.log(arrayReference[0]); //here's the new way to compute the min and max of the array of reference
+      ////console.log(d.map(function(g) { return g.Value;}).sort(d3.ascending));
+      ////console.log("here starts the array");
+      ////console.log(arrayReference);
+      ////console.log(arrayReference[0]); //here's the new way to compute the min and max of the array of reference
       
       interQuantileRange =  q3 - q1;
       sogliaOutlierMin = q1 - 1.5 * interQuantileRange;//d3.min(function(d) { return +d.Value; }); //q1 - 1.5 * interQuantileRange; //inserire qui il min value dell'array
@@ -50,7 +50,7 @@ d3.csv("../../data/processed/BoxPlotData.csv", function(error, data) {
       let minDatiOrdinati = datiPerCategoria.sort(function(a, b) { // sort in ordine crescente
           return d3.ascending(parseFloat(a['Value']), parseFloat(b['Value']));
       });
-      //console.log(datiPerCategoria);
+      ////console.log(datiPerCategoria);
       min = minDatiOrdinati[0]['Value'];
 
       let maxDatiOrdinati = datiPerCategoria.sort(function(a, b) { // sort in ordine crescente
@@ -58,12 +58,12 @@ d3.csv("../../data/processed/BoxPlotData.csv", function(error, data) {
       });
       max = maxDatiOrdinati[0]['Value'];*/
 
-      console.log("----here starts the values for each category----")
-      console.log("min:" + min);
-      console.log("max: " + max);
-      console.log("median: "+ median);
-      console.log ("interQuantile range: "+ interQuantileRange);
-      console.log("q1: "+q1+ " q3: "+ q3);
+      ////console.log("----here starts the values for each category----")
+      ////console.log("min:" + min);
+      ////console.log("max: " + max);
+      ////console.log("median: "+ median);
+      ////console.log ("interQuantile range: "+ interQuantileRange);
+      ////console.log("q1: "+q1+ " q3: "+ q3);
       return({q1: q1, median: median, q3: q3, interQuantileRange: interQuantileRange, min: d3.max([0, sogliaOutlierMin]), max: d3.min([100, sogliaOutlierMax])})
     })
     .entries(data) 

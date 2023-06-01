@@ -180,12 +180,18 @@ function drawStarPlot(currentBestCity){
   let legend = svgStar.append("g")
   .attr("class", 'node')
 
-  let topCityDot = legend.append("circle").attr("r", 6).style("fill", "#91cf60").attr("cy",svgStar.attr("height")-svgStar.attr("height")*0.04)
-  let topCityText = legend.append("text").text(currentBestCity).style("font-size", "15px").attr("y",svgStar.attr("height")-svgStar.attr("height")*0.027)
-  topCityText.attr("x", '10');
+  let topCityDot;
+  let topCityText
+  let topCityWidth;
 
-  let topCityWidth = displayTextWidth(currentBestCity, "15px sans-serif") + 10;
+  if(currentBestCity!=""){
+    topCityDot = legend.append("circle").attr("r", 6).style("fill", "#91cf60").attr("cy",svgStar.attr("height")-svgStar.attr("height")*0.04)
+    topCityText = legend.append("text").text(currentBestCity).style("font-size", "15px").attr("y",svgStar.attr("height")-svgStar.attr("height")*0.027)
+    topCityText.attr("x", '10');
   
+    topCityWidth = displayTextWidth(currentBestCity, "15px sans-serif") + 10;
+    
+  }
 
   let chosenCityWidth = 0;
   if (currentSelectedCity != "none"){

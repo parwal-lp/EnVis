@@ -41,35 +41,86 @@ function assignColorWater(currentCity, dataWater){
 var dots;
 
 const brush = d3.brush()
-  .on("start brush end", brushed);
+  .extent([[0,0], [width, height]])
+  .on("start brush end", brushed)
+  .on("end", updateRelatedGraphs);
+
+function updateRelatedGraphs(){
+  svgStar.selectAll("*").remove();
+  svg.selectAll("*").remove();
+  
+  d3.csv("../../data/processed/BarChartData.csv", function(data) {
+
+
+    selectedCities = [];
+    selectedDots.forEach(dot => {
+      selectedCities.push(dot.attr('city'));
+    });
+
+    console.log(selectedCities);
+    
+    data = data.filter(function(row){
+      return row['Air Pollutant'] == selectedPollutant && selectedCities.includes(row['City']);
+    });
+
+    
+
+    data = data.sort(function(a, b) { // sort in ordine crescente
+        return d3.ascending(parseFloat(a['Air Pollution Level']), parseFloat(b['Air Pollution Level']));
+    });
+    if (data.length>0){
+      //the maximum value on x axis is that of the worst city
+      XmaxValue = data[data.length-1]['Air Pollution Level'];
+
+      //checking which value is setted
+      if(order == "top10"){ //prendo le prime 10
+          data = data.slice(0, 10);
+      }
+      else if(order == "worst10"){ //prendo le ultime 10
+          data = data.slice(data.length-11,data.length-1);
+      }
+      currentBestCity = data[0].City;
+    } else {
+      currentBestCity = "";
+      selectedCities = null;
+    }
+    drawStarPlot(currentBestCity);
+    draw(selectedPollutant, XmaxValue, order, selectedCities);
+});
+  
+}
 
 function brushed() {
   extent = d3.event.selection;
-  d3.selectAll('circle').each(function () {
+  selectedDots = []; //qui metto tutti i punti selezionati
+  var allDots = []; //qui metto tutti i punti del grafico
+  d3.selectAll('.dot').each(function () {
     const mydot = d3.select(this);
+    
+    allDots.push(mydot);
+
+    //controllo se il punto si trova all'interno della selezione
     var isBrushed = extent[0][0] <= mydot.attr('cx') && extent[1][0] >= mydot.attr('cx') && // Check X coordinate
               extent[0][1] <= mydot.attr('cy') && extent[1][1] >= mydot.attr('cy')  // And Y coordinate
 
-    if(isBrushed){
-      console.log("hai selezionato qualche pallino");
-      //capire come aggiornare il colore dei pallini
-      mydot.attr('fill', '#ff0000');
+    if(isBrushed && !selectedDots.includes(mydot)){ //se il punto si trova nella selezione lo aggiungo a selectedDots
+      selectedDots.push(mydot);
+      //console.log(mydot);
+    } else { //se il punto non si trova nella selezione lo rimuovo da selectedDots
+      let indexToRemove = selectedDots.indexOf(mydot);
+      if (indexToRemove != -1) selectedDots.splice(indexToRemove);
+
     }
   })
 
+  allDots.forEach(dot => {
+    if (selectedDots.includes(dot)){
+      dot.style('fill', '#ff0000'); //tutti i selezionati si colorano
+    } else {
+      dot.style('fill', '#aaa'); //tutti gli altri tornano grigi
+    }
+  });
   
-  // let value = [];
-  // if (selection) {
-  //   const [[x0, y0], [x1, y1]] = selection;
-  //   value = dot
-  //     .style("stroke", "gray")
-  //     .filter(d => x0 <= x(d.x) && x(d.x) < x1 && y0 <= y(d.y) && y(d.y) < y1)
-  //     .style("stroke", "steelblue")
-  //     .data();
-  // } else {
-  //   dot.style("stroke", "steelblue");
-  // }
-  // svg.property("value", value).dispatch("input");
 }
 
 function drawScatterPlot(){
@@ -102,9 +153,10 @@ function drawScatterPlot(){
         .data(data)
         .enter()
         .append("circle")
-          .attr("class", "mydot")
+          .attr("class", "dot")
           .attr("cx", function (d) { return x(d.PC1); } )
           .attr("cy", function (d) { return y(d.PC2); } )
+          .attr("city", function (d) { return (d.City); })
           .attr("r", 4)
           .style("fill", function(d){
             return '#aaa'
@@ -143,7 +195,9 @@ function drawScatterPlot(){
       
     })
 
-    svgScatter.call(brush);
+    const gBrush = svgScatter.append('g')
+      .attr('class', 'brush')
+      .call(brush);
   
 }
 

@@ -7,3 +7,6 @@ let waterColor = {'-1':'#92c5de','1':'#fc8d59','0':'#ffea00'}
 var margin = {top: 20, right: 30, bottom: 40, left: 100},
     width = 460 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
+
+let selectedDots = [];
+let selectedCities = null;

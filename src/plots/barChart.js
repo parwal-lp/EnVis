@@ -22,7 +22,7 @@ var XmaxValue = '30';
 var order = 'top10';
 
 //draw the default plot
-draw(selectedPollutant, XmaxValue, order);
+draw(selectedPollutant, XmaxValue, order, selectedCities);
 
 //-------- definition of used functions --------------//
 
@@ -53,7 +53,7 @@ function changePollutant(pollutant){
     selectedPollutant = element.value;
     order = getOrderValue();
     svg.selectAll("*").remove();
-    draw(selectedPollutant, XmaxValue, order);
+    draw(selectedPollutant, XmaxValue, order, selectedCities);
 
     //quando si cambia il pollutant, cambia anche il set di citta selezionate
     //quindi devo aggiornare tutti i grafici che riguardano la miglior citta della selezione attuale
@@ -86,7 +86,7 @@ function changePollutant(pollutant){
 function changeOrder(order){
     order = getOrderValue();
     svg.selectAll("*").remove();
-    draw(selectedPollutant, XmaxValue, order);
+    draw(selectedPollutant, XmaxValue, order, selectedCities);
 
     //quando si cambia il pollutant, cambia anche il set di citta selezionate
     //quindi devo aggiornare tutti i grafici che riguardano la miglior citta della selezione attuale
@@ -114,12 +114,18 @@ function changeOrder(order){
     });
 }
 
-function draw(selectedPollutant, XmaxValue, order){
+function draw(selectedPollutant, XmaxValue, order, currentSelection){
     // Parse the Data
     d3.csv("../../data/processed/BarChartData.csv", function(data) {
         data = data.filter(function(row){
           return row['Air Pollutant'] == selectedPollutant;
         });
+
+        if (currentSelection!=null){
+            data = data.filter(function(row){
+                return currentSelection.includes(row['City']);
+            });
+        }
 
         data = data.sort(function(a, b) { // sort in ordine crescente
             return d3.ascending(parseFloat(a['Air Pollution Level']), parseFloat(b['Air Pollution Level']));
@@ -132,7 +138,9 @@ function draw(selectedPollutant, XmaxValue, order){
             data = data.slice(0, 10);
         }
         else if(order == "worst10"){ //prendo le ultime 10
-            data = data.slice(data.length-11,data.length-1);
+            if (data.length>10){ //se sono meno di 10 in totale non devo ricalcolare
+                data = data.slice(data.length-11,data.length-1);
+            }
         }
 
         // Add X axis
