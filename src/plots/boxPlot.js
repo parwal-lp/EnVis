@@ -125,7 +125,7 @@ d3.csv("../../data/processed/BoxPlotData.csv", function(error, data) {
       .style("width", 80)
 
 // Add individual points with jitter
-/*var jitterWidth = 40
+/* var jitterWidth = 40
 svgBoxPlot
   .selectAll("indPoints")
   .data(data)
@@ -135,7 +135,7 @@ svgBoxPlot
     .attr("cy", function(d){return(y(d.Value))})
     .attr("r", 4)
     .style("fill", "white")
-    .attr("stroke", "black") */
+    .attr("stroke", "black")*/
 
 
 });
