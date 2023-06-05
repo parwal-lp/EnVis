@@ -56,7 +56,34 @@ function drawAQILegend(){
 }
 
 function drawBarChartMenuOptions(){
-    
+    //creo e aggiungo il menu a tendina per la scelta del pollutant
+    d3.select(".dropDown")
+        .append("option")
+        .attr("value", "PM2.5")
+        .text("PM2.5")
+        .attr("selected", "true");
+    d3.select(".dropDown")
+        .append("option")
+        .attr("value", "PM10")
+        .text("PM10");
+    d3.select(".dropDown")
+        .append("option")
+        .attr("value", "CO")
+        .text("CO");
+    d3.select(".dropDown")
+        .append("option")
+        .attr("value", "SO2")
+        .text("SO2");
+    d3.select(".dropDown")
+        .append("option")
+        .attr("value", "O3")
+        .text("O3");
+    d3.select(".dropDown")
+        .append("option")
+        .attr("value", "NO2")
+        .text("NO2");
+
+    //creo e aggiungo i radio per la scelta dell'ordine
 }
 
 //assigns color based on the pollution level, takes data through colorData
@@ -213,5 +240,6 @@ function draw(selectedPollutant, XmaxValue, order, currentSelection){
     });
 
     drawAQILegend();
+    drawBarChartMenuOptions();
 
 }
