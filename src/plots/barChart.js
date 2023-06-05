@@ -144,7 +144,7 @@ function draw(selectedPollutant, XmaxValue, order, currentSelection){
         }
 
         // Add X axis
-        x = d3.scaleLinear()
+        var x = d3.scaleLinear()
             .domain([0, XmaxValue])
             .range([ 0, width]);
 
@@ -156,7 +156,7 @@ function draw(selectedPollutant, XmaxValue, order, currentSelection){
                 .style("text-anchor", "end");
 
         // Y axis
-        y = d3.scaleBand()
+        var y = d3.scaleBand()
             .range([ 0, height ])
             .domain(data.map(function(d) { return d.City; }))
             .padding(.1);

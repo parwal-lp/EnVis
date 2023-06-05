@@ -13,9 +13,17 @@ var svgBoxPlot = d3.select("#boxPlot")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 
+function drawBoxPlot(currentSelection){
+
 // Read the data and compute summary statistics for each specie
 d3.csv("../../data/processed/BoxPlotData.csv", function(error, data) {
   if (error) throw error;
+
+  if (currentSelection!=null){
+    data = data.filter(function(row){
+        return currentSelection.includes(row['City']);
+    });
+}
 
   //filter the data to eliminate the null value
 
@@ -200,3 +208,7 @@ svgBoxPlot
     
     Plotly.newPlot('boxPlot', showData, layout);
 });**/
+}
+
+
+drawBoxPlot();
