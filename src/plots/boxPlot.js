@@ -1,7 +1,7 @@
 
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 30, bottom: 30, left: 40},
-    width = 600 - margin.left - margin.right,
+    width = 800 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
@@ -78,7 +78,7 @@ d3.csv("../../data/processed/BoxPlotData.csv", function(error, data) {
 
   // Show the X scale
   var x = d3.scaleBand()
-    .range([ 0, width ])
+    .range([ 0, 700])
     .domain(["GreenAreaDensity", "Fuel", "Diesel", "LowEmission", "IndustrialNoise", "CommercialNoise", "Road_Waste"]) //to add "Door_to_door_Waste"
     .paddingInner(1)
     .paddingOuter(.5)
