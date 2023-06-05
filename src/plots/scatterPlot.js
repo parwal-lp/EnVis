@@ -42,7 +42,7 @@ function assignColorWater(currentCity, dataWater){
 var dots;
 
 const brush = d3.brush()
-  .extent([[0,0], [width, height]])
+  .extent([[0,0], [width + margin.left + margin.right, height]])
   .on("start brush end", brushed)
   .on("end", updateRelatedGraphs);
 
