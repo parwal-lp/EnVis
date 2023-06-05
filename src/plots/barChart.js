@@ -3,8 +3,8 @@ var colorArray = ['#d73027','#fc8d59','#fee08b','#d9ef8b','#91cf60','#1a9850']; 
 var levelArray = ['extremely poor', 'very poor', 'poor', 'moderate', 'fair', 'good'];
 
 // set the dimensions and margins of the graph
-var margin = {top: 20, right: 30, bottom: 40, left: 100},
-    width = 460 - margin.left - margin.right,
+var margin = {top: 20, right: 30, bottom: 40, left:200},
+    width = 610 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
@@ -25,6 +25,39 @@ var order = 'top10';
 draw(selectedPollutant, XmaxValue, order, selectedCities);
 
 //-------- definition of used functions --------------//
+
+//draw the legend with AQI color encodings
+function drawAQILegend(){
+    var color = d3.scaleOrdinal()
+        .domain(levelArray)
+        .range(colorArray);
+
+    // Add one dot in the legend for each name.
+    svg.selectAll("mydots")
+    .data(levelArray)
+    .enter()
+    .append("circle")
+        .attr("cx", -180)
+        .attr("cy", function(d,i){ return margin.top + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
+        .attr("r", 7)
+        .style("fill", function(d){ return color(d)})
+
+    // Add one dot in the legend for each name.
+    svg.selectAll("mylabels")
+    .data(levelArray)
+    .enter()
+    .append("text")
+        .attr("x", -170)
+        .attr("y", function(d,i){ return margin.top + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
+        .text(function(d){ return d})
+        .attr("text-anchor", "left")
+        .style("alignment-baseline", "middle")
+        .style("font-size", "12px")
+}
+
+function drawBarChartMenuOptions(){
+    
+}
 
 //assigns color based on the pollution level, takes data through colorData
 function assignColor(colorData, currentPollutant, currentValue){
@@ -146,7 +179,7 @@ function draw(selectedPollutant, XmaxValue, order, currentSelection){
         // Add X axis
         var x = d3.scaleLinear()
             .domain([0, XmaxValue])
-            .range([ 0, width]);
+            .range([ 0, 400]);
 
         svg.append("g")
             .attr("transform", "translate(0," + height + ")")
@@ -178,5 +211,7 @@ function draw(selectedPollutant, XmaxValue, order, currentSelection){
             })
         });
     });
+
+    drawAQILegend();
 
 }

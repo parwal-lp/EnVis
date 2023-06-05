@@ -1,6 +1,6 @@
 const starArea = d3.select('#starPlot'); //select html area for star plot
 const svgStar = starArea.append('svg') //create svg for the starplot
-  .attr("width", width + margin.left + margin.right)
+  .attr("width", 380)
   .attr("height", height + margin.top + margin.bottom) //set dimensions of starplot
 
 const labels = ['PM2.5', 'PM10', 'CO', 'SO2', 'O3', 'NO2'];
@@ -19,7 +19,6 @@ function displayTextWidth(text, font) {
   let metrics = context.measureText(text);
   return metrics.width;
 }
-
 
 function drawStarPlot(currentBestCity){
   d3.csv("../../data/processed/StarPlotData.csv", function(data) { //retrieve the data
@@ -206,7 +205,7 @@ function drawStarPlot(currentBestCity){
   }
 
   //posiziono la legenda al centro, questo significa spostarla dinamicamente in base alla larghezza che il testo occupa
-  legend.attr("transform", `translate(${230-(topCityWidth + chosenCityWidth)/2}, 0)`) 
+  legend.attr("transform", `translate(${200-(topCityWidth + chosenCityWidth)/2}, 0)`) 
 
   });
 

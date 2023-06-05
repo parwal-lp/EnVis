@@ -42,7 +42,7 @@ function assignColorWater(currentCity, dataWater){
 var dots;
 
 const brush = d3.brush()
-  .extent([[0,0], [width + margin.left + margin.right, height]])
+  .extent([[0,0], [width + margin.left, height]])
   .on("start brush end", brushed)
   .on("end", updateRelatedGraphs);
 
@@ -70,7 +70,7 @@ function updateRelatedGraphs(){
     data = data.sort(function(a, b) { // sort in ordine crescente
         return d3.ascending(parseFloat(a['Air Pollution Level']), parseFloat(b['Air Pollution Level']));
     });
-    if (data.length>0){
+    if (data.length>0 && data[0]!=null){
       //the maximum value on x axis is that of the worst city
       XmaxValue = data[data.length-1]['Air Pollution Level'];
 

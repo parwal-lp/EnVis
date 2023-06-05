@@ -37,37 +37,41 @@
 <div class="container" style="max-width: fit-content !important; margin: 0 auto;">
   <div class="row">
     <div class="col-md-auto">
-      <div id="barChart"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-sm">
-            Select a pollutant
-          </div>
-          <div class="col-sm">
-            Select the order
-            
-          </div>
+      <div id="barChart">
+        <div class="container">
+          <select class="dropDown"></select>
+          <!--div class="row">
+            <div class="col-sm">
+              Select a pollutant
+            </div>
+            <div class="col-sm">
+              Select the order
+              
+            </di>
+          </div-->
+          <!--div class="row">
+            <div class="col-sm">
+              <select class="form-select w-auto" id="pollutant" onchange="changePollutant(this.value)">
+                <option value="PM2.5" selected = "selected">PM2.5</option>
+                <option value="PM10">PM10</option>
+                <option value="CO">CO</option>
+                <option value="SO2">SO2</option>
+                <option value="O3">O3</option>
+                <option value="NO2">NO2</option>
+              </select>
+            </div>
+            <div class="col-sm">
+              <input type="radio" id="top10" name="order" value="top10" onclick="changeOrder(this.value)" checked>
+            <label for="top10">Top 10</label>
+            <input type="radio" id="worst10" name="order" value="worst10" onclick="changeOrder(this.value)">
+            <label for="worst10">Worst 10</label>
+            </div>
+          </div-->
+          
         </div>
-        <div class="row">
-          <div class="col-sm">
-            <select class="form-select w-auto" id="pollutant" onchange="changePollutant(this.value)">
-              <option value="PM2.5" selected = "selected">PM2.5</option>
-              <option value="PM10">PM10</option>
-              <option value="CO">CO</option>
-              <option value="SO2">SO2</option>
-              <option value="O3">O3</option>
-              <option value="NO2">NO2</option>
-            </select>
-          </div>
-          <div class="col-sm">
-            <input type="radio" id="top10" name="order" value="top10" onclick="changeOrder(this.value)" checked>
-          <label for="top10">Top 10</label>
-          <input type="radio" id="worst10" name="order" value="worst10" onclick="changeOrder(this.value)">
-          <label for="worst10">Worst 10</label>
-          </div>
-        </div>
-        
+
       </div>
+      
     </div>
     <div class="col-md-auto">
       <div id="starPlot"></div>
