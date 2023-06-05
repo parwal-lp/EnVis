@@ -39,7 +39,13 @@
     <div class="col-md-auto">
       <div id="barChart">
         <div class="container">
-          <select class="form-select w-100 dropDown" id="pollutant" onchange="changePollutant(this.value)"></select>
+          <select class="form-select dropDown" id="pollutant" onchange="changePollutant(this.value)"></select>
+          
+          <input type="radio" id="top10" name="order" value="top10" onclick="changeOrder(this.value)" checked>
+            <label for="top10" id="top10label">Top 10</label>
+          <input type="radio" id="worst10" name="order" value="worst10" onclick="changeOrder(this.value)">
+            <label for="worst10" id="worst10label">Worst 10</label>
+          
           <!--div class="row">
             <div class="col-sm">
               Select a pollutant

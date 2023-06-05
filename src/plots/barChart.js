@@ -23,6 +23,7 @@ var order = 'top10';
 
 //draw the default plot
 draw(selectedPollutant, XmaxValue, order, selectedCities);
+drawBarChartMenuOptions();
 
 //-------- definition of used functions --------------//
 
@@ -240,6 +241,6 @@ function draw(selectedPollutant, XmaxValue, order, currentSelection){
     });
 
     drawAQILegend();
-    drawBarChartMenuOptions();
+   // drawBarChartMenuOptions();
 
 }
