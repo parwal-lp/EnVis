@@ -19,12 +19,12 @@ console.log(-(brushParallelWidth / 2) , margin.top);
 console.log(brushParallelWidth / 2 , width - margin.bottom);
 
 //initialize the brush
- const brushParallel = d3.brushY()
+/* const brushParallel = d3.brushY()
   .extent([
     [-(brushParallelWidth / 2), 0 ],
     [ brushParallelWidth / 2, height]
   ])
-  .on("start brush end", brushedParallel)
+  .on("start brush end", brushedParallel) */
   //.on("end", updateRelatedGraphsParallel); // quando ho finito la selezione chiamo la funzione di update
 
 //function passed to the brush to highlight the y axis 
@@ -141,13 +141,20 @@ function drawParallelPlot(){
           .text(function(d) { return d; })
           .style("fill", "black")
   
+        //initialize the brush
+        const brushParallel = d3.brushY()
+        .extent([
+          [-(brushParallelWidth / 2), 0 ],
+          [ brushParallelWidth / 2, height]
+        ])
+        .on("start brush end", brushedParallel)
+        
           //here I append the parallel brush
         svgParallel.append('g')
           .attr('class', 'brush')
           .call(brushParallel);
     })
 
-   
 }
 
 drawParallelPlot();
