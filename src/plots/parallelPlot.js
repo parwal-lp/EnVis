@@ -28,9 +28,17 @@ console.log(brushParallelWidth / 2 , width - margin.bottom);
   //.on("end", updateRelatedGraphsParallel); // quando ho finito la selezione chiamo la funzione di update
 
 //function passed to the brush to highlight the y axis 
-  function brushedParallel() {
+/*  function brushedParallel() {
     console.log("Prova funzione brushed");
-  }
+    extent = d3.event.selection; //take as input the selection of the event brush
+    selectedLines=[];
+    //scorrere tutti i path del grafico 
+    d3.selectAll(".pt").each(function(column){
+      xParallel(column), yParallel[column](d[column])
+    })
+    
+
+  }*/
 
   function updateRelatedGraphsParallel(){
     //cancello il grafico che va aggiornato 
@@ -105,7 +113,8 @@ function drawParallelPlot(){
       // The path function take a row of the csv as input, and return x and y coordinates of the line to draw for this raw.
       function path(d) {
         return d3.line()(dimensions.map(function(column) {
-          //console.log("here's the x coordinate of the axes: " + xParallel(column));
+          //console.log("here's the y coordinate of the axes: " + yParallel[column](d[column]));
+          //console.log("column is " + column);
           return [xParallel(column), yParallel[column](d[column])]; 
           }));
       } 
@@ -118,12 +127,30 @@ function drawParallelPlot(){
         .append("path")
           .attr("class", function (d) { return "line" + d.City} ) // 2 class for each line: 'line' and the group name
           .attr("d",  path)
+          .attr("class", "pt")
           .style("fill", "none" )
           .style("stroke", function(d){ return("#AAA")} )
           .style("opacity", 0.5)
           //.on("mouseover", highlight)
           //.on("mouseleave", doNotHighlight ) 
 
+
+      //function passed to the brush to highlight the y axis 
+  function brushedParallel() {
+      console.log("Prova funzione brushed");
+      extent = d3.event.selection; //take as input the selection of the event brush
+      selectedLines=[];
+      //scorrere tutti i path del grafico 
+    /*   d3.selectAll(".pt").each(dimensions.map(function(column){
+       console.log(yParallel[column](this.d[column]));
+        if(extent[0][0] > yParallel[column](this.d[column]) && extent[0][1] < yParallel[column](this.d[column])){
+          console.log(yParallel[column](this.d[column]));
+          console.log("la brush funziona");
+        }
+       // path(d); yParallel[column](d[column])
+       // xParallel(column), yParallel[column](d[column])
+      }));*/
+    }
       // Draw the axis:
       svgParallel.selectAll("myAxis")
         // For each dimension of the dataset I add a 'g' element:
@@ -149,8 +176,12 @@ function drawParallelPlot(){
         ])
         .on("start brush end", brushedParallel)
         
-          //here I append the parallel brush
-        svgParallel.append('g')
+    //here I append the parallel brush for every axis
+        svgParallel.append("g")
+          .selectAll("g") //select all the graph
+          .data(dimensions)
+          .enter().append("g")
+            .attr("transform", d=>`translate(${xParallel(d)}, 0)`)
           .attr('class', 'brush')
           .call(brushParallel);
     })
