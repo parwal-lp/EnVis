@@ -79,10 +79,17 @@ function drawParallelPlot(){
     // Add and store a brush for each axis.
     g.append("g")
         .attr("class", "brush")
-        .each(function(d) { d3.select(this).call(yParallel[d].selection = d3.brushY().on("brush", brushedParallel)); })
+        .each(function(d) { 
+            
+            d3.select(this)
+            .call(yParallel[d].selection = d3.brushY()
+                                            .extent([ [-brushParallelWidth/2,0], [brushParallelWidth/2,height] ])//qui definisco le dimensioni dei blocchi brush
+                                            .on("brush", brushedParallel)); 
+            console.log(yParallel[d].selection);
+        })
         .selectAll("rect")
-        .attr("x", -8)
-        .attr("width", 50); //in case change to 50
+        .attr("x", -brushParallelWidth/2)
+        .attr("width", brushParallelWidth); //la zona brushabile parte da 25 prima della colonna, e si estende un totale di 50 in orizzontale
     });
 
     // Returns the path for a given data point.
@@ -92,7 +99,11 @@ function drawParallelPlot(){
   
     // Handles a brush event, toggling the display of foreground lines.
     function brushedParallel() {
-        var actives = dimensions.filter(function(p) { return !yParallel[p].selection === null; }),
+        console.log("oh stai brushando");
+        
+        var actives = dimensions.filter(function(p) { 
+            return !yParallel[p].selection === null; 
+        }),
             extents = actives.map(function(p) { return yParallel[p].selection.extent(); });
         foreground.style("display", function(d) {
         return actives.every(function(p, i) {
