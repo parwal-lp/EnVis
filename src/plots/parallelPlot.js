@@ -31,6 +31,13 @@ function drawParallelPlot(){
     // Parse the Data
     d3.csv("../../data/processed/ParallelPlotData.csv", function(data) {
 
+    // Extract the list of dimensions and create a scale for each.
+    xParallel.domain(dimensions = d3.keys(data[0]).filter(function(d) {
+        return d != "City" && (yParallel[d] = d3.scaleLinear()
+            .domain(d3.extent(data, function(p) { return +p[d]; }))
+            .range([height, 0]));
+    }));
+/*
     var name;
       for (i in dimensions) {
         name = dimensions[i]
@@ -42,7 +49,7 @@ function drawParallelPlot(){
               return +d[name];   // --> Different axis range for each group
           }) )
           .range([height, 0])
-      }
+      }*/
 
     // Add grey background lines for context.
     background = svgParallel.append("g")
@@ -51,6 +58,7 @@ function drawParallelPlot(){
         .data(data)
         .enter().append("path")
         .attr("d", path);
+
 
      // Add blue foreground lines for focus.
     foreground = svgParallel.append("g")
@@ -71,10 +79,12 @@ function drawParallelPlot(){
     g.append("g")
         .attr("class", "axis")
         .each(function(d) { d3.select(this).call(axis.scale(yParallel[d])); })
+        // Add axis title
         .append("text")
-        .style("text-anchor", "middle")
-        .attr("y", -9)
-        .text(function(d) { return d; });
+          .style("text-anchor", "middle")
+          .attr("y", -9)
+          .text(function(d) { return d; })
+          .style("fill", "black")
 
     // Add and store a brush for each axis.
     g.append("g")
@@ -82,10 +92,10 @@ function drawParallelPlot(){
         .each(function(d) { 
             
             d3.select(this)
-            .call(yParallel[d].selection = d3.brushY()
+            .call(yParallel[d].brush = d3.brushY()
                                             .extent([ [-brushParallelWidth/2,0], [brushParallelWidth/2,height] ])//qui definisco le dimensioni dei blocchi brush
-                                            .on("brush", brushedParallel)); 
-            console.log(yParallel[d].selection);
+                                            .on("start brush end", brushedParallel)); 
+            //console.log("yParallel[d].brush :" +yParallel[d].brush);
         })
         .selectAll("rect")
         .attr("x", -brushParallelWidth/2)
@@ -102,13 +112,20 @@ function drawParallelPlot(){
         console.log("oh stai brushando");
         
         var actives = dimensions.filter(function(p) { 
-            return !yParallel[p].selection === null; 
-        }),
-            extents = actives.map(function(p) { return yParallel[p].selection.extent(); });
+            //console.log("here are the active lines: "+ yParallel[p]);
+            return !(yParallel[p].brush === null ); //questa cosa qui non sta funzionando benissimo -- serve per fare l'highlight
+        
+        });
+        
+        extents = actives.map(function(p) { 
+            //console.log("here are the extent: "+ yParallel[p].selection.extent());
+            return yParallel[p].brush.extent(); 
+        });
+
         foreground.style("display", function(d) {
-        return actives.every(function(p, i) {
-            return extents[i][0] <= d[p] && d[p] <= extents[i][1];
-        }) ? null : "none";
+            return actives.every(function(p, i) {
+                return extents[i][0] <= d[p] && d[p] <= extents[i][1];
+                }) ? null : "none";
         });
     }
 
