@@ -6,7 +6,9 @@ var margin = {top: 30, right: 100, bottom: 10, left: 100},
 var brushParallelWidth = 50; 
 var selectedLines=[]; //qui metto tutte i path della selezione 
 var allLines =[]; //qui metto tutti i path
-var activeDimensions = [] // qui metto tutte le dimension attive con il brush
+var activeDimensions = []; // qui metto tutte le dimension attive con il brush
+var extents; //questa variabile mi serve per vedere gli estremi del brush
+var cityColor = []; //questo array associa ad ogni città un colore
 
 // append the svg object to the body of the page
 var svgParallel = d3.select("#parallelPlot")
@@ -131,7 +133,7 @@ function drawParallelPlot(){
         
         d3.selectAll(".line" + selected_value)
           .transition().duration(300).delay(300)
-          .style("stroke", function(p){ return( "#AAA");} ) //grey : no highlight
+          .style("stroke", "#AAA" ) //grey : no highlight
           .style("opacity", "1")
       } 
 
@@ -146,7 +148,7 @@ function drawParallelPlot(){
       } 
 
       // Draw the lines
-      svgParallel
+      var pathProva = svgParallel
         .selectAll("myPath")
         .data(data)
         .enter()
@@ -161,11 +163,11 @@ function drawParallelPlot(){
             return path(d); //funziona!
           })
           .style("fill", "none" )
-          .style("stroke", "#AAA" ) //grey color
+          .style("stroke", "grey") //grey color
           .style("stroke-width", "2px")
           .style("opacity", 0.5)
           .on("mouseover", function(d){
-            highlight(d);
+            //highlight(d);
             tooltipParallel.transition()
                   .duration(100)
                   .style("opacity", 1);
@@ -175,7 +177,7 @@ function drawParallelPlot(){
           }
           )
           .on("mouseleave", function(d){
-            doNotHighlight(d); 
+            //doNotHighlight(d); 
             tooltipParallel.transition()
                   .duration('200')
                   .style("opacity", 0);
@@ -216,7 +218,6 @@ function drawParallelPlot(){
           .attr("class", "brush")
           .call(brushParallel);*/
 
-          //global array to keep track of the active dimension of the brushes
       function removeItemOnce(arr, value) {
             var index = arr.indexOf(value);
             if (index > -1) {
@@ -224,8 +225,19 @@ function drawParallelPlot(){
             }
             return arr;
           }
+      
+      function removeItemAll(arr, value) {
+            var i = 0;
+            while (i < arr.length) {
+              if (arr[i] === value) {
+                arr.splice(i, 1);
+              } else {
+                ++i;
+              }
+            }
+            return arr;
+          }
 
-var extents;
   
 //function passed to the brush to highlight the y axis 
   function brushedParallel(d) { //passo in imput la colonna corrente
@@ -234,18 +246,48 @@ var extents;
       //var actives = dimensions.filter(function(p){ return !yParallel[p].event.selection.empty(); });
       extents = d3.event.selection; //sarebbe il punto in alto e in basso della selezione brush
       console.log("brush area is :"+ extents);
+      console.log("brush of y[d] "+ yParallel[d].brush[0]);
       //questi array servono per la colorazione dei path
-      selectedLines=[]; //li inizializzo a insieme vuoto
-      allLines =[]; //li inizializzo a insieme vuoto
+      //selectedLines=[]; //li inizializzo a insieme vuoto
+      //allLines =[]; //li inizializzo a insieme vuoto
       
     //rimuovo la dimensione d
     removeItemOnce(activeDimensions,d);
     //la riaggiungo all'array nel caso extents sia diverso da null
-    if (!activeDimensions.includes(d) && extents != null){
+    if (!activeDimensions.includes(d) && extents !== null){
       activeDimensions.push(d);
     }
     //a questo punto ho tutte le dimensioni attive! Me le stampo nella console per controllarle 
     console.log("activeDimensions: "+ activeDimensions);
+
+    pathProva.style("stroke", function(rowdata){
+      if(!allLines.includes(rowdata.City)){
+        allLines.push(rowdata.City)
+      }
+      
+      console.log("rowdata is :"+ yParallel[d](rowdata[d])) //questo prende effettivamente tutti i dati di quella colonna
+      console.log("the value of the city: "+rowdata.City); //effettivamente stampa tutte le città
+      if(extents){ //gestione del caso: non ho più il brush su quell'asse
+        if(yParallel[d](rowdata[d]) >= extents[0] && yParallel[d](rowdata[d]) <= extents[1]){ //caso in cui sto nel range
+          if(!selectedLines.includes(rowdata.City)){
+            selectedLines.push(rowdata.City);
+          }
+          return "blue";//blue
+        }
+        else{ //caso in cui non sto nel range
+          if(selectedLines.includes(rowdata.City)){ //se era già presente ma non sta nella selezione attuale lo tolgo 
+            removeItemOnce(selectedLines,rowdata.City);
+          }
+          return "grey"; 
+        }//grey
+      }
+      else{ //caso extents = null, levo il brush e ripristino tutto a grey
+        return "grey";
+      }
+    });
+
+    console.log(selectedLines);
+    console.log(allLines);
 
 //qui devo controllare il valore y di quella colonna di tutti i path (yParallel[d](rowdata[d])) e se sono compresi negli estremi di extent li coloro
 
@@ -254,7 +296,7 @@ var extents;
 //trovare il modo di importare i rowdata...modo simile a quello in cui creiamo i path?
 
 //scorrere tutti i path del grafico 
-svgParallel.selectAll("myPath")
+/*svgParallel.selectAll("myPath")
       .data(data)
       .each(
         dimensions.map(function(column,i,k){ //the first one has value like GreenAreaIndex...the second numeric value from 0 to 4, k is the sstring with all column values
@@ -268,14 +310,14 @@ svgParallel.selectAll("myPath")
           console.log("dentro dimension map");
           //console.log(extent);
           console.log(yParallel[column](myLine[column])); //per ora è NaN
-          /*  if(extent[0][0] > yParallel[column](d[column]) && extent[0][1] < yParallel[column](d[column])){
+            if(extent[0][0] > yParallel[column](d[column]) && extent[0][1] < yParallel[column](d[column])){
               console.log(yParallel[column](this.d[column]));
               console.log("la brush funziona");
               //selectedLines.push(myLine); //qui pusho solo le linee selezionate
-            } */
+            } 
         // path(d); yParallel[column](d[column])
         // xParallel(column), yParallel[column](d[column])
-        })); 
+        })); */
     } 
 
     })
