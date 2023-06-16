@@ -93,9 +93,10 @@ function drawParallelPlot(){
             [-(brushParallelWidth / 2), 0 ],
             [ brushParallelWidth / 2, height]
           ])
-          .on("start brush end", function(d){
-            //console.log("inside the creation of the brush, d is: "+d); //prende solamente il valore effettivo del brush selezionato!!
-            brushedParallel(d);
+          .on("end", function(d,i){ // prima era "start brush end"
+            //console.log("inside the creation of the brush, d is: "+d); //prende solamente il valore edella colonna selezionata
+            //console.log("inside the creation of the brush, i is: "+i); //prende l'indice effettivo della colonna, devo aggiungere una i in imput alla funzione
+            brushedParallel(d,i);
           })
 
           //I store the brush in reference to the axis
@@ -117,12 +118,12 @@ function drawParallelPlot(){
         // first every group turns grey
         d3.selectAll(".line")
           .transition().duration(200)
-          .style("stroke", "lightgrey")
+          .style("stroke", "#AAA")
           .style("opacity", "0.5")
         // Second the hovered specie takes its color
         d3.selectAll(".line" + selected_value)
           .transition().duration(300)
-          .style("stroke",function(p){ return( "#4682B4");}) //blue highlight
+          .style("stroke","#4682B4") //blue highlight
           .style("opacity", "1")
       }
 
@@ -237,54 +238,74 @@ function drawParallelPlot(){
             }
             return arr;
           }
+      
+      function checkNullInIndex(arr, index){ //not working for now
+            if(arr[index] === null){
+              return true;
+            }
+            else{
+              return false;
+            }
+          }
 
+    var extentArray = [null, null, null, null, null]; //fixed array with 5 positions
   
 //function passed to the brush to highlight the y axis 
-  function brushedParallel(d) { //passo in imput la colonna corrente
+  function brushedParallel(d,index) { //passo in imput la colonna corrente
       console.log("Prova funzione brushed");
       //console.log("here d is: "+ d); //now i print the column
       //var actives = dimensions.filter(function(p){ return !yParallel[p].event.selection.empty(); });
-      extents = d3.event.selection; //sarebbe il punto in alto e in basso della selezione brush
+      extents = d3.event.selection;
+       //sarebbe il punto in alto e in basso della selezione brush
       console.log("brush area is :"+ extents);
+
+      if(checkNullInIndex(extentArray, index)){ // se il campo è null, ci inserisco l'extent (deve prima finire però... come fare?)
+        extentArray[index] = extents; //va bene
+      }
+      if(extents === null){
+        extentArray[index] = null; // perfetto funziona!!
+      }
+      console.log("extentArray is:" + extentArray);
       console.log("brush of y[d] "+ yParallel[d].brush[0]);
       //questi array servono per la colorazione dei path
       //selectedLines=[]; //li inizializzo a insieme vuoto
-      //allLines =[]; //li inizializzo a insieme vuoto
+      //allLines =[]; //li inizializzo a insieme vuoto -- a che me serve?
       
-    //rimuovo la dimensione d
-    removeItemOnce(activeDimensions,d);
-    //la riaggiungo all'array nel caso extents sia diverso da null
-    if (!activeDimensions.includes(d) && extents !== null){
-      activeDimensions.push(d);
-    }
-    //a questo punto ho tutte le dimensioni attive! Me le stampo nella console per controllarle 
-    console.log("activeDimensions: "+ activeDimensions);
+      //rimuovo la dimensione d
+      removeItemOnce(activeDimensions,d);
+      //la riaggiungo all'array nel caso extents sia diverso da null
+      if (!activeDimensions.includes(d) && extents != null){
+        activeDimensions.push(d);
+      }
 
-    pathProva.style("stroke", function(rowdata){
-      if(!allLines.includes(rowdata.City)){
-        allLines.push(rowdata.City)
-      }
-      
-      console.log("rowdata is :"+ yParallel[d](rowdata[d])) //questo prende effettivamente tutti i dati di quella colonna
-      console.log("the value of the city: "+rowdata.City); //effettivamente stampa tutte le città
-      if(extents){ //gestione del caso: non ho più il brush su quell'asse
-        if(yParallel[d](rowdata[d]) >= extents[0] && yParallel[d](rowdata[d]) <= extents[1]){ //caso in cui sto nel range
-          if(!selectedLines.includes(rowdata.City)){
-            selectedLines.push(rowdata.City);
-          }
-          return "blue";//blue
+      //a questo punto ho tutte le dimensioni attive! Me le stampo nella console per controllarle 
+      console.log("activeDimensions: "+ activeDimensions);
+
+      pathProva.style("stroke", function(rowdata){
+        if(!allLines.includes(rowdata.City)){
+          allLines.push(rowdata.City)
         }
-        else{ //caso in cui non sto nel range
-          if(selectedLines.includes(rowdata.City)){ //se era già presente ma non sta nella selezione attuale lo tolgo 
-            removeItemOnce(selectedLines,rowdata.City);
+        
+        //console.log("rowdata is :"+ yParallel[d](rowdata[d])) //questo prende effettivamente tutti i dati di quella colonna
+        //console.log("the value of the city: "+rowdata.City); //effettivamente stampa tutte le città
+        if(extents){ //gestione del caso: non ho più il brush su quell'asse
+          if(yParallel[d](rowdata[d]) >= extents[0] && yParallel[d](rowdata[d]) <= extents[1]){ //caso in cui sto nel range
+            if(!selectedLines.includes(rowdata.City)){ //se non è già presente nelle selectedLines, lo metto
+              selectedLines.push(rowdata.City);
+            }
+            return "blue";//blue
           }
-          return "grey"; 
-        }//grey
-      }
-      else{ //caso extents = null, levo il brush e ripristino tutto a grey
-        return "grey";
-      }
-    });
+          else{ //caso in cui non sto nel range
+            if(selectedLines.includes(rowdata.City)){ //se era già presente ma non sta nella selezione attuale lo tolgo 
+              removeItemOnce(selectedLines,rowdata.City);
+            }
+            return "grey"; 
+          }//grey
+        }
+        else{ //caso extents = null, levo il brush e ripristino tutto a grey
+          return "grey";
+        }
+      });
 
     console.log(selectedLines);
     console.log(allLines);
