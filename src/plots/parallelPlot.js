@@ -10,6 +10,7 @@ var extents; //questa variabile mi serve per vedere gli estremi del brush
 var cityColor = []; //questo array associa ad ogni città un colore
 var extentArray = [null, null, null, null, null]; //fixed array with 5 positions
 var activeDimensions = [null, null, null, null, null]; // qui metto tutte le dimension attive con il brush
+var bestCurrentLine = currentBestCity;
 
 // append the svg object to the body of the page
 var svgParallel = d3.select("#parallelPlot")
@@ -21,15 +22,50 @@ var svgParallel = d3.select("#parallelPlot")
         "translate(" + margin.left + "," + margin.top + ")");
 
   function updateRelatedGraphsParallel(){
-    //cancello il grafico che va aggiornato 
-    
-    //tramite d3.csv prendo i dati del Barchart e aggiorno sia il barchart, sia lo starplot
+      svgStar.selectAll("*").remove();
+      svg.selectAll("*").remove();
+      svgBoxPlot.selectAll("*").remove();
+      
+      //bisogna togliere il brush anche allo scatterplot? 
 
-    //tramite d3.csv prendo i dati del boxplot e aggiorno il boxplot
+      d3.csv("../../data/processed/BarChartData.csv", function(data) {
 
-    //Evidenzio anche le città selezionate nello scatterplot?
-    
-    //richiamo la funzione draw per ogni grafico
+        //al posto di selected city ho selected lines?
+        //selectedCities = selectedLines; // da vedere bene: se metto selectedCities mi da un errore strano 
+
+        console.log("inside the update, the cities are: "+selectedLines);
+        
+        //qui filtro i dati dei pollutant in base alle città selezionate
+        data = data.filter(function(row){
+          return row['Air Pollutant'] == selectedPollutant && selectedLines.includes(row['City']);
+        });
+
+        data = data.sort(function(a, b) { // sort in ordine crescente
+            return d3.ascending(parseFloat(a['Air Pollution Level']), parseFloat(b['Air Pollution Level']));
+        });
+        if (data.length>0 && data[0]!=null){
+          //the maximum value on x axis is that of the worst city
+          XmaxValue = data[data.length-1]['Air Pollution Level'];
+
+          //checking which value is setted
+          if(order == "top10"){ //prendo le prime 10
+              data = data.slice(0, 10);
+          }
+          else if(order == "worst10"){ //prendo le ultime 10
+              data = data.slice(data.length-11,data.length-1);
+          }
+          currentBestCity = data[0].City;
+          //qua la parte aggiuntiva
+          bestCurrentLine = currentBestCity;
+        } else {
+          currentBestCity = "";
+          bestCurrentLine = currentBestCity;
+          selectedLines = null;
+        }
+        drawStarPlot(currentBestCity);
+        draw(selectedPollutant, XmaxValue, order, selectedLines);
+        drawBoxPlot(selectedLines);
+    });
   };
 
 function drawParallelPlot(){
@@ -71,6 +107,8 @@ function drawParallelPlot(){
             //console.log("inside the creation of the brush, d is: "+d); 
             //console.log("inside the creation of the brush, i is: "+i); 
             brushedParallel(d,i);
+            //qua inserire l'update dei graph
+            updateRelatedGraphsParallel();
           })
 
           //I store the brush in reference to the axis
@@ -92,12 +130,12 @@ function drawParallelPlot(){
         // first every group turns grey
         d3.selectAll(".line")
           .transition().duration(200)
-          .style("stroke", "#AAA")
+          .style("stroke", "grey")
           .style("opacity", "0.5")
         // Second the hovered specie takes its color
         d3.selectAll(".line" + selected_value)
           .transition().duration(300)
-          .style("stroke","#4682B4") //blue highlight
+          .style("stroke","blue") //blue highlight
           .style("opacity", "1")
       }
 
@@ -108,7 +146,7 @@ function drawParallelPlot(){
         
         d3.selectAll(".line" + selected_value)
           .transition().duration(300).delay(300)
-          .style("stroke", "#AAA" ) //grey : no highlight
+          .style("stroke", "grey" ) //grey : no highlight
           .style("opacity", "1")
       } 
 
@@ -135,9 +173,23 @@ function drawParallelPlot(){
             return path(d); //funziona!
           })
           .style("fill", "none" )
-          .style("stroke", "grey") //grey color
+          .style("stroke", function(d){
+            if(d.City ==currentBestCity){
+              return "red";
+            } // serve per evidenziare la città migliore
+            else{
+              return "blue";
+            }
+          })
           .style("stroke-width", "2px")
-          .style("opacity", 0.5)
+          .style("opacity", function(d){
+            if(d.City ==currentBestCity){
+              return 1;
+            } // serve per evidenziare la città migliore
+            else{
+              return 0.4;
+            }
+          })
           .on("mouseover", function(d){
             //highlight(d);
             tooltipParallel.transition()
@@ -205,7 +257,7 @@ function drawParallelPlot(){
   
 //function passed to the brush to highlight the y axis 
   function brushedParallel(d,index) { 
-      console.log("Prova funzione brushed");
+      //console.log("inside brushedParallel");
       //console.log("here d is: "+ d); 
       extents = d3.event.selection;
       //console.log("brush area is :"+ extents);
@@ -214,7 +266,7 @@ function drawParallelPlot(){
       if(extents === null){
         extentArray[index] = null;
       }
-      console.log("extentArray is:" + extentArray);
+      //console.log("extentArray is:" + extentArray);
       
       activeDimensions[index] = null;
      
@@ -222,7 +274,7 @@ function drawParallelPlot(){
         activeDimensions[index] = d;
       }
 
-      console.log("activeDimensions: "+ activeDimensions);
+      //console.log("activeDimensions: "+ activeDimensions);
 
       pathProva.style("stroke", function(rowdata){
 
@@ -231,32 +283,48 @@ function drawParallelPlot(){
         }
          
         selectedLines = allLines;
-        console.log("here selected lines: "+ selectedLines);
+        //console.log("here selected lines: "+ selectedLines);
         var j;
         for (j= 0; j < extentArray.length; j++){
             //console.log("rowdata is :"+ yParallel[d](rowdata[d]));
             //console.log("the value of the city: "+rowdata.City);
             var ext = extentArray[j];
-            console.log("the index is "+ j);
-            console.log("extent is: "+ ext);
+            //console.log("the index is "+ j);
+            //console.log("extent is: "+ ext);
             if(ext){ //brush è attivo
               //qui la dimensione che sto analizzando
               var dim = activeDimensions[j]; 
               if(yParallel[dim](rowdata[dim]) < ext[0] || yParallel[dim](rowdata[dim]) > ext[1]){ //caso in cui non sto nel range
                   removeItemOnce(selectedLines, rowdata.City); //rimuovo la città
-                  console.log(selectedLines);
+                  //console.log(selectedLines);
               }
             
             }
           } 
 
         if(selectedLines.includes(rowdata.City)){
-          return "blue";
+          if(rowdata.City == currentBestCity){ return "red";}
+          else {return "blue"; }
         }
         else{
           return "grey";
         }
 
+      })
+      .style("opacity", function(rowdata){
+        if(!selectedLines.includes(rowdata.City)){
+            return 0.3;    
+        }
+        else{
+          if(selectedLines.length === 92){ 
+            if(rowdata.City == currentBestCity){ return 1;}
+            else {return 0.4};
+          } //if I have all the cities(92), I return to the initial value
+          else{
+            if(rowdata.City == currentBestCity){ return 1;}
+            else {return 0.8};
+          } 
+        }
       });
 
     } 
