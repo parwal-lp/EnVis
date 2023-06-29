@@ -130,19 +130,25 @@ function drawScatterPlot(){
   d3.csv("../../data/processed/pcaWaterResults.csv", function(data) { //retrieve the data
     // ------------ PRENDO I DATI CHE MI SERVONO --------------- //
     // Add X axis
-    var x = d3.scaleLinear()
+    var xScatter = d3.scaleLinear()
       .domain([-2.5, 3])
       .range([ 0, width ]);
     svgScatter.append("g")
       .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x));
+      .call(d3.axisBottom(xScatter));
+
+      var ticksScatter = xScatter.ticks();
+      console.log(ticksScatter);
+      //ticksScatter.push(0);
+      //xAxisScatter.tickValues(ticksScatter);
+
 
     // Add Y axis
-    var y = d3.scaleLinear()
+    var yScatter = d3.scaleLinear()
       .domain([-2.5, 3])
       .range([ height, 0]);
     svgScatter.append("g")
-      .call(d3.axisLeft(y));
+      .call(d3.axisLeft(yScatter));
 
     var div = d3.select("body").append("div")
       .attr("class", "tooltip")
@@ -157,8 +163,8 @@ function drawScatterPlot(){
         .enter()
         .append("circle")
           .attr("class", "dot")
-          .attr("cx", function (d) { return x(d.PC1); } )
-          .attr("cy", function (d) { return y(d.PC2); } )
+          .attr("cx", function (d) { return xScatter(d.PC1); } )
+          .attr("cy", function (d) { return yScatter(d.PC2); } )
           .attr("city", function (d) { return (d.City); })
           .attr("r", 4)
           .style("fill", function(d){

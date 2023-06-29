@@ -50,7 +50,7 @@ function drawStarPlot(currentBestCity){
       const axis = d3.axisRight() //creo le scale ticchettate
         .scale(scales[labels[i]])
         //.ticks(nTicks);
-        .tickValues([0,pollutantsMaxValues[i]/nTicks,2*pollutantsMaxValues[i]/nTicks,3*pollutantsMaxValues[i]/nTicks,4*pollutantsMaxValues[i]/nTicks, pollutantsMaxValues[i]]);
+        .tickValues([pollutantsMaxValues[i]/nTicks,2*pollutantsMaxValues[i]/nTicks,3*pollutantsMaxValues[i]/nTicks,4*pollutantsMaxValues[i]/nTicks, pollutantsMaxValues[i]]);
 
       svgStar.append('g') //traslo e ruoto le scale ticchettate al posto giusto
         .attr('transform', `translate(${center.x},${center.y-radius})rotate(${angle}, 0, ${radius})`) //le scale devono essere ruotate di angoli progressivi (come le linee raggi)
@@ -61,7 +61,7 @@ function drawStarPlot(currentBestCity){
         //le formule per la traslazione sono un po empiriche, non sono ufficiali
         .attr("transform",function(d,i){ return `rotate(${-angle})`+"translate(" + -Math.sin(angle/2*Math.PI/180)*radius/6 + ", "+ Math.sin(angle*Math.PI/180)*radius/9 +") "})
     
-      d3.selectAll(".tick").filter(function (d) { return d===0;  }).remove(); //rimuovo gli 0 dagli assi, perche si sovrappongono e diventano poco leggibili, tanto e intuitivo che al centro ci sia lo 0
+        //d3.selectAll(".tick").filter(function (d) { return d===0;  }).remove(); //rimuovo gli 0 dagli assi, perche si sovrappongono e diventano poco leggibili, tanto e intuitivo che al centro ci sia lo 0
       }
 
     // ------------ CREO CIRCONFERENZE CONCENTRICHE --------------- //
