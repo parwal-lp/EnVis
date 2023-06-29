@@ -211,4 +211,21 @@ function drawStarPlot(currentBestCity){
 
 }
 
-drawStarPlot("Roma");
+//calcolo la best city prima dell'interazione dell'utente
+//quindi sarebbe la best city tra i dati completi del barchart
+d3.csv("../../data/processed/BarChartData.csv", function(initialData) {
+  initialData = initialData.filter(function(row){
+    return row['Air Pollutant'] == initialPollutant;
+  });
+
+  initialData = initialData.sort(function(a, b) { // sort in ordine crescente
+      return d3.ascending(parseFloat(a['Air Pollution Level']), parseFloat(b['Air Pollution Level']));
+  });
+    
+  initialBestCity = initialData[0].City;
+
+  //qui dentro chiamo la renderizzazione del grafico perché d3.cs è asincrona
+  drawStarPlot(initialBestCity);
+});
+
+
