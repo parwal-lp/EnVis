@@ -9,7 +9,10 @@ var margin = {top: 20, right: 30, bottom: 40, left: 100},
     height = 400 - margin.top - margin.bottom;
 
 let selectedDots = [];
+let allDots = [];
 let selectedCities = null;
 
 let initialBestCity;
 let initialPollutant='PM2.5';
+
+let legendScatter;

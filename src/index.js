@@ -1,4 +1,4 @@
-let currentBestCity = "Roma";
+let currentBestCity;
 
 d3.csv("../data/processed/StarPlotData.csv", function(data){
     let listaCitta = [];
