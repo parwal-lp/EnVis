@@ -106,7 +106,7 @@ function drawStarPlot(currentBestCity){
 
     // ------------ DISEGNO I PERCORSI IN BASE AI DATI ------------------ //
     // dati citta selezionata dall'utente
-    let currentSelectedCity = document.getElementById("tendina_scelta_city").value;
+    currentSelectedCity = document.getElementById("tendina_scelta_city").value;
     if (currentSelectedCity != "none") {
       //il path della citta selezionata dall'utente viene mostrato
       //solamente se l'utente ha selezionato unacitta nella tendina, altrimenti salto e vado al path successivo

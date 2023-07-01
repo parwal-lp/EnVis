@@ -39,9 +39,14 @@ function assignColorWater(currentCity, dataWater){
     return waterColor[media.toString()];
 }
 function colorCityDots(currentCity){
-
-    if (currentCity == initialBestCity) return '#00ff00';
-    else return '#aaa';
+    if (currentCity == initialBestCity){
+      return '#b2df8a';
+    } else if (currentCity == currentSelectedCity) {
+      return '#d95f02';
+    } else {
+      return '#a6cee3';
+    }
+    
 }
 
 var dots;
@@ -99,10 +104,20 @@ function updateRelatedGraphs(){
     draw(selectedPollutant, XmaxValue, order, selectedCities);
     drawBoxPlot(selectedCities)
     coloraCurrentBestCity(); //aggiorno lo scatterplot evidenziando la current best city
-    legendScatter.remove();
-    drawScatterLegend(currentBestCity);
+    coloraChosenCity();
+    legendScatter.remove(); //aggiorno la legenda dello scatter con il nome della current best city
+    drawScatterLegend(currentBestCity, currentSelectedCity);
   });
   
+}
+
+function coloraChosenCity(){
+  allDots.forEach(dot => { //identifico currentBest e inizialBest
+    if (dot.attr("city") == currentSelectedCity){
+      dot.style('fill', '#d95f02'); //se non esiste una currentBest allora mostro la initialBest
+      dot.raise();
+    }
+  });
 }
 
 function coloraCurrentBestCity(){
@@ -117,10 +132,10 @@ function coloraCurrentBestCity(){
     }
   });
   if (foundCity != null){ //se esiste una currentBest evidenzio quella
-    foundCity.style('fill', '#00ff00');
+    foundCity.style('fill', '#b2df8a');
     foundCity.raise();
   } else {
-    initialCity.style('fill', '#00ff00'); //se non esiste una currentBest allora mostro la initialBest
+    initialCity.style('fill', '#b2df8a'); //se non esiste una currentBest allora mostro la initialBest
     initialCity.raise();
   }
 }
@@ -149,16 +164,14 @@ function brushed() {
   })
 
   allDots.forEach(dot => {
-
-    
     if (selectedDots.includes(dot)){
 
       
       //console.log(dot.attr("city"));
-      //console.log(currentBestCity);
-      dot.style('fill', '#ff0000'); //tutti i selezionati si colorano
-    } else {
-      dot.style('fill', '#aaa'); //tutti gli altri tornano grigi
+      console.log(dot);
+      dot.style('fill', '#1f78b4'); //tutti i selezionati si colorano
+    } else if(!selectedDots.includes(dot)){
+      dot.style('fill', '#a6cee3'); //tutti gli altri tornano grigi
     }
   });
 
@@ -166,7 +179,7 @@ function brushed() {
   
 }
 
-function drawScatterPlot(currentBestCity){
+function drawScatterPlot(currentBestCity, currentSelectedCity){
   d3.csv("../../data/processed/pcaWaterResults.csv", function(data) { //retrieve the data
     // ------------ PRENDO I DATI CHE MI SERVONO --------------- //
     // Add X axis
@@ -207,6 +220,7 @@ function drawScatterPlot(currentBestCity){
           .attr("cy", function (d) { return yScatter(d.PC2); } )
           .attr("city", function (d) { return (d.City); })
           .attr("r", 4)
+          //.style("stroke","black")
           .style("fill", function(d){
             let color = colorCityDots(d.City);
             ////console.log(d.City + " " + color);
@@ -252,10 +266,10 @@ function drawScatterPlot(currentBestCity){
       .call(brush);
 
   // LEGEND
-  drawScatterLegend(currentBestCity);
+  drawScatterLegend(currentBestCity, currentSelectedCity);
 }
 
-function drawScatterLegend(currentBestCity){
+function drawScatterLegend(currentBestCity, currentSelectedCity){
 
   legendScatter = svgScatter.append("g")
   .attr("class", 'node')
@@ -281,12 +295,27 @@ function drawScatterLegend(currentBestCity){
   topCityWidthScatter = displayTextWidth(greenCity, "15px sans-serif") + 10;
 
 
-  let selectedPointsCircle = legendScatter.append("circle").attr("r", 6).style("fill", "#ff0000").attr("cy",svgScatter.attr("height")-svgScatter.attr("height")*0.04)
-  let selectedPointdLabel = legendScatter.append("text").text("Selected cities").style("font-size", "15px").attr("y",svgScatter.attr("height")-svgScatter.attr("height")*0.027)
+  let labelSelectedCityText = "Selected cities"
+  let selectedPointsCircle = legendScatter.append("circle").attr("r", 6).style("fill", "#1f78b4").attr("cy",svgScatter.attr("height")-svgScatter.attr("height")*0.04)
+  let selectedPointdLabel = legendScatter.append("text").text(labelSelectedCityText).style("font-size", "15px").attr("y",svgScatter.attr("height")-svgScatter.attr("height")*0.027)
   
   selectedPointsCircle.attr("cx", topCityWidthScatter + 10);
   selectedPointdLabel.attr("x", topCityWidthScatter + 20);
   selectedPointdLabel.attr("y", '5');
+
+  selectedPointsWidthScatter = displayTextWidth(labelSelectedCityText, "15px sans-serif") + 10;
+
+  if(currentSelectedCity != "none" && currentSelectedCity!=null){
+    let chosenCityScatterCircle = legendScatter.append("circle").attr("r", 6).style("fill", "#d95f02").attr("cy",svgScatter.attr("height")-svgScatter.attr("height")*0.04)
+    let chosenCityScatterLabel = legendScatter.append("text").text(currentSelectedCity).style("font-size", "15px").attr("y",svgScatter.attr("height")-svgScatter.attr("height")*0.027)
+    
+    chosenCityScatterCircle.attr("cx", selectedPointsWidthScatter + 85);
+    chosenCityScatterLabel.attr("x", selectedPointsWidthScatter + 95);
+    chosenCityScatterLabel.attr("y", '5');
+  }
+
+
+  
  
   //posiziono la legenda al centro, questo significa spostarla dinamicamente in base alla larghezza che il testo occupa
   legendScatter.attr("transform", `translate(20, -10)`) 
@@ -308,5 +337,5 @@ d3.csv("../../data/processed/BarChartData.csv", function(initialData) {
   initialBestCity = initialData[0].City;
 
   //qui dentro chiamo la renderizzazione del grafico perché d3.cs è asincrona
-  drawScatterPlot(initialBestCity);
+  drawScatterPlot(initialBestCity, "none");
 });

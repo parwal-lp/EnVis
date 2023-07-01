@@ -16,3 +16,6 @@ let initialBestCity;
 let initialPollutant='PM2.5';
 
 let legendScatter;
+
+let currentSelectedCity;
+let currentBestCity;
