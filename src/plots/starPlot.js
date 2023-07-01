@@ -134,10 +134,10 @@ function drawStarPlot(currentBestCity){
       pathSelectedCity += 'Z';
         svgStar.append('path')
           .attr('d', pathSelectedCity)
-          .style('stroke', '#888')
+          .style('stroke', '#d95f02')
           .style('stroke-width', 3)
           .style('stroke-opacity', 0.6)
-          .style('fill', '#888')
+          .style('fill', '#d95f02')
           .style('fill-opacity', 0.3)
 
     }
@@ -194,7 +194,7 @@ function drawStarPlot(currentBestCity){
 
   let chosenCityWidth = 0;
   if (currentSelectedCity != "none"){
-    let chosenCityDot = legend.append("circle").attr("r", 6).style("fill", "#888").attr("cy",svgStar.attr("height")-svgStar.attr("height")*0.04)
+    let chosenCityDot = legend.append("circle").attr("r", 6).style("fill", "#d95f02").attr("cy",svgStar.attr("height")-svgStar.attr("height")*0.04)
     let chosenCityText = legend.append("text").text(currentSelectedCity).style("font-size", "15px").attr("y",svgStar.attr("height")-svgStar.attr("height")*0.027)
     
     chosenCityDot.attr("cx", topCityWidth + 10);
