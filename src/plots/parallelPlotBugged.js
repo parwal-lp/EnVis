@@ -117,24 +117,24 @@ function drawParallelPlot(){
   
     // Handles a brush event, toggling the display of foreground lines.
     function brushedParallel() {
-        console.log("oh stai brushando");
+        //console.log("oh stai brushando");
         var select = d3.event.selection; //here I memorize the points extreme of the range -- is it useful?
        // console.log(select);
 
         var actives = dimensions.filter(function(p) { 
-            console.log("here is the yParallel[p].brush : "+ yParallel[p].brush);
-            console.log("here is the result : "+ (yParallel[p].brush === null));
+            //console.log("here is the yParallel[p].brush : "+ yParallel[p].brush);
+            //console.log("here is the result : "+ (yParallel[p].brush === null));
             return !(yParallel[p].brush === null); //questa cosa qui non sta funzionando benissimo -- serve per fare l'highlight
         
         }),
             extents = actives.map(function(p) { 
-            console.log("here are the extent: "+ yParallel[p].brush.extent());
+            //console.log("here are the extent: "+ yParallel[p].brush.extent());
             return yParallel[p].brush.extent(); 
             });
 
         foreground.style("display", function(d) {
             return actives.every(function(p, i) {
-                console.log("here d[p]: "+ d[p]);
+                //console.log("here d[p]: "+ d[p]);
                 return extents[i][0] <= d[p] && d[p] <= extents[i][1];
                 }) ? null : "none";  
         });
@@ -144,7 +144,7 @@ function drawParallelPlot(){
  /*   function brush_parallel() {
 
         for(var i=0;i<dimensions.length;++i){
-            console.log(dimensions[i]);
+            //console.log(dimensions[i]);
             //console.log("prova print yParallel[dimensions[i]].brush "+ yParallel[dimensions[i]].brush);
             //dentro questo if ci entra ma perchè?
                 if(d3.event.target==yParallel[dimensions[i]].brush) {    
@@ -152,11 +152,11 @@ function drawParallelPlot(){
 
                 var selected =  yScale.domain().filter(function(d){
                         //var s = d3.event.target.extent();
-                        console.log("here the d:" + d); // non so cosa voglia dire questa d ... sembrano i valori estremi della scala, tranne per la colonna 4
+                        //console.log("here the d:" + d); // non so cosa voglia dire questa d ... sembrano i valori estremi della scala, tranne per la colonna 4
 
                     var select = d3.event.selection;
-                    console.log("here the select " +select);
-                    console.log("here the yScale(d) "+ yScale(select)); // la scala sono sempre i valori 0,360 ... penso sia l'altezza
+                    //console.log("here the select " +select);
+                    //console.log("here the yScale(d) "+ yScale(select)); // la scala sono sempre i valori 0,360 ... penso sia l'altezza
                     
                     return (select[0] <= yScale(d)) && (yScale(d) <= select[1])
                 });

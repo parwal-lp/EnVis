@@ -261,6 +261,7 @@ function drawParallelPlot(){
   
 //function passed to the brush to highlight the y axis 
   function brushedParallel(d,index) { 
+      //console.log("Prova funzione brushed");
       //console.log("inside brushedParallel");
       //console.log("here d is: "+ d); 
       extents = d3.event.selection;
@@ -270,7 +271,7 @@ function drawParallelPlot(){
       if(extents === null){
         extentArray[index] = null;
       }
-      //console.log("extentArray is:" + extentArray);
+      console.log("extentArray is:" + extentArray);
       
       activeDimensions[index] = null;
      
