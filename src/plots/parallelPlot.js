@@ -11,6 +11,8 @@ var cityColor = []; //questo array associa ad ogni città un colore
 var extentArray = [null, null, null, null, null]; //fixed array with 5 positions
 var activeDimensions = [null, null, null, null, null]; // qui metto tutte le dimension attive con il brush
 var bestCurrentLine = currentBestCity;
+//from colorBrewer
+var parColors = ['#fdbb84', '#ef6548', '#b30000']; // in substitution of grey, blue, red
 
 // append the svg object to the body of the page
 var svgParallel = d3.select("#parallelPlot")
@@ -33,7 +35,7 @@ var svgParallel = d3.select("#parallelPlot")
         //al posto di selected city ho selected lines?
         //selectedCities = selectedLines; // da vedere bene: se metto selectedCities mi da un errore strano 
 
-        console.log("inside the update, the cities are: "+selectedLines);
+        //console.log("inside the update, the cities are: "+ selectedLines);
         
         //qui filtro i dati dei pollutant in base alle città selezionate
         data = data.filter(function(row){
@@ -175,10 +177,10 @@ function drawParallelPlot(){
           .style("fill", "none" )
           .style("stroke", function(d){
             if(d.City ==currentBestCity){
-              return "red";
+              return parColors[2];
             } // serve per evidenziare la città migliore
             else{
-              return "blue";
+              return parColors[1];
             }
           })
           .style("stroke-width", "2px")
@@ -303,17 +305,19 @@ function drawParallelPlot(){
           } 
 
         if(selectedLines.includes(rowdata.City)){
-          if(rowdata.City == currentBestCity){ return "red";}
-          else {return "blue"; }
+          if(rowdata.City == currentBestCity){ 
+            return parColors[2];
+          }
+          else {return parColors[1]; }
         }
         else{
-          return "grey";
+          return parColors[0];
         }
 
       })
       .style("opacity", function(rowdata){
         if(!selectedLines.includes(rowdata.City)){
-            return 0.3;    
+            return 0.8;    
         }
         else{
           if(selectedLines.length === 92){ 
@@ -325,7 +329,16 @@ function drawParallelPlot(){
             else {return 0.8};
           } 
         }
-      });
+      })
+      .sort(function(a, b) {
+        if (a.City === currentBestCity) return 1; // Move currentBestCity to the end
+        if (b.City === currentBestCity) return -1; // Move currentBestCity to the end
+        return 0;
+      })
+      .filter(function(rowdata) {
+        return selectedLines.includes(rowdata.City);
+      })
+      .raise();
 
     } 
 
