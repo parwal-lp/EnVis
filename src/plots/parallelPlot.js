@@ -205,7 +205,7 @@ function drawParallelPlot(){
   
 //function passed to the brush to highlight the y axis 
   function brushedParallel(d,index) { 
-      console.log("Prova funzione brushed");
+      //console.log("Prova funzione brushed");
       //console.log("here d is: "+ d); 
       extents = d3.event.selection;
       //console.log("brush area is :"+ extents);
@@ -214,7 +214,7 @@ function drawParallelPlot(){
       if(extents === null){
         extentArray[index] = null;
       }
-      console.log("extentArray is:" + extentArray);
+      //console.log("extentArray is:" + extentArray);
       
       activeDimensions[index] = null;
      
@@ -222,7 +222,7 @@ function drawParallelPlot(){
         activeDimensions[index] = d;
       }
 
-      console.log("activeDimensions: "+ activeDimensions);
+      //console.log("activeDimensions: "+ activeDimensions);
 
       pathProva.style("stroke", function(rowdata){
 
@@ -231,20 +231,20 @@ function drawParallelPlot(){
         }
          
         selectedLines = allLines;
-        console.log("here selected lines: "+ selectedLines);
+        //console.log("here selected lines: "+ selectedLines);
         var j;
         for (j= 0; j < extentArray.length; j++){
             //console.log("rowdata is :"+ yParallel[d](rowdata[d]));
             //console.log("the value of the city: "+rowdata.City);
             var ext = extentArray[j];
-            console.log("the index is "+ j);
-            console.log("extent is: "+ ext);
+            //console.log("the index is "+ j);
+            //console.log("extent is: "+ ext);
             if(ext){ //brush è attivo
               //qui la dimensione che sto analizzando
               var dim = activeDimensions[j]; 
               if(yParallel[dim](rowdata[dim]) < ext[0] || yParallel[dim](rowdata[dim]) > ext[1]){ //caso in cui non sto nel range
                   removeItemOnce(selectedLines, rowdata.City); //rimuovo la città
-                  console.log(selectedLines);
+                  //console.log(selectedLines);
               }
             
             }

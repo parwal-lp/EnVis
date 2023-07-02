@@ -103,24 +103,31 @@ function updateRelatedGraphs(){
     }
     draw(selectedPollutant, XmaxValue, order, selectedCities);
     drawBoxPlot(selectedCities)
-    coloraCurrentBestCity(); //aggiorno lo scatterplot evidenziando la current best city
-    coloraChosenCity();
+    highlightImportantNodes(currentBestCity, currentSelectedCity); //ricoloro i nodi chosen e best nello scatter
     legendScatter.remove(); //aggiorno la legenda dello scatter con il nome della current best city
     drawScatterLegend(currentBestCity, currentSelectedCity);
   });
   
 }
 
-function coloraChosenCity(){
-  allDots.forEach(dot => { //identifico currentBest e inizialBest
-    if (dot.attr("city") == currentSelectedCity){
-      dot.style('fill', '#d95f02'); //se non esiste una currentBest allora mostro la initialBest
-      dot.raise();
-    }
-  });
+function highlightImportantNodes(currentBestCity, currentSelectedCity){
+  coloraChosenCity(currentSelectedCity);
+  coloraCurrentBestCity(currentBestCity);
 }
 
-function coloraCurrentBestCity(){
+function coloraChosenCity(currentSelectedCity){
+  d3.selectAll('.dot').each(function () {
+    let currentDot = d3.select(this);
+    if (currentDot.attr("city") == currentSelectedCity){
+      
+      currentDot.style('fill', '#d95f02'); //se non esiste una currentBest allora mostro la initialBest
+      
+      currentDot.raise();
+    }
+  })
+}
+
+function coloraCurrentBestCity(currentBestCity){
   let initialCity = null;
   let foundCity = null;
   allDots.forEach(dot => { //identifico currentBest e inizialBest
@@ -134,7 +141,7 @@ function coloraCurrentBestCity(){
   if (foundCity != null){ //se esiste una currentBest evidenzio quella
     foundCity.style('fill', '#b2df8a');
     foundCity.raise();
-  } else {
+  } else if (initialCity!=null){
     initialCity.style('fill', '#b2df8a'); //se non esiste una currentBest allora mostro la initialBest
     initialCity.raise();
   }
@@ -168,7 +175,7 @@ function brushed() {
 
       
       //console.log(dot.attr("city"));
-      console.log(dot);
+      //console.log(dot);
       dot.style('fill', '#1f78b4'); //tutti i selezionati si colorano
     } else if(!selectedDots.includes(dot)){
       dot.style('fill', '#a6cee3'); //tutti gli altri tornano grigi
@@ -256,6 +263,26 @@ function drawScatterPlot(currentBestCity, currentSelectedCity){
         });
 
 
+      d3.selectAll('.dot').each(function () {
+        let currentDot = d3.select(this);
+        if (currentDot.attr("city") == currentSelectedCity){
+          currentDot.raise();
+        }
+        let initialCity;
+        let foundCity;
+        if (currentDot.attr("city") == currentBestCity){
+          foundCity = currentDot;
+        }
+        if (currentDot.attr("city") == initialBestCity){
+          initialCity = currentDot;
+        }
+        if (foundCity != null){ //se esiste una currentBest evidenzio quella
+          foundCity.raise();
+        } else if (initialCity!=null){ //se non esiste una currentBest allora mostro la initialBest
+          initialCity.raise();
+        }
+
+      })
         
       })
       
@@ -284,8 +311,6 @@ function drawScatterLegend(currentBestCity, currentSelectedCity){
   } else {
     greenCity = currentBestCity;
   }
-
-  console.log(greenCity);
 
   topCityDotScatter = legendScatter.append("circle").attr("r", 6).style("fill", "#91cf60").attr("cy",svgScatter.attr("height")-svgScatter.attr("height")*0.04)
   topCityTextScatter = legendScatter.append("text").text(greenCity).style("font-size", "15px").attr("y",svgScatter.attr("height")-svgScatter.attr("height")*0.027)
@@ -322,6 +347,7 @@ function drawScatterLegend(currentBestCity, currentSelectedCity){
 
   
 }
+
 
 //calcolo la best city prima dell'interazione dell'utente
 //quindi sarebbe la best city tra i dati completi del barchart
