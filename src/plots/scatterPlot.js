@@ -329,13 +329,23 @@ function drawScatterLegend(currentBestCity, currentSelectedCity){
   selectedPointdLabel.attr("y", '5');
 
   selectedPointsWidthScatter = displayTextWidth(labelSelectedCityText, "15px sans-serif") + 10;
+  let otherText = "Others"
+  let otherScatterCircle = legendScatter.append("circle").attr("r", 6).style("fill", "#a6cee3").attr("cy",svgScatter.attr("height")-svgScatter.attr("height")*0.04)
+  let otherScatterLabel = legendScatter.append("text").text(otherText).style("font-size", "15px").attr("y",svgScatter.attr("height")-svgScatter.attr("height")*0.027)
+  
+  otherScatterCircle.attr("cx", selectedPointsWidthScatter + 85);
+  otherScatterLabel.attr("x", selectedPointsWidthScatter + 95);
+  otherScatterLabel.attr("y", '5');
+
+  otherPointsWidthScatter = displayTextWidth(otherText, "15px sans-serif") + 10;
+
 
   if(currentSelectedCity != "none" && currentSelectedCity!=null){
     let chosenCityScatterCircle = legendScatter.append("circle").attr("r", 6).style("fill", "#d95f02").attr("cy",svgScatter.attr("height")-svgScatter.attr("height")*0.04)
     let chosenCityScatterLabel = legendScatter.append("text").text(currentSelectedCity).style("font-size", "15px").attr("y",svgScatter.attr("height")-svgScatter.attr("height")*0.027)
     
-    chosenCityScatterCircle.attr("cx", selectedPointsWidthScatter + 85);
-    chosenCityScatterLabel.attr("x", selectedPointsWidthScatter + 95);
+    chosenCityScatterCircle.attr("cx", otherPointsWidthScatter + 215);
+    chosenCityScatterLabel.attr("x", otherPointsWidthScatter + 225);
     chosenCityScatterLabel.attr("y", '5');
   }
 
