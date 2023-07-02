@@ -126,34 +126,6 @@ function drawParallelPlot(){
           .call(yParallel[name].brush);
 
       }
-      
-      // Highlight the specie that is hovered
-    /*  var highlight = function(d){
-
-        selected_value = d.City;
-
-        // first every group turns grey
-        d3.selectAll(".line")
-          .transition().duration(200)
-          .style("stroke", "grey")
-          .style("opacity", "0.5")
-        // Second the hovered specie takes its color
-        d3.selectAll(".line" + selected_value)
-          .transition().duration(300)
-          .style("stroke","blue") //blue highlight
-          .style("opacity", "1")
-      } */
-
-      // Unhighlight
-    /*  var doNotHighlight = function(d){
-
-        selected_value = d.City;
-        
-        d3.selectAll(".line" + selected_value)
-          .transition().duration(300).delay(300)
-          .style("stroke", "grey" ) //grey : no highlight
-          .style("opacity", "1")
-      } */
 
       // The path function take a row of the csv as input, and return x and y coordinates of the line to draw for this raw.
       function path(d) {
@@ -196,7 +168,6 @@ function drawParallelPlot(){
             }
           })
           .on("mouseover", function(d){
-            //highlight(d);
             tooltipParallel.transition()
                   .duration(100)
                   .style("opacity", 1);
@@ -206,7 +177,6 @@ function drawParallelPlot(){
           }
           )
           .on("mouseleave", function(d){
-            //doNotHighlight(d); 
             tooltipParallel.transition()
                   .duration('200')
                   .style("opacity", 0);
@@ -229,6 +199,7 @@ function drawParallelPlot(){
           .attr("y", -9)
           .text(function(d) { return d; })
           .style("fill", "black")
+        .raise();
 
       function removeItemOnce(arr, value) {
             var index = arr.indexOf(value);
@@ -237,7 +208,7 @@ function drawParallelPlot(){
             }
             return arr;
           }
-      
+    /*  
       function removeItemAll(arr, value) {
             var i = 0;
             while (i < arr.length) {
@@ -249,15 +220,7 @@ function drawParallelPlot(){
             }
             return arr;
           }
-      
-      function checkNullInIndex(arr, index){ //not working for now
-            if(arr[index] === null){
-              return true;
-            }
-            else{
-              return false;
-            }
-          }
+      */
 
   
 //function passed to the brush to highlight the y axis 
@@ -281,7 +244,6 @@ function drawParallelPlot(){
       }
 
       //console.log("activeDimensions: "+ activeDimensions);
-
       pathProva.style("stroke", function(rowdata){
 
         if(!allLines.includes(rowdata.City)){
@@ -344,10 +306,7 @@ function drawParallelPlot(){
       })
       .raise();
 
-      yParallel.raise(); //funziona solo al momento in cui lo disegno 
-
     } 
-
 
 
     })
@@ -363,9 +322,7 @@ function drawParallelLegend(){
     { label: "Best", color: '#b30000' },
     { label: "Selected", color: "#ef6548" },
     { label: "Others", color: "#fee8c8" },
-    // Add more legend data objects as needed
   ];
-
 
   const legendWidth = 10; // Calculate or set the width of the legend
 
@@ -415,7 +372,6 @@ function drawParallelLegend(){
 
   svgParallel.attr("height", Math.max(graphHeight, legendY + legendItems.size() * 20)); // Adjust the height of the SVG container
 
-  
 }
 
 drawParallelPlot();
