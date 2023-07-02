@@ -12,7 +12,8 @@ var extentArray = [null, null, null, null, null]; //fixed array with 5 positions
 var activeDimensions = [null, null, null, null, null]; // qui metto tutte le dimension attive con il brush
 var bestCurrentLine = currentBestCity;
 //from colorBrewer
-var parColors = ['#fdbb84', '#ef6548', '#b30000']; // in substitution of grey, blue, red
+var parColors = ['#fee8c8', '#ef6548', '#b30000']; // in substitution of grey, blue, red
+var parLevels = ['others', 'selected', 'best city'];
 
 // append the svg object to the body of the page
 var svgParallel = d3.select("#parallelPlot")
@@ -111,6 +112,7 @@ function drawParallelPlot(){
             brushedParallel(d,i);
             //qua inserire l'update dei graph
             updateRelatedGraphsParallel();
+            
           })
 
           //I store the brush in reference to the axis
@@ -340,10 +342,30 @@ function drawParallelPlot(){
       })
       .raise();
 
+      svgParallel.selectAll("myAxis").raise(); //funziona solo al momento in cui lo disegno 
+
     } 
 
+
+
     })
-    
+    // LEGEND
+  drawParallelLegend(currentBestCity, selectedLines);
+}
+
+//LEGEND
+function drawParallelLegend(currentBestCity, selectedLines){
+
+  
+  legendParallel = svgParallel.append("g")
+  .attr("class", 'node')
+
+   // do something
+  
+  //posiziono la legenda al centro, questo significa spostarla dinamicamente in base alla larghezza che il testo occupa
+  legendParallel.attr("transform", `translate(20, -10)`) 
+
+  
 }
 
 drawParallelPlot();
