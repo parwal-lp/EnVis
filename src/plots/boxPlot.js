@@ -117,7 +117,7 @@ d3.csv("../../data/processed/BoxPlotData.csv", function(error, data) {
         .attr("height", function(d){return(y(d.value.q1)-y(d.value.q3))}) //questa riga è un problema per i Low emission che hanno i valori scambiati
         .attr("width", boxWidth )
         .attr("stroke", "black")
-        .style("fill", "#990066")
+        .style("fill", "#8c6bb1")
 
   // Show the median
   svgBoxPlot

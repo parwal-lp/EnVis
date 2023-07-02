@@ -1,6 +1,6 @@
 // set the dimensions and margins of the graph
 var margin = {top: 30, right: 100, bottom: 10, left: 100},
-  width = 900 - margin.left - margin.right,
+  width = 800 - margin.left - margin.right,
   height = 400 - margin.top - margin.bottom;
 
 var brushParallelWidth = 50; 
@@ -65,6 +65,7 @@ var svgParallel = d3.select("#parallelPlot")
           bestCurrentLine = currentBestCity;
           selectedLines = null;
         }
+
         drawStarPlot(currentBestCity);
         draw(selectedPollutant, XmaxValue, order, selectedLines);
         drawBoxPlot(selectedLines);
@@ -127,7 +128,7 @@ function drawParallelPlot(){
       }
       
       // Highlight the specie that is hovered
-      var highlight = function(d){
+    /*  var highlight = function(d){
 
         selected_value = d.City;
 
@@ -141,10 +142,10 @@ function drawParallelPlot(){
           .transition().duration(300)
           .style("stroke","blue") //blue highlight
           .style("opacity", "1")
-      }
+      } */
 
       // Unhighlight
-      var doNotHighlight = function(d){
+    /*  var doNotHighlight = function(d){
 
         selected_value = d.City;
         
@@ -152,7 +153,7 @@ function drawParallelPlot(){
           .transition().duration(300).delay(300)
           .style("stroke", "grey" ) //grey : no highlight
           .style("opacity", "1")
-      } 
+      } */
 
       // The path function take a row of the csv as input, and return x and y coordinates of the line to draw for this raw.
       function path(d) {
@@ -191,7 +192,7 @@ function drawParallelPlot(){
               return 1;
             } // serve per evidenziare la città migliore
             else{
-              return 0.4;
+              return 0.6;
             }
           })
           .on("mouseover", function(d){
@@ -343,28 +344,76 @@ function drawParallelPlot(){
       })
       .raise();
 
-      svgParallel.selectAll("myAxis").raise(); //funziona solo al momento in cui lo disegno 
+      yParallel.raise(); //funziona solo al momento in cui lo disegno 
 
     } 
 
 
 
     })
+
     // LEGEND
-  drawParallelLegend(currentBestCity, selectedLines);
+  drawParallelLegend();
 }
 
 //LEGEND
-function drawParallelLegend(currentBestCity, selectedLines){
+function drawParallelLegend(){
 
-  
-  legendParallel = svgParallel.append("g")
-  .attr("class", 'node')
+  const legendData = [
+    { label: "Best", color: '#b30000' },
+    { label: "Selected", color: "#ef6548" },
+    { label: "Others", color: "#fee8c8" },
+    // Add more legend data objects as needed
+  ];
 
-   // do something
-  
-  //posiziono la legenda al centro, questo significa spostarla dinamicamente in base alla larghezza che il testo occupa
-  legendParallel.attr("transform", `translate(20, -10)`) 
+
+  const legendWidth = 10; // Calculate or set the width of the legend
+
+  const legendParallel = svgParallel.append("g")
+    .attr("class", "legend")
+    .attr("transform", "translate(graphWidth + x, y)"); // Adjust the x and y coordinates as needed
+
+  const legendItems = legendParallel.selectAll(".legend-item")
+    .data(legendData)
+    .enter()
+    .append("g")
+    .attr("class", "legend-item")
+    .attr("transform", function(d, i) {
+      return "translate(0, " + i * 20 + ")"; // Adjust the y position of each legend item
+    });
+
+  legendItems.append("circle")
+    .attr("cx", 10) // Adjust the x position of the circle
+    .attr("cy", 10) // Adjust the y position of the circle
+    .attr("r", 5) // Adjust the radius of the circle
+    .style("fill", function(d) {
+      return d.color;
+    });
+
+  legendItems.append("text")
+    .attr("x", 20) // Adjust the x position of the label relative to the circle
+    .attr("y", 12) // Adjust the y position of the label relative to the circle
+    .text(function(d) {
+      return d.label;
+    });
+
+  const graphWidth = width; // Calculate or set the width of the graph
+  const graphHeight = height; // Calculate or set the height of the graph
+
+  const legendX = 10; // Calculate or set the x position of the legend
+  const legendY = 20; // Calculate or set the y position of the legend
+
+  svgParallel.attr("width", graphWidth + legendWidth); // Adjust the width of the SVG container
+
+  const graphGroup = svgParallel.append("g")
+    .attr("class", "graph")
+    .attr("transform", "translate(0, " + legendY + ")"); // Adjust the y position of the graph group
+
+  // Add your graph elements and code here, positioning them relative to the graphGroup
+
+  legendParallel.attr("transform", "translate(" + (graphWidth + legendX) + ", 0)"); // Adjust the x position of the legend
+
+  svgParallel.attr("height", Math.max(graphHeight, legendY + legendItems.size() * 20)); // Adjust the height of the SVG container
 
   
 }
