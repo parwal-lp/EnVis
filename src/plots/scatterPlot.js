@@ -38,6 +38,16 @@ function assignColorWater(currentCity, dataWater){
     ////console.log(currentCity + " " +waterColor[media.toString()]);
     return waterColor[media.toString()];
 }
+function colorCityDots(currentCity){
+    if (currentCity == initialBestCity){
+      return '#b2df8a';
+    } else if (currentCity == currentSelectedCity) {
+      return '#d95f02';
+    } else {
+      return '#a6cee3';
+    }
+    
+}
 
 var dots;
 
@@ -59,7 +69,7 @@ function updateRelatedGraphs(){
       selectedCities.push(dot.attr('city'));
     });
 
-    console.log(selectedCities);
+    //console.log(selectedCities);
     
     data = data.filter(function(row){
       return row['Air Pollutant'] == selectedPollutant && selectedCities.includes(row['City']);
@@ -86,17 +96,54 @@ function updateRelatedGraphs(){
       currentBestCity = "";
       selectedCities = null;
     }
-    drawStarPlot(currentBestCity);
+    if(currentBestCity == ""){
+      drawStarPlot(initialBestCity);
+    } else {
+      drawStarPlot(currentBestCity);
+    }
     draw(selectedPollutant, XmaxValue, order, selectedCities);
     drawBoxPlot(selectedCities)
-});
+    coloraCurrentBestCity(); //aggiorno lo scatterplot evidenziando la current best city
+    coloraChosenCity();
+    legendScatter.remove(); //aggiorno la legenda dello scatter con il nome della current best city
+    drawScatterLegend(currentBestCity, currentSelectedCity);
+  });
   
+}
+
+function coloraChosenCity(){
+  allDots.forEach(dot => { //identifico currentBest e inizialBest
+    if (dot.attr("city") == currentSelectedCity){
+      dot.style('fill', '#d95f02'); //se non esiste una currentBest allora mostro la initialBest
+      dot.raise();
+    }
+  });
+}
+
+function coloraCurrentBestCity(){
+  let initialCity = null;
+  let foundCity = null;
+  allDots.forEach(dot => { //identifico currentBest e inizialBest
+    if (dot.attr("city") == currentBestCity){
+      foundCity = dot;
+    }
+    if (dot.attr("city") == initialBestCity){
+      initialCity = dot;
+    }
+  });
+  if (foundCity != null){ //se esiste una currentBest evidenzio quella
+    foundCity.style('fill', '#b2df8a');
+    foundCity.raise();
+  } else {
+    initialCity.style('fill', '#b2df8a'); //se non esiste una currentBest allora mostro la initialBest
+    initialCity.raise();
+  }
 }
 
 function brushed() {
   extent = d3.event.selection;
   selectedDots = []; //qui metto tutti i punti selezionati
-  var allDots = []; //qui metto tutti i punti del grafico
+  allDots = []; //qui metto tutti i punti del grafico
   d3.selectAll('.dot').each(function () {
     const mydot = d3.select(this);
     
@@ -118,31 +165,43 @@ function brushed() {
 
   allDots.forEach(dot => {
     if (selectedDots.includes(dot)){
-      dot.style('fill', '#ff0000'); //tutti i selezionati si colorano
-    } else {
-      dot.style('fill', '#aaa'); //tutti gli altri tornano grigi
+
+      
+      //console.log(dot.attr("city"));
+      console.log(dot);
+      dot.style('fill', '#1f78b4'); //tutti i selezionati si colorano
+    } else if(!selectedDots.includes(dot)){
+      dot.style('fill', '#a6cee3'); //tutti gli altri tornano grigi
     }
   });
+
+  //colora di verde la citta migliore della selezione attuale
   
 }
 
-function drawScatterPlot(){
+function drawScatterPlot(currentBestCity, currentSelectedCity){
   d3.csv("../../data/processed/pcaWaterResults.csv", function(data) { //retrieve the data
     // ------------ PRENDO I DATI CHE MI SERVONO --------------- //
     // Add X axis
-    var x = d3.scaleLinear()
+    var xScatter = d3.scaleLinear()
       .domain([-2.5, 3])
       .range([ 0, width ]);
     svgScatter.append("g")
       .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x));
+      .call(d3.axisBottom(xScatter));
+
+      var ticksScatter = xScatter.ticks();
+      //console.log(ticksScatter);
+      //ticksScatter.push(0);
+      //xAxisScatter.tickValues(ticksScatter);
+
 
     // Add Y axis
-    var y = d3.scaleLinear()
+    var yScatter = d3.scaleLinear()
       .domain([-2.5, 3])
       .range([ height, 0]);
     svgScatter.append("g")
-      .call(d3.axisLeft(y));
+      .call(d3.axisLeft(yScatter));
 
     var div = d3.select("body").append("div")
       .attr("class", "tooltip")
@@ -157,15 +216,19 @@ function drawScatterPlot(){
         .enter()
         .append("circle")
           .attr("class", "dot")
-          .attr("cx", function (d) { return x(d.PC1); } )
-          .attr("cy", function (d) { return y(d.PC2); } )
+          .attr("cx", function (d) { return xScatter(d.PC1); } )
+          .attr("cy", function (d) { return yScatter(d.PC2); } )
           .attr("city", function (d) { return (d.City); })
           .attr("r", 4)
+          //.style("stroke","black")
           .style("fill", function(d){
-            return '#aaa'
-            let color = assignColorWater(d.City, dataWater);
+            let color = colorCityDots(d.City);
             ////console.log(d.City + " " + color);
             return color;
+            //return '#aaa'
+            //let color = assignColorWater(d.City, dataWater);
+            ////console.log(d.City + " " + color);
+            //return color;
           })
         .on('mouseover', function (d, i) {
             //ingrandisce pallino citta
@@ -201,9 +264,78 @@ function drawScatterPlot(){
     const gBrush = svgScatter.append('g')
       .attr('class', 'brush')
       .call(brush);
+
+  // LEGEND
+  drawScatterLegend(currentBestCity, currentSelectedCity);
+}
+
+function drawScatterLegend(currentBestCity, currentSelectedCity){
+
+  legendScatter = svgScatter.append("g")
+  .attr("class", 'node')
+
+  let topCityDotScatter;
+  let topCityTextScatter
+  let topCityWidthScatter;
+  let greenCity;
+
+  if (currentBestCity == "") {
+    greenCity = initialBestCity;
+  } else {
+    greenCity = currentBestCity;
+  }
+
+  console.log(greenCity);
+
+  topCityDotScatter = legendScatter.append("circle").attr("r", 6).style("fill", "#91cf60").attr("cy",svgScatter.attr("height")-svgScatter.attr("height")*0.04)
+  topCityTextScatter = legendScatter.append("text").text(greenCity).style("font-size", "15px").attr("y",svgScatter.attr("height")-svgScatter.attr("height")*0.027)
+  topCityTextScatter.attr("x", '10');
+  topCityTextScatter.attr("y", '5');
+  
+  topCityWidthScatter = displayTextWidth(greenCity, "15px sans-serif") + 10;
+
+
+  let labelSelectedCityText = "Selected cities"
+  let selectedPointsCircle = legendScatter.append("circle").attr("r", 6).style("fill", "#1f78b4").attr("cy",svgScatter.attr("height")-svgScatter.attr("height")*0.04)
+  let selectedPointdLabel = legendScatter.append("text").text(labelSelectedCityText).style("font-size", "15px").attr("y",svgScatter.attr("height")-svgScatter.attr("height")*0.027)
+  
+  selectedPointsCircle.attr("cx", topCityWidthScatter + 10);
+  selectedPointdLabel.attr("x", topCityWidthScatter + 20);
+  selectedPointdLabel.attr("y", '5');
+
+  selectedPointsWidthScatter = displayTextWidth(labelSelectedCityText, "15px sans-serif") + 10;
+
+  if(currentSelectedCity != "none" && currentSelectedCity!=null){
+    let chosenCityScatterCircle = legendScatter.append("circle").attr("r", 6).style("fill", "#d95f02").attr("cy",svgScatter.attr("height")-svgScatter.attr("height")*0.04)
+    let chosenCityScatterLabel = legendScatter.append("text").text(currentSelectedCity).style("font-size", "15px").attr("y",svgScatter.attr("height")-svgScatter.attr("height")*0.027)
+    
+    chosenCityScatterCircle.attr("cx", selectedPointsWidthScatter + 85);
+    chosenCityScatterLabel.attr("x", selectedPointsWidthScatter + 95);
+    chosenCityScatterLabel.attr("y", '5');
+  }
+
+
+  
+ 
+  //posiziono la legenda al centro, questo significa spostarla dinamicamente in base alla larghezza che il testo occupa
+  legendScatter.attr("transform", `translate(20, -10)`) 
+
   
 }
 
+//calcolo la best city prima dell'interazione dell'utente
+//quindi sarebbe la best city tra i dati completi del barchart
+d3.csv("../../data/processed/BarChartData.csv", function(initialData) {
+  initialData = initialData.filter(function(row){
+    return row['Air Pollutant'] == initialPollutant;
+  });
 
+  initialData = initialData.sort(function(a, b) { // sort in ordine crescente
+      return d3.ascending(parseFloat(a['Air Pollution Level']), parseFloat(b['Air Pollution Level']));
+  });
+    
+  initialBestCity = initialData[0].City;
 
-drawScatterPlot();
+  //qui dentro chiamo la renderizzazione del grafico perché d3.cs è asincrona
+  drawScatterPlot(initialBestCity, "none");
+});

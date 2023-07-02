@@ -67,29 +67,26 @@ body {
 .dropDown {
   position: absolute;
   top:280px;
-  left:100px;
   width: min-content !important;
 }
 
 #top10, #top10label{
   position: absolute;
   top:350px;
-  left:100px;
 }
 #worst10, #worst10label{
   position: absolute;
   top:380px;
-  left:100px;
 }
 
 #top10label{
-  left:120px;
   top:345px;
+  left:90px;
 }
 
 #worst10label{
-  left:120px;
   top:375px;
+  left:90px;
 }
 
 /* cose del parallel da esempio github */
