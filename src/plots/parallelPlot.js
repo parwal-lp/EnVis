@@ -10,7 +10,7 @@ var extents; //questa variabile mi serve per vedere gli estremi del brush
 var cityColor = []; //questo array associa ad ogni città un colore
 var extentArray = [null, null, null, null, null]; //fixed array with 5 positions
 var activeDimensions = [null, null, null, null, null]; // qui metto tutte le dimension attive con il brush
-var bestCurrentLine = currentBestCity;
+var bestCurrentLine;
 //from colorBrewer
 var parColors = ['#fee8c8', '#ef6548', '#b30000']; // in substitution of grey, blue, red
 var parLevels = ['others', 'selected', 'best city'];
@@ -107,12 +107,14 @@ function drawParallelPlot(){
             [-(brushParallelWidth / 2), 0 ],
             [ brushParallelWidth / 2, height]
           ])
-          .on("end", function(d,i){ // prima era "start brush end"
+          .on("brush end", function(d,i){ // prima era "start brush end"
             //console.log("inside the creation of the brush, d is: "+d); 
             //console.log("inside the creation of the brush, i is: "+i); 
+           
             brushedParallel(d,i);
-            //qua inserire l'update dei graph
             updateRelatedGraphsParallel();
+            //qua inserire l'update dei graph
+            
             
           })
 
@@ -316,62 +318,66 @@ function drawParallelPlot(){
 }
 
 //LEGEND
-function drawParallelLegend(){
-
+//LEGEND
+function drawParallelLegend() {
   const legendData = [
-    { label: "Best", color: '#b30000' },
+    { label: "Best", color: "#b30000" },
     { label: "Selected", color: "#ef6548" },
     { label: "Others", color: "#fee8c8" },
   ];
-
-  const legendWidth = 10; // Calculate or set the width of the legend
-
-  const legendParallel = svgParallel.append("g")
-    .attr("class", "legend")
-    .attr("transform", "translate(graphWidth + x, y)"); // Adjust the x and y coordinates as needed
-
-  const legendItems = legendParallel.selectAll(".legend-item")
-    .data(legendData)
-    .enter()
-    .append("g")
-    .attr("class", "legend-item")
-    .attr("transform", function(d, i) {
-      return "translate(0, " + i * 20 + ")"; // Adjust the y position of each legend item
-    });
-
-  legendItems.append("circle")
-    .attr("cx", 10) // Adjust the x position of the circle
-    .attr("cy", 10) // Adjust the y position of the circle
-    .attr("r", 5) // Adjust the radius of the circle
-    .style("fill", function(d) {
-      return d.color;
-    });
-
-  legendItems.append("text")
-    .attr("x", 20) // Adjust the x position of the label relative to the circle
-    .attr("y", 12) // Adjust the y position of the label relative to the circle
-    .text(function(d) {
-      return d.label;
-    });
-
-  const graphWidth = width; // Calculate or set the width of the graph
+ const graphWidth = width; // Calculate or set the width of the graph
   const graphHeight = height; // Calculate or set the height of the graph
 
   const legendX = 10; // Calculate or set the x position of the legend
   const legendY = 20; // Calculate or set the y position of the legend
+  const legendWidth = 10; // Calculate or set the width of the legend
 
-  svgParallel.attr("width", graphWidth + legendWidth); // Adjust the width of the SVG container
+  const legendParallel = svgParallel
+    .append("g")
+    .attr("class", "legend")
+    .attr("transform", "translate(" + (graphWidth + legendX) + ", " + legendY + ")"); // Adjust the x and y coordinates as needed
 
-  const graphGroup = svgParallel.append("g")
+  const legendItems = legendParallel
+    .selectAll(".legend-item")
+    .data(legendData)
+    .enter()
+    .append("g")
+    .attr("class", "legend-item")
+    .attr("transform", function (d, i) {
+      return "translate(0, " + i * 20 + ")"; // Adjust the y position of each legend item
+    });
+
+  legendItems
+    .append("circle")
+    .attr("cx", 10) // Adjust the x position of the circle
+    .attr("cy", 10) // Adjust the y position of the circle
+    .attr("r", 5) // Adjust the radius of the circle
+    .style("fill", function (d) {
+      return d.color;
+    });
+
+  legendItems
+    .append("text")
+    .attr("x", 20) // Adjust the x position of the label relative to the circle
+    .attr("y", 12) // Adjust the y position of the label relative to the circle
+    .text(function (d) {
+      return d.label;
+    });
+
+ 
+
+  svgParallel.attr("width", width + legendWidth); // Adjust the width of the SVG container
+
+  const graphGroup = svgParallel
+    .append("g")
     .attr("class", "graph")
     .attr("transform", "translate(0, " + legendY + ")"); // Adjust the y position of the graph group
 
   // Add your graph elements and code here, positioning them relative to the graphGroup
 
-  legendParallel.attr("transform", "translate(" + (graphWidth + legendX) + ", 0)"); // Adjust the x position of the legend
+  legendParallel.attr("transform", "translate(" + (width + legendX) + ", 0)"); // Adjust the x position of the legend
 
   svgParallel.attr("height", Math.max(graphHeight, legendY + legendItems.size() * 20)); // Adjust the height of the SVG container
-
 }
 
 drawParallelPlot();
