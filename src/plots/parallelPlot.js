@@ -120,7 +120,7 @@ function drawParallelPlot(){
             brushedParallel(d,i, bestCurrentLine);
             updateBestLine(bestCurrentLine, selectedLines)
             //console.log("here the best line (after brushedParallel) is: "+ bestCurrentLine);
-            //colorSelectionParallel(bestCurrentLine);
+            colorSelectionParallel(bestCurrentLine);
             updateRelatedGraphsParallel();
           })
           
@@ -287,7 +287,7 @@ function colorSelectionParallel(bestCurrentLine){
   pathProva.style("stroke", function(rowdata){
     if(selectedLines.includes(rowdata.City)){
       if(rowdata.City === bestCurrentLine){ // ho sostituito a currentBestCity --> bestCurrentLine
-        console.log("3. best current line is: "+ bestCurrentLine); 
+        //console.log("3. best current line is: "+ bestCurrentLine); 
         return parColors[2];
       }
       else {return parColors[1]; }
@@ -382,23 +382,27 @@ function drawParallelLegend() {
 
 //FUNCTION TO UPDATE THE BEST CURRENT LINE 
 function updateBestLine(bestCurrentLine, selectedLines){
-  d3.csv("../../data/processed/BarChartData.csv", function(data) {
-    //qui filtro i dati dei pollutant in base alle città selezionate
-    data = data.filter(function(row){
-      return row['Air Pollutant'] == selectedPollutant && selectedLines.includes(row['City']);
-    });
+    d3.csv("../../data/processed/BarChartData.csv", function(data) {
+      //qui filtro i dati dei pollutant in base alle città selezionate
+      
+      data = data.filter(function(row){
+        return row['Air Pollutant'] == selectedPollutant && selectedLines.includes(row['City']);
+      });
 
-    data = data.sort(function(a, b) { // sort in ordine crescente
-        return d3.ascending(parseFloat(a['Air Pollution Level']), parseFloat(b['Air Pollution Level']));
-    });
-    bestCurrentLine = data[0].City;
-    console.log("best current line is :"+ bestCurrentLine)
-   
-    if(bestCurrentLine == ""){
-      bestCurrentLine = bestInitialLine;
-    } 
+      data = data.sort(function(a, b) { // sort in ordine crescente
+          return d3.ascending(parseFloat(a['Air Pollution Level']), parseFloat(b['Air Pollution Level']));
+      });
 
-    });
+      console.log("data is : " + data[0]);
+      bestCurrentLine = data[0].City;
+      
+      console.log("best current line is :"+ bestCurrentLine)
+    
+      if(bestCurrentLine === ""){
+        bestCurrentLine = bestInitialLine;
+      } 
+
+      });
     
 }
 
