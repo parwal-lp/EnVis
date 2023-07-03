@@ -15,6 +15,8 @@ var bestCurrentLine = "Savona";
 //from colorBrewer
 var parColors = ['#fee8c8', '#ef6548', '#b30000']; // in substitution of grey, blue, red
 //var parLevels = ['others', 'selected', 'best city'];
+var pathProva;
+var yParallel;
 
 // append the svg object to the body of the page
 var svgParallel = d3.select("#parallelPlot")
@@ -72,6 +74,7 @@ var svgParallel = d3.select("#parallelPlot")
         //here I modify the legend of the scatter plot
         //legendScatter.remove(); //aggiorno la legenda dello scatter con il nome della current best city
         //drawScatterLegend(currentBestCity, currentSelectedCity);
+        colorSelectionParallel(bestCurrentLine);
     });
   };
 
@@ -94,7 +97,7 @@ function drawParallelPlot(){
         .domain(dimensions); 
 
       // For each dimension, I build a linear scale. I store all in a y object
-      var yParallel = {}
+      yParallel = {}
       var name;
       for (i in dimensions) {
         name = dimensions[i]
@@ -117,13 +120,10 @@ function drawParallelPlot(){
             brushedParallel(d,i, bestCurrentLine);
             updateBestLine(bestCurrentLine, selectedLines)
             //console.log("here the best line (after brushedParallel) is: "+ bestCurrentLine);
-            brushedParallelEnd(bestCurrentLine);
+            //colorSelectionParallel(bestCurrentLine);
             updateRelatedGraphsParallel();
           })
           
-          
-          
-
           //I store the brush in reference to the axis
           svgParallel.append("g")
           .selectAll("g") //select all the graph
@@ -143,7 +143,7 @@ function drawParallelPlot(){
       } 
 
       // Draw the lines
-      var pathProva = svgParallel
+      pathProva = svgParallel
         .selectAll("myPath")
         .data(data)
         .enter()
@@ -161,7 +161,7 @@ function drawParallelPlot(){
           .style("stroke", function(d){
             //console.log(d.City);
             if(d.City === bestCurrentLine){
-              console.log("2. best current line is: "+ bestCurrentLine);
+              //console.log("2. best current line is: "+ bestCurrentLine);
               return parColors[2];
             } // serve per evidenziare la città migliore
             else{
@@ -191,7 +191,6 @@ function drawParallelPlot(){
                   .duration('200')
                   .style("opacity", 0);
           }) 
-
 
         //pathProva.sort(function (a,b){
         //  if (selectedLines.includes(a.City) && !selectedLines.includes(b.City)) return 1; // Move bestCurrentLine to the end
@@ -224,7 +223,16 @@ function drawParallelPlot(){
           .style("fill", "black")
         .raise();
 
-      function removeItemOnce(arr, value) {
+     
+ 
+    })
+// LEGEND
+      drawParallelLegend();
+
+} // fine drawparallelPlot
+
+
+function removeItemOnce(arr, value) {
             var index = arr.indexOf(value);
             if (index > -1) {
               arr.splice(index, 1);
@@ -232,97 +240,89 @@ function drawParallelPlot(){
             return arr;
           }
 
-  function brushedParallelEnd(bestCurrentLine){
-
-    pathProva.style("stroke", function(rowdata){
-      if(selectedLines.includes(rowdata.City)){
-        if(rowdata.City === bestCurrentLine){ // ho sostituito a currentBestCity --> bestCurrentLine
-          console.log("3. best current line is: "+ bestCurrentLine); 
-          return parColors[2];
-        }
-        else {return parColors[1]; }
-      }
-      else{
-        return parColors[0];
-      }
-    })
-    .style("opacity", function(rowdata){
-      if(!selectedLines.includes(rowdata.City)){
-          return 0.8;    
-      }
-      else{
-        if(selectedLines.length === 92){ 
-          if(rowdata.City == bestCurrentLine){ return 1;} // ho sostituito a currentBestCity --> bestCurrentLine
-          else {return 0.6};
-        } //if I have all the cities(92), I return to the initial value
-        else{
-          if(rowdata.City == bestCurrentLine){ return 1;} // ho sostituito a currentBestCity --> bestCurrentLine
-          else {return 0.8};
-        } 
-      }
-    })
-    .sort(function(a, b) {
-      if (a.City === bestCurrentLine) return 1; // Move bestCurrentLine to the end
-      if (b.City === bestCurrentLine) return -1; // Move bestCurrentLine to the end
-      return 0;
-    })
-  }
-  
-  //function passed to the brush to highlight the y axis 
-  function brushedParallel(d,index, bestCurrentLine) { 
+//function passed to the brush to highlight the y axis 
+function brushedParallel(d,index, bestCurrentLine) { 
         
 
-      extents = d3.event.selection;
+  extents = d3.event.selection;
 
-      extentArray[index] = extents; 
-      if(extents === null){
-        extentArray[index] = null;
-      }
-      //console.log("extentArray is:" + extentArray);
-      
-      activeDimensions[index] = null;
+  extentArray[index] = extents; 
+  if(extents === null){
+    extentArray[index] = null;
+  }
+  //console.log("extentArray is:" + extentArray);
+  
+  activeDimensions[index] = null;
+ 
+  if (extents !== null){
+    activeDimensions[index] = d;
+  }
+
+  //console.log("activeDimensions: "+ activeDimensions);
+  pathProva.style("fill", function(rowdata){
+
+    if(!allLines.includes(rowdata.City)){
+      allLines.push(rowdata.City)
+    }
      
-      if (extents !== null){
-        activeDimensions[index] = d;
-      }
+    selectedLines = allLines;
+    //console.log("here selected lines: "+ selectedLines);
+    var j;
+    for (j= 0; j < extentArray.length; j++){
+        
+        var ext = extentArray[j];
 
-      //console.log("activeDimensions: "+ activeDimensions);
-      pathProva.style("fill", function(rowdata){
-
-        if(!allLines.includes(rowdata.City)){
-          allLines.push(rowdata.City)
+        if(ext){ //brush è attivo
+          //qui la dimensione che sto analizzando
+          var dim = activeDimensions[j]; 
+          if(yParallel[dim](rowdata[dim]) < ext[0] || yParallel[dim](rowdata[dim]) > ext[1]){ //caso in cui non sto nel range
+              removeItemOnce(selectedLines, rowdata.City); //rimuovo la città
+          }
+        
         }
-         
-        selectedLines = allLines;
-        //console.log("here selected lines: "+ selectedLines);
-        var j;
-        for (j= 0; j < extentArray.length; j++){
-            
-            var ext = extentArray[j];
+      } 
+    //console.log("here selected lines: "+ selectedLines);
+    return "none";
+  })
+ 
+  //colorSelectionParallel(bestCurrentLine);
+  //console.log("here the best city: "+ bestCurrentLine);
+} 
 
-            if(ext){ //brush è attivo
-              //qui la dimensione che sto analizzando
-              var dim = activeDimensions[j]; 
-              if(yParallel[dim](rowdata[dim]) < ext[0] || yParallel[dim](rowdata[dim]) > ext[1]){ //caso in cui non sto nel range
-                  removeItemOnce(selectedLines, rowdata.City); //rimuovo la città
-              }
-            
-            }
-          } 
-        //console.log("here selected lines: "+ selectedLines);
-        return "none";
-      })
-     
-      //brushedParallelEnd(bestCurrentLine);
-      //console.log("here the best city: "+ bestCurrentLine);
-    } 
-
-    
-
-      
-    })
-// LEGEND
-      drawParallelLegend();
+//FUNCTION TO COLOR THE SELECTION AND THE BEST CURRENT CITY
+function colorSelectionParallel(bestCurrentLine){
+  pathProva.style("stroke", function(rowdata){
+    if(selectedLines.includes(rowdata.City)){
+      if(rowdata.City === bestCurrentLine){ // ho sostituito a currentBestCity --> bestCurrentLine
+        console.log("3. best current line is: "+ bestCurrentLine); 
+        return parColors[2];
+      }
+      else {return parColors[1]; }
+    }
+    else{
+      return parColors[0];
+    }
+  })
+  .style("opacity", function(rowdata){
+    if(!selectedLines.includes(rowdata.City)){
+        return 0.8;    
+    }
+    else{
+      if(selectedLines.length === 92){ 
+        if(rowdata.City == bestCurrentLine){ return 1;} // ho sostituito a currentBestCity --> bestCurrentLine
+        else {return 0.6};
+      } //if I have all the cities(92), I return to the initial value
+      else{
+        if(rowdata.City == bestCurrentLine){ return 1;} // ho sostituito a currentBestCity --> bestCurrentLine
+        else {return 0.8};
+      } 
+    }
+  })
+  .sort(function(a, b) {
+    if (a.City === bestCurrentLine) return 1; // Move bestCurrentLine to the end
+    if (b.City === bestCurrentLine) return -1; // Move bestCurrentLine to the end
+    return 0;
+  })
 }
 
 //LEGEND
@@ -371,8 +371,6 @@ function drawParallelLegend() {
       return d.label;
     });
 
- 
-
   svgParallel.attr("width", width + legendWidth); // Adjust the width of the SVG container
 
   const graphGroup = svgParallel
@@ -387,6 +385,7 @@ function drawParallelLegend() {
   svgParallel.attr("height", Math.max(graphHeight, legendY + legendItems.size() * 20)); // Adjust the height of the SVG container
 }
 
+//FUNCTION TO UPDATE THE BEST CURRENT LINE 
 function updateBestLine(bestCurrentLine, selectedLines){
   d3.csv("../../data/processed/BarChartData.csv", function(data) {
     //qui filtro i dati dei pollutant in base alle città selezionate
