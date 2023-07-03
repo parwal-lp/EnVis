@@ -191,12 +191,6 @@ function drawParallelPlot(){
                   .duration('200')
                   .style("opacity", 0);
           }) 
-
-        //pathProva.sort(function (a,b){
-        //  if (selectedLines.includes(a.City) && !selectedLines.includes(b.City)) return 1; // Move bestCurrentLine to the end
-        //  if (!selectedLines.includes(a.City) && selectedLines.includes(b.City)) return -1; // Move bestCurrentLine to the end
-        //  return 0;
-        //})
         
         pathProva.sort(function(a, b) {
           if (a.City === bestCurrentLine) return 1; // Move bestCurrentLine to the end
@@ -242,8 +236,6 @@ function removeItemOnce(arr, value) {
 
 //function passed to the brush to highlight the y axis 
 function brushedParallel(d,index, bestCurrentLine) { 
-        
-
   extents = d3.event.selection;
 
   extentArray[index] = extents; 
@@ -291,6 +283,7 @@ function brushedParallel(d,index, bestCurrentLine) {
 
 //FUNCTION TO COLOR THE SELECTION AND THE BEST CURRENT CITY
 function colorSelectionParallel(bestCurrentLine){
+
   pathProva.style("stroke", function(rowdata){
     if(selectedLines.includes(rowdata.City)){
       if(rowdata.City === bestCurrentLine){ // ho sostituito a currentBestCity --> bestCurrentLine
@@ -321,8 +314,10 @@ function colorSelectionParallel(bestCurrentLine){
   .sort(function(a, b) {
     if (a.City === bestCurrentLine) return 1; // Move bestCurrentLine to the end
     if (b.City === bestCurrentLine) return -1; // Move bestCurrentLine to the end
+    if (selectedLines.includes(a.City) && !selectedLines.includes(b.City)) return 1; // Move selected lines before other lines
+    if (!selectedLines.includes(a.City) && selectedLines.includes(b.City)) return -1; // Move other lines after selected lines
     return 0;
-  })
+  });
 }
 
 //LEGEND
