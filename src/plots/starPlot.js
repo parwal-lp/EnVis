@@ -168,10 +168,10 @@ function drawStarPlot(currentBestCity){
     pathBestCity += 'Z';
       svgStar.append('path')
         .attr('d', pathBestCity)
-        .style('stroke', '#91cf60')
+        .style('stroke', '#1a9850')
         .style('stroke-width', 3)
         .style('stroke-opacity', 0.6)
-        .style('fill', '#91cf60')
+        .style('fill', '#1a9850')
         .style('fill-opacity', 0.3)
 
   // ----------- CREO LA LEGENDA ---------------- //
@@ -184,7 +184,7 @@ function drawStarPlot(currentBestCity){
   let topCityWidth;
 
   if(currentBestCity!=""){
-    topCityDot = legend.append("circle").attr("r", 6).style("fill", "#91cf60").attr("cy",svgStar.attr("height")-svgStar.attr("height")*0.04)
+    topCityDot = legend.append("circle").attr("r", 6).style("fill", "#1a9850").attr("cy",svgStar.attr("height")-svgStar.attr("height")*0.04)
     topCityText = legend.append("text").text(currentBestCity).style("font-size", "15px").attr("y",svgStar.attr("height")-svgStar.attr("height")*0.027)
     topCityText.attr("x", '10');
   

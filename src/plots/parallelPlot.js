@@ -286,8 +286,7 @@ function brushedParallel(d,index, bestCurrentLine) {
 function colorSelectionParallel(bestCurrentLine){
 
   pathProva.style("stroke", function(rowdata){
-    if (rowdata.City === "Roma") return '#ff0000';
-    if (rowdata.City === "Latina") return '#0000ff';
+    if (rowdata.City === "Roma") return '#d95f02';
     if(selectedLines.includes(rowdata.City)){
       if(rowdata.City === bestCurrentLine){ // ho sostituito a currentBestCity --> bestCurrentLine
         //console.log("3. best current line is: "+ bestCurrentLine); 
