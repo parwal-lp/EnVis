@@ -185,7 +185,7 @@ function changeOrder(order){
 
 function draw(selectedPollutant, XmaxValue, order, currentSelection){
     // Parse the Data
-    d3.csv("../data/processed/BarChartData.csv", function(data) {
+    d3.csv("../../data/processed/BarChartData.csv", function(data) {
         data = data.filter(function(row){
           return row['Air Pollutant'] == selectedPollutant;
         });
