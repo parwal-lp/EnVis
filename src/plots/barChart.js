@@ -124,6 +124,10 @@ function changePollutant(pollutant){
           return row['Air Pollutant'] == selectedPollutant;
         });
 
+        data = data.filter(function(row){
+            return selectedCities.includes(row['City']);
+        });
+
         data = data.sort(function(a, b) { // sort in ordine crescente
             return d3.ascending(parseFloat(a['Air Pollution Level']), parseFloat(b['Air Pollution Level']));
         });
@@ -155,6 +159,10 @@ function changeOrder(order){
     d3.csv("../../data/processed/BarChartData.csv", function(data) {
         data = data.filter(function(row){
           return row['Air Pollutant'] == selectedPollutant;
+        });
+
+        data = data.filter(function(row){
+            return selectedCities.includes(row['City']);
         });
 
         data = data.sort(function(a, b) { // sort in ordine crescente
@@ -203,6 +211,8 @@ function draw(selectedPollutant, XmaxValue, order, currentSelection){
                 data = data.slice(data.length-11,data.length-1);
             }
         }
+
+        currentBestCity = data[0].City;
 
         // Add X axis
         var x = d3.scaleLinear()

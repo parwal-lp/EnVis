@@ -40,9 +40,9 @@ function assignColorWater(currentCity, dataWater){
 }
 function colorCityDots(currentCity){
     if (currentCity == initialBestCity){
-      return '#b2df8a';
+      return '#1a9850';
     } else if (currentCity == currentSelectedCity) {
-      return '#d95f02';
+      return '#fed976';
     } else {
       return '#a6cee3';
     }
@@ -62,7 +62,6 @@ function updateRelatedGraphs(){
   svgBoxPlot.selectAll("*").remove();
   
   d3.csv("../../data/processed/BarChartData.csv", function(data) {
-
 
     selectedCities = [];
     selectedDots.forEach(dot => {
@@ -120,7 +119,7 @@ function coloraChosenCity(currentSelectedCity){
     let currentDot = d3.select(this);
     if (currentDot.attr("city") == currentSelectedCity){
       
-      currentDot.style('fill', '#d95f02'); //se non esiste una currentBest allora mostro la initialBest
+      currentDot.style('fill', '#fed976'); //se non esiste una currentBest allora mostro la initialBest
       
       currentDot.raise();
     }
@@ -139,10 +138,10 @@ function coloraCurrentBestCity(currentBestCity){
     }
   });
   if (foundCity != null){ //se esiste una currentBest evidenzio quella
-    foundCity.style('fill', '#b2df8a');
+    foundCity.style('fill', '#1a9850');
     foundCity.raise();
   } else if (initialCity!=null){
-    initialCity.style('fill', '#b2df8a'); //se non esiste una currentBest allora mostro la initialBest
+    initialCity.style('fill', '#1a9850'); //se non esiste una currentBest allora mostro la initialBest
     initialCity.raise();
   }
 }
@@ -176,7 +175,7 @@ function brushed() {
       
       //console.log(dot.attr("city"));
       //console.log(dot);
-      dot.style('fill', '#1f78b4'); //tutti i selezionati si colorano
+      dot.style('fill', '#9e9ac8'); //tutti i selezionati si colorano
     } else if(!selectedDots.includes(dot)){
       dot.style('fill', '#a6cee3'); //tutti gli altri tornano grigi
     }
@@ -321,7 +320,7 @@ function drawScatterLegend(currentBestCity, currentSelectedCity){
 
 
   let labelSelectedCityText = "Selected cities"
-  let selectedPointsCircle = legendScatter.append("circle").attr("r", 6).style("fill", "#1f78b4").attr("cy",svgScatter.attr("height")-svgScatter.attr("height")*0.04)
+  let selectedPointsCircle = legendScatter.append("circle").attr("r", 6).style("fill", "#9e9ac8").attr("cy",svgScatter.attr("height")-svgScatter.attr("height")*0.04)
   let selectedPointdLabel = legendScatter.append("text").text(labelSelectedCityText).style("font-size", "15px").attr("y",svgScatter.attr("height")-svgScatter.attr("height")*0.027)
   
   selectedPointsCircle.attr("cx", topCityWidthScatter + 10);
@@ -341,7 +340,7 @@ function drawScatterLegend(currentBestCity, currentSelectedCity){
 
 
   if(currentSelectedCity != "none" && currentSelectedCity!=null){
-    let chosenCityScatterCircle = legendScatter.append("circle").attr("r", 6).style("fill", "#d95f02").attr("cy",svgScatter.attr("height")-svgScatter.attr("height")*0.04)
+    let chosenCityScatterCircle = legendScatter.append("circle").attr("r", 6).style("fill", "#fed976").attr("cy",svgScatter.attr("height")-svgScatter.attr("height")*0.04)
     let chosenCityScatterLabel = legendScatter.append("text").text(currentSelectedCity).style("font-size", "15px").attr("y",svgScatter.attr("height")-svgScatter.attr("height")*0.027)
     
     chosenCityScatterCircle.attr("cx", otherPointsWidthScatter + 215);

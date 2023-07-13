@@ -13,7 +13,8 @@ var activeDimensions = [null, null, null, null, null]; // qui metto tutte le dim
 var bestInitialLine = "Savona";
 var bestCurrentLine = "Savona";
 //from colorBrewer
-var parColors = ['#fee8c8', '#ef6548', '#b30000']; // in substitution of grey, blue, red
+//var parColors = ['#fee8c8', '#ef6548', '#b30000']; // in substitution of grey, blue, red
+var parColors = ['#fee8c8', '#9e9ac8', '#1a9850']; // in substitution of grey, blue, red
 //var parLevels = ['others', 'selected', 'best city'];
 var pathProva;
 var yParallel;
@@ -323,8 +324,8 @@ function colorSelectionParallel(bestCurrentLine){
 //LEGEND
 function drawParallelLegend() {
   const legendData = [
-    { label: "Best", color: "#b30000" },
-    { label: "Selected", color: "#ef6548" },
+    { label: "Best", color: "#1a9850" },
+    { label: "Selected", color: "#9e9ac8" },
     { label: "Others", color: "#fee8c8" },
   ];
  const graphWidth = width; // Calculate or set the width of the graph
