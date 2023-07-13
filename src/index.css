@@ -1,0 +1,123 @@
+body {
+    font: 10px sans-serif;
+  }
+  
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
+  
+  .bar {
+    fill: orange;
+  }
+  
+  .bar:hover {
+    fill: orangered ;
+  }
+  
+  .x.axis path {
+    display: none;
+  }
+  
+  .d3-tip {
+    line-height: 1;
+    font-weight: bold;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 2px;
+  }
+  
+  /* Creates a small triangle extender for the tooltip */
+  .d3-tip:after {
+    box-sizing: border-box;
+    display: inline;
+    font-size: 10px;
+    width: 100%;
+    line-height: 1;
+    color: rgba(0, 0, 0, 0.8);
+    content: "\25BC";
+    position: absolute;
+    text-align: center;
+  }
+  
+  /* Style northward tooltips differently */
+  .d3-tip.n:after {
+    margin: -1px 0 0 0;
+    top: 100%;
+    left: 0;
+  }
+
+
+  /*style tooltip scatterplot*/
+  div.tooltip {
+    position: absolute;
+    text-align: center;
+    padding: .2rem;
+    background: #313639;
+    color: #f9f9f9;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+    font-size: .7rem;
+}
+
+.dropDown {
+  position: absolute;
+  top:280px;
+  width: min-content !important;
+}
+
+#top10, #top10label{
+  position: absolute;
+  top:350px;
+}
+#worst10, #worst10label{
+  position: absolute;
+  top:380px;
+}
+
+#top10label{
+  top:345px;
+  left:140px;
+}
+
+#worst10label{
+  top:375px;
+  left:140px;
+}
+
+/* cose del parallel da esempio github */
+svg {
+  font: 10px sans-serif;
+}
+
+.background path {
+  fill: none;
+  stroke: #ddd;
+  shape-rendering: crispEdges;
+}
+
+.foreground path {
+  fill: none;
+  stroke: steelblue;
+}
+
+.brush .extent {
+  fill-opacity: .3;
+  stroke: #fff;
+  shape-rendering: crispEdges;
+}
+
+.axis line,
+.axis path {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.axis text {
+  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+}
