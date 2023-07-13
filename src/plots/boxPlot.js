@@ -16,7 +16,7 @@ var svgBoxPlot = d3.select("#boxPlot")
 function drawBoxPlot(currentSelection){
 
 // Read the data and compute summary statistics for each specie
-d3.csv("../../data/processed/BoxPlotData.csv", function(error, data) {
+d3.csv("data/processed/BoxPlotData.csv", function(error, data) {
   if (error) throw error;
 
   if (currentSelection!=null){

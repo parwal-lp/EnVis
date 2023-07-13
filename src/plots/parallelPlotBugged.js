@@ -32,7 +32,7 @@ var svgParallel = d3.select("#parallelPlot")
 //function that includes all the necessary to draw and update the plot
 function drawParallelPlot(){
     // Parse the Data
-    d3.csv("../../data/processed/ParallelPlotData.csv", function(data) {
+    d3.csv("data/processed/ParallelPlotData.csv", function(data) {
 
     // Extract the list of dimensions and create a scale for each.
     xParallel.domain(dimensions = d3.keys(data[0]).filter(function(d) {

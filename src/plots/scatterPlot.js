@@ -61,7 +61,7 @@ function updateRelatedGraphs(){
   svg.selectAll("*").remove();
   svgBoxPlot.selectAll("*").remove();
   
-  d3.csv("../../data/processed/BarChartData.csv", function(data) {
+  d3.csv("data/processed/BarChartData.csv", function(data) {
 
     selectedCities = [];
     selectedDots.forEach(dot => {
@@ -186,7 +186,7 @@ function brushed() {
 }
 
 function drawScatterPlot(currentBestCity, currentSelectedCity){
-  d3.csv("../../data/processed/pcaWaterResults.csv", function(data) { //retrieve the data
+  d3.csv("data/processed/pcaWaterResults.csv", function(data) { //retrieve the data
     // ------------ PRENDO I DATI CHE MI SERVONO --------------- //
     // Add X axis
     var xScatter = d3.scaleLinear()
@@ -214,7 +214,7 @@ function drawScatterPlot(currentBestCity, currentSelectedCity){
       .style("opacity", 0);
 
 
-      d3.csv("../../data/processed/mergedWaterComuni.csv", function(dataWater){
+      d3.csv("data/processed/mergedWaterComuni.csv", function(dataWater){
         // Add dots
         dots = svgScatter.append('g')
         .selectAll("dot")
@@ -360,7 +360,7 @@ function drawScatterLegend(currentBestCity, currentSelectedCity){
 
 //calcolo la best city prima dell'interazione dell'utente
 //quindi sarebbe la best city tra i dati completi del barchart
-d3.csv("../../data/processed/BarChartData.csv", function(initialData) {
+d3.csv("data/processed/BarChartData.csv", function(initialData) {
   initialData = initialData.filter(function(row){
     return row['Air Pollutant'] == initialPollutant;
   });

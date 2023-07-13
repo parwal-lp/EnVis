@@ -3,7 +3,7 @@ import numpy as np
 
 #import the csv file to work on it
 #first file Green Area Density
-dataset1 = pd.read_csv("data/original/2021GreenAreaDensity.csv") #../../data/original/2021GreenAreaDensity.csv
+dataset1 = pd.read_csv("data/original/2021GreenAreaDensity.csv") #data/original/2021GreenAreaDensity.csv
 #dataset1 = dataset1.drop(columns=['SquareMeters'], axis=1) #non serve perchè non c'è più la colonna SquareMeters
 dataset1['Category'] = "GreenAreaDensity"
 #dataset1 = dataset1.set_index('City', 'Category')

@@ -21,7 +21,7 @@ function displayTextWidth(text, font) {
 }
 
 function drawStarPlot(currentBestCity){
-  d3.csv("../../data/processed/StarPlotData.csv", function(data) { //retrieve the data
+  d3.csv("data/processed/StarPlotData.csv", function(data) { //retrieve the data
     // ------------ PRENDO I DATI CHE MI SERVONO --------------- //
     labels.forEach(pollutant => {
       let i=0;
@@ -213,7 +213,7 @@ function drawStarPlot(currentBestCity){
 
 //calcolo la best city prima dell'interazione dell'utente
 //quindi sarebbe la best city tra i dati completi del barchart
-d3.csv("../../data/processed/BarChartData.csv", function(initialData) {
+d3.csv("data/processed/BarChartData.csv", function(initialData) {
   initialData = initialData.filter(function(row){
     return row['Air Pollutant'] == initialPollutant;
   });
