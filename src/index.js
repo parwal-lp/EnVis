@@ -1,6 +1,6 @@
 //let currentBestCity;
 
-d3.csv("../data/processed/StarPlotData.csv", function(data){
+d3.csv("data/processed/StarPlotData.csv", function(data){
     let listaCitta = [];
     data.filter(function(row){
         if (!(row.City in listaCitta) && row.City!=""){
