@@ -286,7 +286,7 @@ function brushedParallel(d,index, bestCurrentLine) {
 function colorSelectionParallel(bestCurrentLine){
 
   pathProva.style("stroke", function(rowdata){
-    if (rowdata.City === "Roma") return '#d95f02';
+    if (rowdata.City === currentSelectedCity) return '#d95f02';
     if(selectedLines.includes(rowdata.City)){
       if(rowdata.City === bestCurrentLine){ // ho sostituito a currentBestCity --> bestCurrentLine
         //console.log("3. best current line is: "+ bestCurrentLine); 
@@ -304,7 +304,7 @@ function colorSelectionParallel(bestCurrentLine){
     }
     else{
       if(selectedLines.length === 92){ 
-        if(rowdata.City == bestCurrentLine){ return 1;} // ho sostituito a currentBestCity --> bestCurrentLine
+        if(rowdata.City === bestCurrentLine || rowdata.City === currentSelectedCity){ return 1;} // ho sostituito a currentBestCity --> bestCurrentLine
         else {return 0.6};
       } //if I have all the cities(92), I return to the initial value
       else{
@@ -316,6 +316,10 @@ function colorSelectionParallel(bestCurrentLine){
   .sort(function(a, b) {
     if (a.City === bestCurrentLine) return 1; // Move bestCurrentLine to the end
     if (b.City === bestCurrentLine) return -1; // Move bestCurrentLine to the end
+
+    if (a.City === currentSelectedCity) return 1; // Move currentSelectedLine to the end
+    if (b.City === currentSelectedCity) return -1; // Move currentSelectedLine to the end
+
     if (selectedLines.includes(a.City) && !selectedLines.includes(b.City)) return 1; // Move selected lines before other lines
     if (!selectedLines.includes(a.City) && selectedLines.includes(b.City)) return -1; // Move other lines after selected lines
     return 0;
