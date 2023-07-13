@@ -332,6 +332,7 @@ function drawParallelLegend() {
     { label: "Best", color: "#1a9850" },
     { label: "Selected", color: "#9e9ac8" },
     { label: "Others", color: "#fee8c8" },
+    { label: "Chosen City", color: "#d95f02" },
   ];
  const graphWidth = width; // Calculate or set the width of the graph
   const graphHeight = height; // Calculate or set the height of the graph

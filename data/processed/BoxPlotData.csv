@@ -1,5 +1,5 @@
 City,Value,Category
-Torino ,7.46,GreenAreaDensity
+Torino,7.46,GreenAreaDensity
 Vercelli,1.28,GreenAreaDensity
 Novara,1.22,GreenAreaDensity
 Biella,33.56,GreenAreaDensity
@@ -11,22 +11,22 @@ Imperia,1.11,GreenAreaDensity
 Savona,7.82,GreenAreaDensity
 Genova,26.26,GreenAreaDensity
 La Spezia,24.16,GreenAreaDensity
-Varese ,45.48,GreenAreaDensity
+Varese,45.48,GreenAreaDensity
 Como,19.38,GreenAreaDensity
 Lecco,20.74,GreenAreaDensity
 Sondrio,2.21,GreenAreaDensity
-Monza ,22.33,GreenAreaDensity
+Monza,22.33,GreenAreaDensity
 Bergamo,31.5,GreenAreaDensity
 Brescia,38.81,GreenAreaDensity
 Pavia,18.72,GreenAreaDensity
 Lodi,35.53,GreenAreaDensity
 Cremona,27.51,GreenAreaDensity
-Mantova ,21.25,GreenAreaDensity
-Bolzano - Bozen ,0.11,GreenAreaDensity
-Trento ,6.65,GreenAreaDensity
+Mantova,21.25,GreenAreaDensity
+Bolzano - Bozen,0.11,GreenAreaDensity
+Trento,6.65,GreenAreaDensity
 Verona,4.68,GreenAreaDensity
 Vicenza,1.71,GreenAreaDensity
-Belluno ,21.44,GreenAreaDensity
+Belluno,21.44,GreenAreaDensity
 Treviso,10.36,GreenAreaDensity
 Venezia,62.8,GreenAreaDensity
 Padova,0.07,GreenAreaDensity
@@ -37,10 +37,10 @@ Gorizia,7.64,GreenAreaDensity
 Trieste,33.44,GreenAreaDensity
 Piacenza,17.71,GreenAreaDensity
 Parma,2.31,GreenAreaDensity
-Reggio nell'Emilia ,7.14,GreenAreaDensity
+Reggio nell'Emilia,7.14,GreenAreaDensity
 Modena,1.14,GreenAreaDensity
 Bologna,26.54,GreenAreaDensity
-Ferrara ,3.04,GreenAreaDensity
+Ferrara,3.04,GreenAreaDensity
 Ravenna,29.05,GreenAreaDensity
 Forlì,3.17,GreenAreaDensity
 Cesena,1.69,GreenAreaDensity
@@ -49,23 +49,23 @@ Massa,33.99,GreenAreaDensity
 Lucca,10.48,GreenAreaDensity
 Pistoia,17.73,GreenAreaDensity
 Firenze,10.91,GreenAreaDensity
-Prato ,31.35,GreenAreaDensity
+Prato,31.35,GreenAreaDensity
 Livorno,29.71,GreenAreaDensity
 Pisa,42.88,GreenAreaDensity
 Arezzo,7.08,GreenAreaDensity
 Siena,7.8,GreenAreaDensity
 Grosseto,32.79,GreenAreaDensity
-Perugia ,15.97,GreenAreaDensity
+Perugia,15.97,GreenAreaDensity
 Terni,20.74,GreenAreaDensity
 Pesaro,20.52,GreenAreaDensity
-Ancona ,25.35,GreenAreaDensity
+Ancona,25.35,GreenAreaDensity
 Ascoli Piceno,9.51,GreenAreaDensity
 Viterbo,5.02,GreenAreaDensity
 Rieti,19.19,GreenAreaDensity
 Roma,32.24,GreenAreaDensity
 Latina,4.44,GreenAreaDensity
 Frosinone,0.01,GreenAreaDensity
-L'Aquila ,50.09,GreenAreaDensity
+L'Aquila,50.09,GreenAreaDensity
 Teramo,2.97,GreenAreaDensity
 Pescara,1.79,GreenAreaDensity
 Chieti,0.0,GreenAreaDensity
@@ -73,7 +73,7 @@ Isernia,19.73,GreenAreaDensity
 Campobasso,3.67,GreenAreaDensity
 Caserta,8.75,GreenAreaDensity
 Benevento,0.0,GreenAreaDensity
-Napoli ,24.06,GreenAreaDensity
+Napoli,24.06,GreenAreaDensity
 Avellino,0.0,GreenAreaDensity
 Salerno,0.05,GreenAreaDensity
 Foggia,3.73,GreenAreaDensity
@@ -85,7 +85,7 @@ Taranto,8.49,GreenAreaDensity
 Brindisi,10.56,GreenAreaDensity
 Lecce,12.78,GreenAreaDensity
 Potenza,0.86,GreenAreaDensity
-Matera ,25.04,GreenAreaDensity
+Matera,25.04,GreenAreaDensity
 Cosenza,0.0,GreenAreaDensity
 Crotone,14.14,GreenAreaDensity
 Catanzaro,0.0,GreenAreaDensity
@@ -442,7 +442,7 @@ Bergamo,0.0,IndustrialNoise
 Brescia,26.7,IndustrialNoise
 Pavia,0.0,IndustrialNoise
 Mantova,50.0,IndustrialNoise
-Bolzano - Bozen ,0.0,IndustrialNoise
+Bolzano - Bozen,0.0,IndustrialNoise
 Trento,0.0,IndustrialNoise
 Vicenza,0.0,IndustrialNoise
 Treviso,33.3,IndustrialNoise
@@ -514,7 +514,7 @@ Bergamo,14.3,CommercialNoise
 Brescia,60.0,CommercialNoise
 Pavia,100.0,CommercialNoise
 Mantova,50.0,CommercialNoise
-Bolzano - Bozen ,100.0,CommercialNoise
+Bolzano - Bozen,100.0,CommercialNoise
 Trento,50.0,CommercialNoise
 Vicenza,100.0,CommercialNoise
 Treviso,66.7,CommercialNoise

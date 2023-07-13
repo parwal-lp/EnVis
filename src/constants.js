@@ -19,3 +19,24 @@ let legendScatter;
 
 let currentSelectedCity;
 let currentBestCity;
+
+  
+d3.csv("data/processed/BarChartData.csv", function(data) {
+
+    selectedCities = [];
+    selectedDots.forEach(dot => {
+      selectedCities.push(dot.attr('city'));
+    });
+
+    //console.log(selectedCities);
+    
+    data = data.filter(function(row){
+      return row['Air Pollutant'] == selectedPollutant;
+    });
+
+    data = data.filter(function(row){
+        selectedCities.push(row.City);
+    });
+
+    
+  });
