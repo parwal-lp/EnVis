@@ -86,7 +86,7 @@ function drawParallelPlot(){
      
       console.log("1. best current line is: "+ bestCurrentLine);
       // Here I set the list of dimension manually to control the order of axis:
-      dimensions = ["GreenAreaDensity","LowEmission","AutobusStopDensity","CirculatingVehicles","ExposedNoisePollution"]
+      dimensions = ["GreenAreaDensity","LowEmission","AutobusStopDensity","CirculatingVehicles","Noise_control"]
 
       var tooltipParallel = d3.select("body").append("div")
       .attr("class", "tooltip")
@@ -286,6 +286,8 @@ function brushedParallel(d,index, bestCurrentLine) {
 function colorSelectionParallel(bestCurrentLine){
 
   pathProva.style("stroke", function(rowdata){
+    if (rowdata.City === "Roma") return '#ff0000';
+    if (rowdata.City === "Latina") return '#0000ff';
     if(selectedLines.includes(rowdata.City)){
       if(rowdata.City === bestCurrentLine){ // ho sostituito a currentBestCity --> bestCurrentLine
         //console.log("3. best current line is: "+ bestCurrentLine); 
