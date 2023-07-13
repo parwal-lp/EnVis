@@ -2,7 +2,8 @@
 A tool for visualizing analytic data on the quality of the environment in Italy.
 
 ## Overview
-The purpose of this project is to provide a .. [todo]
+The purpose of this project is to provide a graphical representation of several environmental factors,
+allowing the user to immediately grasp informations about quality of the city he lives in.
 
 It was developed using the following libraries:
 - d3.js for creating the visualizations
