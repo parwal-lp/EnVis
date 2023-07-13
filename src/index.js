@@ -1,6 +1,6 @@
 //let currentBestCity;
 
-d3.csv("../data/processed/StarPlotData.csv", function(data){
+d3.csv("data/processed/StarPlotData.csv", function(data){
     let listaCitta = [];
     data.filter(function(row){
         if (!(row.City in listaCitta) && row.City!=""){
@@ -21,7 +21,7 @@ d3.csv("../data/processed/StarPlotData.csv", function(data){
 
 function aggiornaGraficiConCittaSelezionata(){
     //retrieve current best city
-    d3.csv("../../data/processed/BarChartData.csv", function(data) {
+    d3.csv("data/processed/BarChartData.csv", function(data) {
         data = data.filter(function(row){
             return row['Air Pollutant'] == selectedPollutant;
         });
@@ -57,7 +57,7 @@ function aggiornaGraficiConCittaSelezionata(){
 
 // function aggiornaGraficiConCittaSelezionata(){
 //     //retrieve current best city
-//     d3.csv("../../data/processed/BarChartData.csv", function(data) {
+//     d3.csv("data/processed/BarChartData.csv", function(data) {
 //         /*data = data.filter(function(row){
 //           return row['Air Pollutant'] == selectedPollutant;
 //         });

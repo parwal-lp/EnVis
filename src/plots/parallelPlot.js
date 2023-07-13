@@ -36,7 +36,7 @@ var svgParallel = d3.select("#parallelPlot")
       
       //bisogna togliere il brush anche allo scatterplot? 
 
-      d3.csv("../../data/processed/BarChartData.csv", function(data) {
+      d3.csv("data/processed/BarChartData.csv", function(data) {
         //qui filtro i dati dei pollutant in base alle città selezionate
         data = data.filter(function(row){
           return row['Air Pollutant'] == selectedPollutant && selectedLines.includes(row['City']);
@@ -81,7 +81,7 @@ var svgParallel = d3.select("#parallelPlot")
 
 function drawParallelPlot(){
     // Parse the Data
-    d3.csv("../../data/processed/ParallelPlotData.csv", function(data) {
+    d3.csv("data/processed/ParallelPlotData.csv", function(data) {
 
      
       console.log("1. best current line is: "+ bestCurrentLine);
@@ -383,7 +383,7 @@ function drawParallelLegend() {
 
 //FUNCTION TO UPDATE THE BEST CURRENT LINE 
 function updateBestLine(bestCurrentLine, selectedLines){
-    d3.csv("../../data/processed/BarChartData.csv", function(data) {
+    d3.csv("data/processed/BarChartData.csv", function(data) {
       //qui filtro i dati dei pollutant in base alle città selezionate
       
       data = data.filter(function(row){
