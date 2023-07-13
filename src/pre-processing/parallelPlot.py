@@ -37,20 +37,20 @@ dataset4['CirculatingVehicles'] = dataset4['CirculatingVehicles'].replace('',np.
 dataset4 = dataset4.dropna(axis=0, how ='any')
 #dataset4['CirculatingVehicles'] = dataset4['CirculatingVehicles'].astype(float)
 
-dataset5 =pd.read_csv("data/original/2021Noise_control.csv")  #quinta colonna: Noise Levels
+dataset5 =pd.read_csv("data/original/2021ExposedNoisePollution.csv")  #quinta colonna: Noise Levels
 #drop column VA-Values
 dataset5 = dataset5.drop(columns=['ExposedNoisePollution'],axis=1) 
-dataset5['Noise_control'] = dataset5['Noise_control'].replace(' - ',np.nan)
-dataset5['Noise_control'] = dataset5['Noise_control'].str.replace(' ','')
+dataset5['NoiseControl'] = dataset5['NoiseControl'].replace(' - ',np.nan)
+dataset5['NoiseControl'] = dataset5['NoiseControl'].str.replace(' ','')
 #here i replace the missing value with np.nan
-dataset5['Noise_control'] = dataset5['Noise_control'].replace('',np.nan)
-dataset5 = dataset5.dropna(axis=0, how ='any')
-#dataset5['Noise_control'] = dataset5['Noise_control'].astype(float)
+dataset5['NoiseControl'] = dataset5['NoiseControl'].replace('',np.nan)
+#dataset5 = dataset5.dropna(axis=0, how ='any')
+#dataset5['NoiseControl'] = dataset5['NoiseControl'].astype(float)
 
 merged_df = pd.merge(dataset1[['City', 'GreenAreaDensity']], dataset2[['City','LowEmission']], on='City', how= 'outer').set_index('City')
 merged_df = pd.merge(merged_df, dataset3[['City','AutobusStopDensity']], on='City', how= 'outer').set_index('City')
 merged_df = pd.merge(merged_df, dataset4[['City','CirculatingVehicles']], on='City', how= 'outer').set_index('City')
-merged_df = pd.merge(merged_df, dataset5[['City','Noise_control']], on='City', how= 'outer').set_index('City')
+merged_df = pd.merge(merged_df, dataset5[['City','NoiseControl']], on='City', how= 'outer').set_index('City')
 
 # stampa il dataframe risultante
 print(merged_df.head())

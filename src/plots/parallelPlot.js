@@ -86,7 +86,7 @@ function drawParallelPlot(){
      
       console.log("1. best current line is: "+ bestCurrentLine);
       // Here I set the list of dimension manually to control the order of axis:
-      dimensions = ["GreenAreaDensity","LowEmission","AutobusStopDensity","CirculatingVehicles","Noise_control"]
+      dimensions = ["GreenAreaDensity","LowEmission","AutobusStopDensity","CirculatingVehicles","NoiseControl"]
 
       var tooltipParallel = d3.select("body").append("div")
       .attr("class", "tooltip")
