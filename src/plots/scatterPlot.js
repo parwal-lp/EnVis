@@ -42,7 +42,7 @@ function colorCityDots(currentCity){
     if (currentCity == initialBestCity){
       return '#1a9850';
     } else if (currentCity == currentSelectedCity) {
-      return '#fed976';
+      return '#d95f02';
     } else {
       return '#a6cee3';
     }
@@ -119,7 +119,7 @@ function coloraChosenCity(currentSelectedCity){
     let currentDot = d3.select(this);
     if (currentDot.attr("city") == currentSelectedCity){
       
-      currentDot.style('fill', '#fed976'); //se non esiste una currentBest allora mostro la initialBest
+      currentDot.style('fill', '#d95f02'); //se non esiste una currentBest allora mostro la initialBest
       
       currentDot.raise();
     }
@@ -311,7 +311,7 @@ function drawScatterLegend(currentBestCity, currentSelectedCity){
     greenCity = currentBestCity;
   }
 
-  topCityDotScatter = legendScatter.append("circle").attr("r", 6).style("fill", "#91cf60").attr("cy",svgScatter.attr("height")-svgScatter.attr("height")*0.04)
+  topCityDotScatter = legendScatter.append("circle").attr("r", 6).style("fill", "#1a9850").attr("cy",svgScatter.attr("height")-svgScatter.attr("height")*0.04)
   topCityTextScatter = legendScatter.append("text").text(greenCity).style("font-size", "15px").attr("y",svgScatter.attr("height")-svgScatter.attr("height")*0.027)
   topCityTextScatter.attr("x", '10');
   topCityTextScatter.attr("y", '5');
@@ -340,7 +340,7 @@ function drawScatterLegend(currentBestCity, currentSelectedCity){
 
 
   if(currentSelectedCity != "none" && currentSelectedCity!=null){
-    let chosenCityScatterCircle = legendScatter.append("circle").attr("r", 6).style("fill", "#fed976").attr("cy",svgScatter.attr("height")-svgScatter.attr("height")*0.04)
+    let chosenCityScatterCircle = legendScatter.append("circle").attr("r", 6).style("fill", "#d95f02").attr("cy",svgScatter.attr("height")-svgScatter.attr("height")*0.04)
     let chosenCityScatterLabel = legendScatter.append("text").text(currentSelectedCity).style("font-size", "15px").attr("y",svgScatter.attr("height")-svgScatter.attr("height")*0.027)
     
     chosenCityScatterCircle.attr("cx", otherPointsWidthScatter + 215);
