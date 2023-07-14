@@ -162,6 +162,9 @@ function changePollutant(pollutant){
 
         svgScatter.selectAll("*").remove();
         drawScatterPlot(currentBestCity, currentSelectedCity);
+
+        svgParallel.selectAll("*").remove();
+        drawParallelPlot(currentBestCity, currentSelectedCity);
     });
     
 }
@@ -220,6 +223,9 @@ function changeOrder(order){
 
         svgScatter.selectAll("*").remove();
         drawScatterPlot(currentBestCity, currentSelectedCity);
+
+        svgParallel.selectAll("*").remove();
+        drawParallelPlot(currentBestCity, currentSelectedCity);
     });
 }
 
