@@ -33,6 +33,8 @@ var svgParallel = d3.select("#parallelPlot")
       svgStar.selectAll("*").remove();
       svg.selectAll("*").remove();
       svgBoxPlot.selectAll("*").remove();
+      svgScatter.selectAll("*").remove();
+      legendScatter.remove();
       
       //bisogna togliere il brush anche allo scatterplot? 
 
@@ -77,6 +79,8 @@ var svgParallel = d3.select("#parallelPlot")
         //legendScatter.remove(); //aggiorno la legenda dello scatter con il nome della current best city
         //drawScatterLegend(currentBestCity, currentSelectedCity);
         colorSelectionParallel(bestCurrentLine);
+        drawScatterPlot(currentBestCity, currentSelectedCity);
+        drawScatterLegend(currentBestCity, currentSelectedCity);
     });
   };
 
