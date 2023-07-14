@@ -34,7 +34,6 @@ var svgParallel = d3.select("#parallelPlot")
       svg.selectAll("*").remove();
       svgBoxPlot.selectAll("*").remove();
       svgScatter.selectAll("*").remove();
-      legendScatter.remove();
       
       //bisogna togliere il brush anche allo scatterplot? 
 
@@ -79,6 +78,7 @@ var svgParallel = d3.select("#parallelPlot")
         draw(selectedPollutant, XmaxValue, order, selectedLines);
         drawBoxPlot(selectedLines);
         drawScatterPlot(currentBestCity, currentSelectedCity);
+        legendScatter.remove();
         drawScatterLegend(currentBestCity, currentSelectedCity);
         //here I modify the legend of the scatter plot
         //legendScatter.remove(); //aggiorno la legenda dello scatter con il nome della current best city
@@ -89,7 +89,7 @@ var svgParallel = d3.select("#parallelPlot")
 
 function drawParallelPlot(bestCurrentLine, currentSelectedLine){
 
-    console.log("current selected line is: "+ currentSelectedLine);
+    //console.log("current selected line is: "+ currentSelectedLine);
     // Parse the Data
     d3.csv("data/processed/ParallelPlotData.csv", function(data) {
      
@@ -305,6 +305,9 @@ function brushedParallel(d,index, bestCurrentLine) {
 
 //FUNCTION TO COLOR THE SELECTION AND THE BEST CURRENT CITY
 function colorSelectionParallel(bestCurrentLine){
+  if (selectedLines == null){
+    selectedLines = allLines;
+  }
 
   pathProva.style("stroke", function(rowdata){
     if (rowdata.City === currentSelectedCity) return '#d95f02';
@@ -421,14 +424,14 @@ function updateBestLine(bestCurrentLine, selectedLines){
           return d3.ascending(parseFloat(a['Air Pollution Level']), parseFloat(b['Air Pollution Level']));
       });
 
-      console.log("data is : " + data[0]);
+      //console.log("data is : " + data[0]);
       if (data.length==0){
         bestCurrentLine = bestInitialLine;
       } else {
         bestCurrentLine = data[0].City;
       }
     
-      console.log("best current line is :"+ bestCurrentLine)
+      //console.log("best current line is :"+ bestCurrentLine)
     
 
       });

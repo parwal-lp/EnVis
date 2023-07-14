@@ -202,7 +202,7 @@ function brushed() {
 
   if (selectedDots.length==0){
     allDots.forEach(dot => {
-      console.log(dot);
+      //console.log(dot);
       if (allCities.includes(dot.attr('city'))){
         dot.style('fill', '#9e9ac8');
       } else {
