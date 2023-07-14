@@ -152,6 +152,10 @@ function drawParallelPlot(bestCurrentLine, currentSelectedLine){
           }));
       } 
 
+      if (selectedCities == null){
+        selectedCities = allCities;
+      }
+
       // Draw the lines
       pathProva = svgParallel
         .selectAll("myPath")
@@ -177,8 +181,11 @@ function drawParallelPlot(bestCurrentLine, currentSelectedLine){
             else if (d.City === currentSelectedLine){
               return '#d95f02'; //rosso
             }
-            else{
+            else if (selectedCities.includes(d.City)){
               return parColors[1];
+            }
+            else{
+              return parColors[0];
             }
           })
           .style("stroke-width", "2px")
