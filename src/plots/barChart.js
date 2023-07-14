@@ -145,6 +145,9 @@ function changePollutant(pollutant){
         }
         currentBestCity = data[0].City;
         drawStarPlot(currentBestCity);
+
+        svgScatter.selectAll("*").remove();
+        drawScatterPlot(currentBestCity, currentSelectedCity);
     });
     
 }
@@ -184,6 +187,9 @@ function changeOrder(order){
         }
         currentBestCity = data[0].City;
         drawStarPlot(currentBestCity);
+
+        svgScatter.selectAll("*").remove();
+        drawScatterPlot(currentBestCity, currentSelectedCity);
     });
 }
 

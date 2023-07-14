@@ -39,13 +39,20 @@ function assignColorWater(currentCity, dataWater){
     return waterColor[media.toString()];
 }
 function colorCityDots(currentCity){
+  if (currentBestCity!=""){
+    if (currentCity == currentBestCity){
+      return '#1a9850';
+    }
+  } else {
     if (currentCity == initialBestCity){
       return '#1a9850';
-    } else if (currentCity == currentSelectedCity) {
-      return '#d95f02';
-    } else {
-      return '#a6cee3';
     }
+  }
+  if (currentCity == currentSelectedCity) {
+    return '#d95f02';
+  } else {
+    return '#a6cee3';
+  }
     
 }
 
@@ -277,8 +284,8 @@ function drawScatterPlot(currentBestCity, currentSelectedCity){
         if (currentDot.attr("city") == currentSelectedCity){
           currentDot.raise();
         }
-        let initialCity;
-        let foundCity;
+        let initialCity = null;
+        let foundCity = null;
         if (currentDot.attr("city") == currentBestCity){
           foundCity = currentDot;
         }
