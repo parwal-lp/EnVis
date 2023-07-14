@@ -53,6 +53,9 @@ function aggiornaGraficiConCittaSelezionata(){
         svgScatter.selectAll("*").remove();
         currentSelectedCity = document.getElementById("tendina_scelta_city").value;
         drawScatterPlot(currentBestCity, currentSelectedCity);
+
+        svgParallel.selectAll("*").remove();
+        drawParallelPlot(currentSelectedCity);
     });
 
 }

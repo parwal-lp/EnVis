@@ -79,10 +79,11 @@ var svgParallel = d3.select("#parallelPlot")
     });
   };
 
-function drawParallelPlot(){
+function drawParallelPlot(currentSelectedLine){
+
+    console.log(currentSelectedLine);
     // Parse the Data
     d3.csv("data/processed/ParallelPlotData.csv", function(data) {
-
      
       console.log("1. best current line is: "+ bestCurrentLine);
       // Here I set the list of dimension manually to control the order of axis:
@@ -165,6 +166,9 @@ function drawParallelPlot(){
               //console.log("2. best current line is: "+ bestCurrentLine);
               return parColors[2];
             } // serve per evidenziare la città migliore
+            else if (d.City === currentSelectedLine){
+              return '#d95f02';
+            }
             else{
               return parColors[1];
             }
@@ -174,6 +178,9 @@ function drawParallelPlot(){
             if(d.City === bestCurrentLine){
               return 1;
             } // serve per evidenziare la città migliore
+            else if (d.City === currentSelectedLine){
+              return 1;
+            }
             else{
               return 0.6;
             }
@@ -194,9 +201,15 @@ function drawParallelPlot(){
           }) 
         
         pathProva.sort(function(a, b) {
-          if (a.City === bestCurrentLine) return 1; // Move bestCurrentLine to the end
-          if (b.City === bestCurrentLine) return -1; // Move bestCurrentLine to the end
-          return 0;
+            if (a.City === bestCurrentLine) return 1; // Move bestCurrentLine to the end
+            if (b.City === bestCurrentLine) return -1; // Move bestCurrentLine to the end
+        
+            if (a.City === currentSelectedCity) return 1; // Move currentSelectedLine to the end
+            if (b.City === currentSelectedCity) return -1; // Move currentSelectedLine to the end
+        
+            if (selectedLines.includes(a.City) && !selectedLines.includes(b.City)) return 1; // Move selected lines before other lines
+            if (!selectedLines.includes(a.City) && selectedLines.includes(b.City)) return -1; // Move other lines after selected lines
+            return 0;
         })
 
       // Draw the axis:
@@ -413,4 +426,4 @@ function updateBestLine(bestCurrentLine, selectedLines){
     
 }
 
-drawParallelPlot();
+drawParallelPlot(currentSelectedCity);
