@@ -246,7 +246,7 @@ function draw(selectedPollutant, XmaxValue, order, currentSelection){
             return d3.ascending(parseFloat(a['Air Pollution Level']), parseFloat(b['Air Pollution Level']));
         });
 
-        console.log(dataSelectedCities);
+        //console.log(dataSelectedCities);
 
         if (dataSelectedCities.length>0){
             //the maximum value on x axis is that of the worst city

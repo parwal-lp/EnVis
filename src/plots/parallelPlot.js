@@ -90,7 +90,7 @@ function drawParallelPlot(bestCurrentLine, currentSelectedLine){
     // Parse the Data
     d3.csv("data/processed/ParallelPlotData.csv", function(data) {
      
-      console.log("1. best current line is: "+ bestCurrentLine);
+      //console.log("1. best current line is: "+ bestCurrentLine);
       // Here I set the list of dimension manually to control the order of axis:
       dimensions = ["GreenAreaDensity","LowEmission","AutobusStopDensity","CirculatingVehicles","NoiseControl"]
 
