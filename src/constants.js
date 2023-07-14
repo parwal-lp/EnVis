@@ -11,6 +11,7 @@ var margin = {top: 20, right: 30, bottom: 40, left: 100},
 let selectedDots = [];
 let allDots = [];
 let selectedCities = null;
+let allCities = [];
 
 let initialBestCity;
 let initialPollutant='PM2.5';
@@ -28,6 +29,7 @@ d3.csv("data/processed/BarChartData.csv", function(data) {
     selectedCities = [];
     selectedDots.forEach(dot => {
       selectedCities.push(dot.attr('city'));
+      allCities.push(dot.attr('city'));
     });
 
     //console.log(selectedCities);
@@ -38,6 +40,7 @@ d3.csv("data/processed/BarChartData.csv", function(data) {
 
     data = data.filter(function(row){
         selectedCities.push(row.City);
+        allCities.push(row.City);
     });
 
     

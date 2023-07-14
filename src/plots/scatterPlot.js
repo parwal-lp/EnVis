@@ -50,10 +50,11 @@ function colorCityDots(currentCity){
   }
   if (currentCity == currentSelectedCity) {
     return '#d95f02';
+  } else if (selectedCities.includes(currentCity)){
+    return '#9e9ac8';
   } else {
     return '#a6cee3';
   }
-    
 }
 
 var dots;
@@ -188,15 +189,25 @@ function brushed() {
 
   allDots.forEach(dot => {
     if (selectedDots.includes(dot)){
-
-      
       //console.log(dot.attr("city"));
       //console.log(dot);
       dot.style('fill', '#9e9ac8'); //tutti i selezionati si colorano
     } else if(!selectedDots.includes(dot)){
       dot.style('fill', '#a6cee3'); //tutti gli altri tornano grigi
     }
+
   });
+
+  if (selectedDots.length==0){
+    allDots.forEach(dot => {
+      console.log(dot);
+      if (allCities.includes(dot.attr('city'))){
+        dot.style('fill', '#9e9ac8');
+      } else {
+        dot.style('fill', '#a6cee3');
+      }
+    })
+  }
 
   //colora di verde la citta migliore della selezione attuale
   
