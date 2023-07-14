@@ -70,6 +70,7 @@ var svgParallel = d3.select("#parallelPlot")
         } else {
           drawStarPlot(currentBestCity);
         }
+        selectedCities = selectedLines;
         draw(selectedPollutant, XmaxValue, order, selectedLines);
         drawBoxPlot(selectedLines);
         //here I modify the legend of the scatter plot
