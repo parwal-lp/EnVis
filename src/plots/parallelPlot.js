@@ -73,14 +73,17 @@ var svgParallel = d3.select("#parallelPlot")
           drawStarPlot(currentBestCity);
         }
         selectedCities = selectedLines;
+        if (selectedLines == null){
+          selectedCities = allLines;
+        }
         draw(selectedPollutant, XmaxValue, order, selectedLines);
         drawBoxPlot(selectedLines);
+        drawScatterPlot(currentBestCity, currentSelectedCity);
+        drawScatterLegend(currentBestCity, currentSelectedCity);
         //here I modify the legend of the scatter plot
         //legendScatter.remove(); //aggiorno la legenda dello scatter con il nome della current best city
         //drawScatterLegend(currentBestCity, currentSelectedCity);
         colorSelectionParallel(bestCurrentLine);
-        drawScatterPlot(currentBestCity, currentSelectedCity);
-        drawScatterLegend(currentBestCity, currentSelectedCity);
     });
   };
 
@@ -419,13 +422,14 @@ function updateBestLine(bestCurrentLine, selectedLines){
       });
 
       console.log("data is : " + data[0]);
-      bestCurrentLine = data[0].City;
-      
+      if (data.length==0){
+        bestCurrentLine = bestInitialLine;
+      } else {
+        bestCurrentLine = data[0].City;
+      }
+    
       console.log("best current line is :"+ bestCurrentLine)
     
-      if(bestCurrentLine === ""){
-        bestCurrentLine = bestInitialLine;
-      } 
 
       });
     
