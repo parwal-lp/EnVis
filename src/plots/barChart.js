@@ -19,7 +19,6 @@ var svg = d3.select("#barChart")
 //set the default pollutant and default order to view
 var selectedPollutant = 'PM2.5';
 var XmaxValue = '30';
-var order = 'top10';
 
 //draw the default plot
 draw(selectedPollutant, XmaxValue, order, selectedCities);

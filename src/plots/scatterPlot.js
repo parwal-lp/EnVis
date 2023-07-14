@@ -64,13 +64,13 @@ const brush = d3.brush()
   .on("end", updateRelatedGraphs);
 
 function updateRelatedGraphs(){
-  console.log(order);
   svgStar.selectAll("*").remove();
   svg.selectAll("*").remove();
   svgBoxPlot.selectAll("*").remove();
   
   d3.csv("data/processed/BarChartData.csv", function(data) {
 
+    order = getOrderValue();
     selectedCities = [];
     selectedDots.forEach(dot => {
       selectedCities.push(dot.attr('city'));

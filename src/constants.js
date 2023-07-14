@@ -20,6 +20,8 @@ let legendScatter;
 let currentSelectedCity;
 let currentBestCity;
 
+let order = "top10";
+
   
 d3.csv("data/processed/BarChartData.csv", function(data) {
 
