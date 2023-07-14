@@ -57,6 +57,7 @@ const brush = d3.brush()
   .on("end", updateRelatedGraphs);
 
 function updateRelatedGraphs(){
+  console.log(order);
   svgStar.selectAll("*").remove();
   svg.selectAll("*").remove();
   svgBoxPlot.selectAll("*").remove();
@@ -70,29 +71,38 @@ function updateRelatedGraphs(){
 
     //console.log(selectedCities);
     
-    data = data.filter(function(row){
+    dataSelectedCities = data.filter(function(row){
       return row['Air Pollutant'] == selectedPollutant && selectedCities.includes(row['City']);
     });
 
     
 
-    data = data.sort(function(a, b) { // sort in ordine crescente
+    dataSelectedCities = dataSelectedCities.sort(function(a, b) { // sort in ordine crescente
         return d3.ascending(parseFloat(a['Air Pollution Level']), parseFloat(b['Air Pollution Level']));
     });
-    if (data.length>0 && data[0]!=null){
-      //the maximum value on x axis is that of the worst city
-      XmaxValue = data[data.length-1]['Air Pollution Level'];
-
+    if (dataSelectedCities.length>0 && dataSelectedCities[0]!=null){
       //checking which value is setted
       if(order == "top10"){ //prendo le prime 10
-          data = data.slice(0, 10);
+        dataSelectedCities = dataSelectedCities.slice(0, 10);
       }
       else if(order == "worst10"){ //prendo le ultime 10
-          data = data.slice(data.length-11,data.length-1);
+        dataSelectedCities = dataSelectedCities.slice(dataSelectedCities.length-11,dataSelectedCities.length-1);
       }
-      currentBestCity = data[0].City;
+      currentBestCity = dataSelectedCities[0].City;
     } else {
-      currentBestCity = "";
+      dataAllCities = data.filter(function(row){
+        return row['Air Pollutant'] == selectedPollutant;
+      });
+      dataAllCities = dataAllCities.sort(function(a, b) { // sort in ordine crescente
+        return d3.ascending(parseFloat(a['Air Pollution Level']), parseFloat(b['Air Pollution Level']));
+      });
+      if(order == "top10"){ //prendo le prime 10
+        dataAllCities = dataAllCities.slice(0, 10);
+      }
+      else if(order == "worst10"){ //prendo le ultime 10
+        dataAllCities = dataAllCities.slice(dataAllCities.length-11,dataAllCities.length-1);
+      }
+      currentBestCity = dataAllCities[0].City;
       selectedCities = null;
     }
     if(currentBestCity == ""){

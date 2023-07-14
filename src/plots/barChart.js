@@ -124,9 +124,11 @@ function changePollutant(pollutant){
           return row['Air Pollutant'] == selectedPollutant;
         });
 
-        data = data.filter(function(row){
-            return selectedCities.includes(row['City']);
-        });
+        if (selectedCities != null){
+            data = data.filter(function(row){
+                return selectedCities.includes(row['City']);
+            });
+        }
 
         data = data.sort(function(a, b) { // sort in ordine crescente
             return d3.ascending(parseFloat(a['Air Pollution Level']), parseFloat(b['Air Pollution Level']));
@@ -161,9 +163,11 @@ function changeOrder(order){
           return row['Air Pollutant'] == selectedPollutant;
         });
 
-        data = data.filter(function(row){
-            return selectedCities.includes(row['City']);
-        });
+        if (selectedCities != null){
+            data = data.filter(function(row){
+                return selectedCities.includes(row['City']);
+            });
+        }
 
         data = data.sort(function(a, b) { // sort in ordine crescente
             return d3.ascending(parseFloat(a['Air Pollution Level']), parseFloat(b['Air Pollution Level']));
