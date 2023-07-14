@@ -11,7 +11,7 @@ var cityColor = []; //questo array associa ad ogni città un colore
 var extentArray = [null, null, null, null, null]; //fixed array with 5 positions
 var activeDimensions = [null, null, null, null, null]; // qui metto tutte le dimension attive con il brush
 var bestInitialLine = "Savona";
-var bestCurrentLine = "Savona";
+var bestCurrentLine = "";
 //from colorBrewer
 //var parColors = ['#fee8c8', '#ef6548', '#b30000']; // in substitution of grey, blue, red
 var parColors = ['#fee8c8', '#9e9ac8', '#1a9850']; // in substitution of grey, blue, red
@@ -79,9 +79,9 @@ var svgParallel = d3.select("#parallelPlot")
     });
   };
 
-function drawParallelPlot(currentSelectedLine){
+function drawParallelPlot(bestCurrentLine, currentSelectedLine){
 
-    console.log(currentSelectedLine);
+    console.log("current selected line is: "+ currentSelectedLine);
     // Parse the Data
     d3.csv("data/processed/ParallelPlotData.csv", function(data) {
      
@@ -167,7 +167,7 @@ function drawParallelPlot(currentSelectedLine){
               return parColors[2];
             } // serve per evidenziare la città migliore
             else if (d.City === currentSelectedLine){
-              return '#d95f02';
+              return '#d95f02'; //rosso
             }
             else{
               return parColors[1];
@@ -426,4 +426,9 @@ function updateBestLine(bestCurrentLine, selectedLines){
     
 }
 
-drawParallelPlot(currentSelectedCity);
+if(bestCurrentLine === ""){
+  drawParallelPlot(bestInitialLine, currentSelectedCity);
+}
+else {
+  drawParallelPlot(bestCurrentLine, currentSelectedCity);
+}

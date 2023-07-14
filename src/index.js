@@ -55,7 +55,7 @@ function aggiornaGraficiConCittaSelezionata(){
         drawScatterPlot(currentBestCity, currentSelectedCity);
 
         svgParallel.selectAll("*").remove();
-        drawParallelPlot(currentSelectedCity);
+        drawParallelPlot(currentBestCity, currentSelectedCity);
     });
 
 }

@@ -67,6 +67,7 @@ function updateRelatedGraphs(){
   svgStar.selectAll("*").remove();
   svg.selectAll("*").remove();
   svgBoxPlot.selectAll("*").remove();
+  svgParallel.selectAll("*").remove();
   
   d3.csv("data/processed/BarChartData.csv", function(data) {
 
@@ -122,6 +123,7 @@ function updateRelatedGraphs(){
     highlightImportantNodes(currentBestCity, currentSelectedCity); //ricoloro i nodi chosen e best nello scatter
     legendScatter.remove(); //aggiorno la legenda dello scatter con il nome della current best city
     drawScatterLegend(currentBestCity, currentSelectedCity);
+    drawParallelPlot(currentBestCity, currentSelectedCity);
   });
   
 }
