@@ -41,7 +41,7 @@ function aggiornaGraficiConCittaSelezionata(){
             data = data.slice(0, 10);
         }
         else if(order == "worst10"){ //prendo le ultime 10
-            data = data.slice(data.length-11,data.length);
+            data = data.slice(data.length-10,data.length);
         }
         currentBestCity = data[0].City;
 
@@ -76,7 +76,7 @@ function aggiornaGraficiConCittaSelezionata(){
 //             data = data.slice(0, 10);
 //         }
 //         else if(order == "worst10"){ //prendo le ultime 10
-//             data = data.slice(data.length-11,data.length-1);
+//             data = data.slice(data.length-10,data.length);
 //         }
 //         currentBestCity = data[0].City;*/
 
