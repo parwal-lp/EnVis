@@ -1,14 +1,19 @@
 const starArea = d3.select('#starPlot'); //select html area for star plot
-const svgStar = starArea.append('svg') //create svg for the starplot
-  .attr("width", 380)
-  .attr("height", height + margin.top + margin.bottom) //set dimensions of starplot
+const svgStar = starArea.append("div")
+  .classed("svg-container", true)
+  .append('svg') //create svg for the starplot
+  .attr("preserveAspectRatio", "xMinYMin meet")
+  .attr("viewBox", "0 0 600 420")
+  .classed("svg-content-responsive", true)
+  //.attr("width", 380)
+  //.attr("height", height + margin.top + margin.bottom) //set dimensions of starplot
 
 const labels = ['PM2.5', 'PM10', 'CO', 'SO2', 'O3', 'NO2'];
 const shiftStart = ['middle', 'start', 'start', 'middle', 'end', 'end']; //lo shift delle labels deve partire da inizio, centro o fine della parola
 let pollutantsMaxValues = [];
 const maxValue = 50;
 const radius = 150;
-const center = {x: svgStar.attr("width")/2, y: svgStar.attr("height")/2};
+const center = {x: 300, y: 200};
 const nTicks = 5;
 const scales = {};
 
@@ -184,18 +189,18 @@ function drawStarPlot(currentBestCity){
   let topCityWidth;
 
   if(currentBestCity!=""){
-    topCityDot = legend.append("circle").attr("r", 6).style("fill", "#1a9850").attr("cy",svgStar.attr("height")-svgStar.attr("height")*0.04)
-    topCityText = legend.append("text").text(currentBestCity).style("font-size", "15px").attr("y",svgStar.attr("height")-svgStar.attr("height")*0.027)
+    topCityDot = legend.append("circle").attr("r", 6).style("fill", "#1a9850").attr("cy","400")
+    topCityText = legend.append("text").text(currentBestCity).style("font-size", "15px").attr("y","405")
     topCityText.attr("x", '10');
   
-    topCityWidth = displayTextWidth(currentBestCity, "15px sans-serif") + 10;
+    topCityWidth = displayTextWidth(currentBestCity, "15px sans-serif") + 20;
     
   }
 
   let chosenCityWidth = 0;
   if (currentSelectedCity != "none"){
-    let chosenCityDot = legend.append("circle").attr("r", 6).style("fill", "#d95f02").attr("cy",svgStar.attr("height")-svgStar.attr("height")*0.04)
-    let chosenCityText = legend.append("text").text(currentSelectedCity).style("font-size", "15px").attr("y",svgStar.attr("height")-svgStar.attr("height")*0.027)
+    let chosenCityDot = legend.append("circle").attr("r", 6).style("fill", "#d95f02").attr("cy","400")
+    let chosenCityText = legend.append("text").text(currentSelectedCity).style("font-size", "15px").attr("y","405")
     
     chosenCityDot.attr("cx", topCityWidth + 10);
     chosenCityText.attr("x", topCityWidth + 20);
@@ -205,7 +210,7 @@ function drawStarPlot(currentBestCity){
   }
 
   //posiziono la legenda al centro, questo significa spostarla dinamicamente in base alla larghezza che il testo occupa
-  legend.attr("transform", `translate(${200-(topCityWidth + chosenCityWidth)/2}, 0)`) 
+  legend.attr("transform", `translate(${300-(topCityWidth + chosenCityWidth)/2}, 0)`) 
 
   });
 
@@ -227,5 +232,4 @@ d3.csv("data/processed/BarChartData.csv", function(initialData) {
   //qui dentro chiamo la renderizzazione del grafico perché d3.cs è asincrona
   drawStarPlot(initialBestCity);
 });
-
 

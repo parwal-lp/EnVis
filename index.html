@@ -34,9 +34,9 @@
 <!-- Create a div where the graph will take place -->
 
 
-<div class="container" style="max-width: fit-content !important; margin: 0 auto;">
+<div class="container" style="max-width: 90vw;">
   <div class="row">
-    <div class="col-md-auto">
+    <div class="col">
       <div id="barChart">
         <div class="container">
           <select class="form-select dropDown" id="pollutant" onchange="changePollutant(this.value)"></select>
@@ -45,52 +45,23 @@
             <label for="top10" id="top10label">Top 10</label>
           <input type="radio" id="worst10" name="order" value="worst10" onclick="changeOrder(this.value)">
             <label for="worst10" id="worst10label">Worst 10</label>
-          
-          <!--div class="row">
-            <div class="col-sm">
-              Select a pollutant
-            </div>
-            <div class="col-sm">
-              Select the order
-              
-            </di>
-          </div-->
-          <!--div class="row">
-            <div class="col-sm">
-              <select class="form-select w-auto" id="pollutant" onchange="changePollutant(this.value)">
-                <option value="PM2.5" selected = "selected">PM2.5</option>
-                <option value="PM10">PM10</option>
-                <option value="CO">CO</option>
-                <option value="SO2">SO2</option>
-                <option value="O3">O3</option>
-                <option value="NO2">NO2</option>
-              </select>
-            </div>
-            <div class="col-sm">
-              <input type="radio" id="top10" name="order" value="top10" onclick="changeOrder(this.value)" checked>
-            <label for="top10">Top 10</label>
-            <input type="radio" id="worst10" name="order" value="worst10" onclick="changeOrder(this.value)">
-            <label for="worst10">Worst 10</label>
-            </div>
-          </div-->
-          
         </div>
 
       </div>
       
     </div>
-    <div class="col-md-auto">
+    <div class="col">
       <div id="starPlot"></div>
     </div>
-    <div class="col-md-auto">
+    <div class="col">
       <div id="scatterPlot"></div>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-6 d-flex justify-content-center">
+    <div class="col">
       <div id="boxPlot"></div>
     </div>
-    <div class="col-md-6 d-flex justify-content-center">
+    <div class="col">
       <div id="parallelPlot"></div>
     </div>
   </div>

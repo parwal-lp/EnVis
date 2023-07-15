@@ -2,11 +2,16 @@ const scatterArea = d3.select('#scatterPlot'); //select html area for star plot
 margin.left = 200;
 height = 380;
 width = 350;
-const svgScatter = scatterArea.append('svg') //create svg for the starplot
-  .attr("width", width + margin.left + margin.right)
-  .attr("height", height + margin.top + margin.bottom) //set dimensions of starplot
+const svgScatter = scatterArea.append("div")
+  .classed("svg-container", true)
+  .append('svg') //create svg for the starplot
+  .attr("preserveAspectRatio", "xMinYMin meet")
+  .attr("viewBox", "0 0 600 420")
+  .classed("svg-content-responsive", true)
+  //.attr("width", width + margin.left + margin.right)
+  //.attr("height", height + margin.top + margin.bottom) //set dimensions of starplot
   .append('g')
-  .attr("transform", "translate(40,40)")
+  .attr("transform", "translate(40,30)")
   .attr("style", "display:block");
 //assigns color based on the pollution level, takes data through colorData
 function assignColorWater(currentCity, dataWater){

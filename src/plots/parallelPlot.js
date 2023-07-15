@@ -21,9 +21,14 @@ var yParallel;
 
 // append the svg object to the body of the page
 var svgParallel = d3.select("#parallelPlot")
+.append("div")
+.classed("svg-container-largo", true) 
 .append("svg")
-  .attr("width", width + margin.left + margin.right)
-  .attr("height", height + margin.top + margin.bottom)
+  .attr("preserveAspectRatio", "xMinYMin meet")
+  .attr("viewBox", "0 0 805 420")
+  .classed("svg-content-responsive", true)
+  //.attr("width", width + margin.left + margin.right)
+  //.attr("height", height + margin.top + margin.bottom)
 .append("g")
   .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
@@ -152,6 +157,10 @@ function drawParallelPlot(bestCurrentLine, currentSelectedLine){
           }));
       } 
 
+      if (selectedCities == null){
+        selectedCities = allCities;
+      }
+
       // Draw the lines
       pathProva = svgParallel
         .selectAll("myPath")
@@ -177,8 +186,11 @@ function drawParallelPlot(bestCurrentLine, currentSelectedLine){
             else if (d.City === currentSelectedLine){
               return '#d95f02'; //rosso
             }
-            else{
+            else if (selectedCities.includes(d.City)){
               return parColors[1];
+            }
+            else{
+              return parColors[0];
             }
           })
           .style("stroke-width", "2px")
@@ -230,7 +242,7 @@ function drawParallelPlot(bestCurrentLine, currentSelectedLine){
         .attr("transform", function(d) { return "translate(" + xParallel(d) + ")"; })
         // And I build the axis with the call function
         .each(function(d) { d3.select(this).call(d3.axisLeft().ticks(5).scale(yParallel[d])); })
-        .style("stroke-width", "1.5px") //added to have all the axis the same width
+        .style("stroke-width", "1px") //added to have all the axis the same width
         // Add axis title
         .append("text")
           .style("text-anchor", "middle")
@@ -384,15 +396,16 @@ function drawParallelLegend() {
     .append("circle")
     .attr("cx", 10) // Adjust the x position of the circle
     .attr("cy", 10) // Adjust the y position of the circle
-    .attr("r", 5) // Adjust the radius of the circle
+    .attr("r", 6) // Adjust the radius of the circle
     .style("fill", function (d) {
       return d.color;
     });
 
   legendItems
     .append("text")
+    .style("font-size", "0.85rem")
     .attr("x", 20) // Adjust the x position of the label relative to the circle
-    .attr("y", 12) // Adjust the y position of the label relative to the circle
+    .attr("y", 14) // Adjust the y position of the label relative to the circle
     .text(function (d) {
       return d.label;
     });
