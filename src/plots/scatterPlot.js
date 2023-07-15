@@ -100,7 +100,7 @@ function updateRelatedGraphs(){
         dataSelectedCities = dataSelectedCities.slice(0, 10);
       }
       else if(order == "worst10"){ //prendo le ultime 10
-        dataSelectedCities = dataSelectedCities.slice(dataSelectedCities.length-11,dataSelectedCities.length-1);
+        dataSelectedCities = dataSelectedCities.slice(dataSelectedCities.length-11,dataSelectedCities.length);
       }
       currentBestCity = dataSelectedCities[0].City;
     } else {
@@ -114,7 +114,7 @@ function updateRelatedGraphs(){
         dataAllCities = dataAllCities.slice(0, 10);
       }
       else if(order == "worst10"){ //prendo le ultime 10
-        dataAllCities = dataAllCities.slice(dataAllCities.length-11,dataAllCities.length-1);
+        dataAllCities = dataAllCities.slice(dataAllCities.length-11,dataAllCities.length);
       }
       currentBestCity = dataAllCities[0].City;
       selectedCities = null;

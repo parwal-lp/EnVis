@@ -60,7 +60,7 @@ var svgParallel = d3.select("#parallelPlot")
               data = data.slice(0, 10);
           }
           else if(order == "worst10"){ //prendo le ultime 10
-              data = data.slice(data.length-11,data.length-1);
+              data = data.slice(data.length-11,data.length);
           }
           currentBestCity = data[0].City;
           //qua la parte aggiuntiva

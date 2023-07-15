@@ -160,7 +160,7 @@ function changePollutant(pollutant){
             data = data.slice(0, 10);
         }
         else if(order == "worst10"){ //prendo le ultime 10
-            data = data.slice(data.length-11,data.length-1);
+            data = data.slice(data.length-11,data.length);
         }
         currentBestCity = data[0].City;
         drawStarPlot(currentBestCity);
@@ -221,7 +221,7 @@ function changeOrder(order){
             data = data.slice(0, 10);
         }
         else if(order == "worst10"){ //prendo le ultime 10
-            data = data.slice(data.length-11,data.length-1);
+            data = data.slice(data.length-11,data.length);
         }
         currentBestCity = data[0].City;
         drawStarPlot(currentBestCity);
@@ -263,7 +263,7 @@ function draw(selectedPollutant, XmaxValue, order, currentSelection){
             }
             else if(order == "worst10"){ //prendo le ultime 10
                 if (dataSelectedCities.length>10){ //se sono meno di 10 in totale non devo ricalcolare
-                    dataSelectedCities = dataSelectedCities.slice(dataSelectedCities.length-11,dataSelectedCities.length-1);
+                    dataSelectedCities = dataSelectedCities.slice(dataSelectedCities.length-11,dataSelectedCities.length);
                 }
             }
 
@@ -285,7 +285,7 @@ function draw(selectedPollutant, XmaxValue, order, currentSelection){
             }
             else if(order == "worst10"){ //prendo le ultime 10
                 if (dataAllCities.length>10){ //se sono meno di 10 in totale non devo ricalcolare
-                    dataAllCities = dataAllCities.slice(dataAllCities.length-11,dataAllCities.length-1);
+                    dataAllCities = dataAllCities.slice(dataAllCities.length-11,dataAllCities.length);
                 }
             }
 
