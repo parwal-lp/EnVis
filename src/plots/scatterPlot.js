@@ -351,7 +351,7 @@ function drawScatterLegend(currentBestCity, currentSelectedCity){
   topCityTextScatter.attr("x", '10');
   topCityTextScatter.attr("y", '5');
   
-  topCityWidthScatter = displayTextWidth(greenCity, "15px sans-serif") + 10;
+  topCityWidthScatter = displayTextWidth(greenCity, "15px sans-serif") + 20;
 
 
   let labelSelectedCityText = "Selected cities"
@@ -362,13 +362,13 @@ function drawScatterLegend(currentBestCity, currentSelectedCity){
   selectedPointdLabel.attr("x", topCityWidthScatter + 20);
   selectedPointdLabel.attr("y", '5');
 
-  selectedPointsWidthScatter = displayTextWidth(labelSelectedCityText, "15px sans-serif") + 10;
+  selectedPointsWidthScatter = displayTextWidth(labelSelectedCityText, "15px sans-serif") + 20;
   let otherText = "Others"
   let otherScatterCircle = legendScatter.append("circle").attr("r", 6).style("fill", "#a6cee3").attr("cy",svgScatter.attr("height")-svgScatter.attr("height")*0.04)
   let otherScatterLabel = legendScatter.append("text").text(otherText).style("font-size", "15px").attr("y",svgScatter.attr("height")-svgScatter.attr("height")*0.027)
   
-  otherScatterCircle.attr("cx", selectedPointsWidthScatter + 85);
-  otherScatterLabel.attr("x", selectedPointsWidthScatter + 95);
+  otherScatterCircle.attr("cx", topCityWidthScatter + selectedPointsWidthScatter + 20);
+  otherScatterLabel.attr("x", topCityWidthScatter + selectedPointsWidthScatter + 30);
   otherScatterLabel.attr("y", '5');
 
   otherPointsWidthScatter = displayTextWidth(otherText, "15px sans-serif") + 10;
@@ -378,8 +378,8 @@ function drawScatterLegend(currentBestCity, currentSelectedCity){
     let chosenCityScatterCircle = legendScatter.append("circle").attr("r", 6).style("fill", "#d95f02").attr("cy",svgScatter.attr("height")-svgScatter.attr("height")*0.04)
     let chosenCityScatterLabel = legendScatter.append("text").text(currentSelectedCity).style("font-size", "15px").attr("y",svgScatter.attr("height")-svgScatter.attr("height")*0.027)
     
-    chosenCityScatterCircle.attr("cx", otherPointsWidthScatter + 215);
-    chosenCityScatterLabel.attr("x", otherPointsWidthScatter + 225);
+    chosenCityScatterCircle.attr("cx", topCityWidthScatter + selectedPointsWidthScatter + otherPointsWidthScatter + 40);
+    chosenCityScatterLabel.attr("x", topCityWidthScatter + selectedPointsWidthScatter + otherPointsWidthScatter + 50);
     chosenCityScatterLabel.attr("y", '5');
   }
 
