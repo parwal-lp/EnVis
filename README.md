@@ -8,6 +8,7 @@ allowing the user to immediately grasp informations about quality of the city he
 It was developed using the following libraries:
 - d3.js for creating the visualizations
 - pandas for data preprocessing
+- scikit-learn for computing the PCA
 
 ## Live Demo
 The live version of this project is provided through GitHub Pages at the following link:<br>
